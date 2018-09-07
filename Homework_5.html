@@ -1,0 +1,803 @@
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type="text/css">
+
+  
+
+  
+  table {
+    font-size: 1em;
+  }
+
+  
+  div, address, ol, ul, li, option, select { 
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+
+  p {
+    margin: 0px;
+  }
+
+  body {
+    padding: 0px;
+    
+    
+      margin: 0px;
+    
+  }
+
+  h6 { font-size: 10pt }
+  h5 { font-size: 11pt }
+  h4 { font-size: 12pt }
+  h3 { font-size: 13pt }
+  h2 { font-size: 14pt }
+  h1 { font-size: 16pt }
+
+  blockquote {padding: 10px; border: 1px #DDDDDD dashed }
+
+  a img {border: 0}
+
+  
+  
+
+  
+  body {
+    font-family: Verdana;
+    
+    font-size: 10.0pt;
+    line-height: normal;
+    background-color: #ffffff;
+  }
+
+
+
+
+</style>
+
+
+</head>
+
+
+<body revision="dcgckwk6_20gr9s43:6">
+
+<p>
+</p>
+<center>
+<h2>
+  Homework 5<br>
+  <font size=-1>W4118 Fall 2010<br>
+  </font>
+</h2>
+</center>
+<p>
+</p>
+<h3>
+  Individual Written Problems:
+</h3>
+<p>
+</p>
+<ol>
+  <li>
+    <i>(Exercise 8.1):</i><br>
+    <b> Explain the difference between internal and external fragmentation.<br>
+    </b> <b><i>Answer:</i></b> Internal fragmentation is the area in a region or
+    a page that is not used by the job occupying that region or page. This space
+    is unavailable for use by the system until that job is finished and the page
+    or region is released.<br>
+    While External fragmentation is that the free memory is divided into small
+    non contiguous region, and left memory is too small to fit another request,
+    then it is wasted.
+    <p>
+      &nbsp;
+    </p>
+  </li>
+  <li>
+    <i>(Exercise 8.3):</i><br>
+    <b>Given five memory partitions of 100 KB, 500 KB, 200 KB, 300 KB, and 600
+    KB (in order), how would each of the first-fit, best-fit, and worst-fit
+    algorithms place processes of 212 KB, 417 KB, 112 KB, and 426 KB (in
+    order)?Which algorithm makes the most efficient use of memory?<br>
+    </b>
+    <p>
+      <b><i>Answer:</i></b><br>
+    </p>
+    <ol type=a>
+      <li>
+        First-fit:
+        <ol type=1>
+          <li>
+            212K is put in 500K partition
+          </li>
+          <li>
+            417K is put in 600K partition
+          </li>
+          <li>
+            112K is put in 288K partition (new partition 288K = 500K - 212K)
+          </li>
+          <li>
+            426K must wait
+          </li>
+        </ol>
+      </li>
+      <li>
+        Best-fit:
+        <ol type=1>
+          <li>
+            212K is put in 300K partition
+          </li>
+          <li>
+            417K is put in 500K partition
+          </li>
+          <li>
+            112K is put in 200K partition
+          </li>
+          <li>
+            426K is put in 600K partition
+          </li>
+        </ol>
+      </li>
+      <li>
+        Worst-fit:
+        <ol type=1>
+          <li>
+            212K is put in 600K partition
+          </li>
+          <li>
+            417K is put in 500K partition
+          </li>
+          <li>
+            112K is put in 388K partition
+          </li>
+          <li>
+            426K must wait
+          </li>
+        </ol>
+      </li>
+    </ol>
+    <br>
+    best-fit turns out to be the best.
+    <p>
+      &nbsp;
+    </p>
+  </li>
+  <li>
+    <i>(Exercise 8.10):</i><br>
+    <b> Why are segmentation and paging sometimes combined into one scheme?<br>
+    </b> <b><i>Answer:</i></b><br>
+    Segmentation and paging are often combined in order to improve upon each
+    other. Segmented paging is helpful when the page table becomes very large. A
+    large contiguous section of the page table that is unused can be collapsed
+    into a single-segment table entry with a pagetable address of zero. Paged
+    segmentation handles the case of having very long segments that require a
+    lot of time for allocation. By paging the segments, we reduce wasted memory
+    due to external fragmentation as well as simplify the allocation.
+    <p>
+      &nbsp;
+    </p>
+  </li>
+  <li>
+    <i>(Exercise 8.12):</i><br>
+    <b>Consider the following segment table:<br>
+    <img src=Homework_5_images/EXTERN_0000.jpg><br>
+    What are the physical addresses for the following logical addresses?<br>
+    </b>
+    <ol type=a>
+      <li>
+        <b>0,430</b>
+      </li>
+      <li>
+        <b>1,10</b>
+      </li>
+      <li>
+        <b>2,500</b>
+      </li>
+      <li>
+        <b>3,400</b>
+      </li>
+      <li>
+        <b>4,112</b>
+      </li>
+    </ol>
+    <br>
+    <b><i>Answer:</i></b><br>
+    <ol type=a>
+      <li>
+        219 + 430 = 649
+      </li>
+      <li>
+        2300 + 10 = 2310
+      </li>
+      <li>
+        illegal reference, trap to operating system
+      </li>
+      <li>
+        1327 + 400 = 1727
+      </li>
+      <li>
+        illegal reference, trap to operating system
+      </li>
+    </ol>
+    <p>
+      &nbsp;
+    </p>
+  </li>
+  <li>
+    <i>(Exercise 8.16):</i><br>
+    <b> Consider the Intel address-translation scheme shown in Figure 8.22. </b>
+    <ol type=a>
+      <li>
+        <b>Describe all the steps that the Intel 80386 takes in translating a
+        logical address into a physical address. </b>
+      </li>
+      <li>
+        <b>What are the advantages to the operating system of hardware that
+        provides such complicated memory-translation hardware? </b>
+      </li>
+      <li>
+        <b>Are there any disadvantages to this address-translation system? If
+        so,what are they? If not,why is it not used by everymanufacturer? </b>
+      </li>
+    </ol>
+    <br>
+    <b><i>Answer:</i></b><br>
+    <ol type=a>
+      <li>
+        <p>
+          The selector is an index into the segment descriptor table. The
+          segment descriptor result plus the original offset is used to produce
+          a linear address with a dir, page, and offset. The dir is an index
+          into a page directory. The entry fromthe page directory selects the
+          page table, and the page field is an index into the page table. The
+          entry from the page table, plus the offset, is the physical address.
+        </p>
+      </li>
+      <li>
+        <p>
+          Such a page-translation mechanism offers the flexibility to allow most
+          operating systems to implement their memory scheme in hardware,
+          instead of having to implement some parts in hardware and some in
+          software. Because it can be done in hardware, it is more efficient
+          (and the kernel is simpler).
+        </p>
+      </li>
+      <li>
+        <p>
+          Address translation can take longer due to the multiple table lookups
+          it can invoke. Caches help, but there will still be cache misses.
+        </p>
+      </li>
+    </ol>
+    <p>
+      &nbsp;
+    </p>
+  </li>
+  <li>
+    <i>(Exercise 9.4):</i><br>
+    <b> A certain computer provides its users with a virtual-memory space of
+    2^32 bytes. The computer has 2^18 bytes of physical memory. The virtual
+    memory is implemented by paging, and the page size is 4096 bytes. A user
+    process generates the virtual address 11123456. Explain how the system
+    establishes the corresponding physical location. Distinguish between
+    software and hardware operations.<br>
+    </b><br>
+    <b><i>Answer:</i></b><br>
+    The virtual address in binary form is<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;"0001 0001 0001 0010 0011 0100 0101 0110"<br>
+    <br>
+    Since the page size is 2^12, the page table size is 2^20. Therefore the
+    loworder 12 bits ¡°0100 0101 0110¡± are used as the displacement into the
+    page, while the remaining 20 bits ¡°0001 0001 0001 0010 0011¡± are used as
+    the displacement in the page table.
+    <p>
+      &nbsp;
+    </p>
+  </li>
+  <li>
+    <i>(Exercise 9.5):</i><br>
+    <b>Assume we have a demand-paged memory. The page table is held in
+    registers. It takes 8 milliseconds to service a page fault if an empty page
+    is available or the replaced page is not modified, and 20 milliseconds if
+    the replaced page is modified. Memory access time is 100 nanoseconds. Assume
+    that the page to be replaced is modified 70 percent of the time. What is the
+    maximum acceptable page-fault rate for an effective access time of no more
+    than 200 nanoseconds? </b><br>
+    <b><i>Answer:</i></b>
+    <p>
+      0.2 usec = (1 - P) ¡Á 0.1 usec + (0.3P) ¡Á 8 millisec + (0.7P) ¡Á 20
+      millisec<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0.1 = -0.1P + 2400 P + 14000 P<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0.1 ~ 16,400 P<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;P ~ 0.000006<br>
+    </p>
+    <p>
+      &nbsp;
+    </p>
+  </li>
+  <li>
+    <i>(Exercise 9.10):</i><br>
+    <b> Consider a demand-paging system with the following time-measured<br>
+    </b>
+    <p>
+      <b>&nbsp;&nbsp;&nbsp;&nbsp;utilizations:<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;CPU utilization 20%<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;Paging disk 97.7%<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;Other I/O devices 5%<br>
+      </b>
+    </p>
+    <b>Which (if any) of the following will (probably) improve CPU utilization?
+    Explain your answer. </b>
+    <ol type=a>
+      <li>
+        <b>a. Install a faster CPU.</b>
+      </li>
+      <li>
+        <b>Install a bigger paging disk.</b>
+      </li>
+      <li>
+        <b>Increase the degree of multiprogramming.</b>
+      </li>
+      <li>
+        <b>Decrease the degree of multiprogramming.</b>
+      </li>
+      <li>
+        <b>Install more main memory.</b>
+      </li>
+      <li>
+        <b>Install a faster hard disk or multiple controllers with multiple hard
+        disks.</b>
+      </li>
+      <li>
+        <b>Add prepaging to the page fetch algorithms.</b>
+      </li>
+      <li>
+        <b>Increase the page size.</b>
+      </li>
+    </ol>
+    <br>
+    <b><i>Answer:</i></b><br>
+    The system obviously is spending most of its time paging, indicating
+    over-allocation of memory. If the level of multiprogramming is reduced
+    resident processes would page fault less frequently and the CPU utilization
+    would improve. Another way to improve performance would be to get more
+    physical memory or a faster paging drum.
+    <ol type=a>
+      <li>
+        Install a faster CPU ¡ª No.
+      </li>
+      <li>
+        Install a bigger paging disk ¡ª No.
+      </li>
+      <li>
+        Increase the degree of multiprogramming ¡ª No.
+      </li>
+      <li>
+        Decrease the degree of multiprogramming ¡ª Yes.
+      </li>
+      <li>
+        Install more main memory ¡ª Likely to improve CPU utilization as more
+        pages can remain resident and not require paging to or from the disks.
+      </li>
+      <li>
+        Install a faster hard disk or multiple controllers with multiple hard
+        disks¡ªAlso an improvement, for as the disk bottleneck is removed by
+        faster response and more throughput to the disks, the CPU will get more
+        data more quickly.
+      </li>
+      <li>
+        Add prepaging to the page fetch algorithms¡ªAgain, the CPU will get more
+        data faster, so it will be more in use. This is only the case if the
+        paging action is amenable to prefetching (i.e., some of the access is
+        sequential).
+      </li>
+      <li>
+        Increase the page size¡ªIncreasing the page size will result in fewer
+        page faults if data is being accessed sequentially. If data access is
+        more or less random, more paging action could ensue because fewer pages
+        can be kept in memory and more data is transferred per page fault. So
+        this change is as likely to decrease utilization as it is to increase
+        it.
+      </li>
+    </ol>
+    <p>
+      &nbsp;
+    </p>
+  </li>
+  <li>
+    <i>(Exercise 9.14):</i><br>
+    <b>Consider a demand-paging system with a paging disk that has an average
+    access and transfer time of 20 milliseconds.Addresses are translated through
+    a page table inmainmemory, with an access time of 1 microsecond per memory
+    access. Thus, eachmemory reference through the page table takes two
+    accesses. To improve this time, we have added an associativememory that
+    reduces access time to one memory reference, if the page-table entry is in
+    the associative memory. Assume that 80 percent of the accesses are in the
+    associativememory and that, of those remaining, 10 percent (or 2 percent of
+    the total) cause page faults.What is the effective memory access time? </b><br>
+    <b><i>Answer:</i></b>
+    <p>
+      effective access time = (0.8) x (1 usec)+(0.18)x(2 usec)+(0.02)x(20000+2
+      usec)<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
+      401.2 usec<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
+      0.4 millisec<br>
+    </p>
+    <p>
+      &nbsp;
+    </p>
+  </li>
+  <li>
+    <i>(Exercise 9.15):</i><br>
+    <b>What is the cause of thrashing? How does the system detect thrashing?
+    Once it detects thrashing, what can the system do to eliminate this problem?
+    </b><br>
+    <b><i>Answer:</i></b>
+    <p>
+      Thrashing is caused by underallocation of the minimum number of pages
+      required by a process, forcing it to continuously page fault. The system
+      can detect thrashing by evaluating the level of CPU utilization as
+      compared to the level of multiprogramming. It can be eliminated by
+      reducing the level of multiprogramming.
+    </p>
+    <p>
+      &nbsp;
+    </p>
+  </li>
+</ol>
+<p>
+  <b>The Working Set and the Modified Set</b>
+</p>
+<b>
+<p>
+  The working set of a process is the set of pages that have been recently
+  accessed. It is an approximation of a program's locality. Knowing about the
+  working set of a process can be useful for a number of reasons. For example,
+  in allocating memory to a process, it is helpful to allocate an amount of
+  memory equal to the working set to avoid unnecessary swapping and its adverse
+  performance impact. To some extent, the kernel already "tracks" the working
+  set of a process at low level using the referenced bit. This is used by the
+  page replacement algorithm, to decide which pages are "not important" and
+  whose replacement is less likely to cause performance issues such as
+  thrashing.
+</p>
+<p>
+  The modified set of a process is the set of pages that have been recently
+  modified. It is similar to the working set, but only includes those pages that
+  have been modified, not just accessed. It can be useful to track and monitor
+  the modified set of a process over user-defined periods to enable debugging,
+  profiling, smarter memory allocation by the application such as a database, or
+  even improvements to the page replacement algorithm.
+</p>
+</b>
+<p>
+  <b>Monitoring the modified set of a process</b>
+</p>
+<p>
+  <b>For this problem, you will implement a new kernel framework that will allow
+  to track the modified set of processes. Review Chapter 2 (Paging in Hardware,
+  Paging in Linux), Chapter 9, and Chapter 17 (Swapping) in <i>Understanding the
+  Linux Kernel</i>. </b>
+</p>
+<p>
+  <b>With the new framework, a user could direct the kernel to monitor any
+  specific process. To monitor a process, the kernel first modifies the page
+  table of that process, and converts all page table entries that are writable
+  to non-writable, marking them with a special bit. After this, any attempt to
+  write a protected entry will result in a page fault. This ensures that the
+  kernel (in particular the page fault handler) will be notified of all modified
+  pages. If the handler identifies the special bit in the page table entry, it
+  will remove the bit, undo the protection, and proceed as usual. This ensures
+  that subsequent write attempts to the same page will succeed without
+  generating additional page faults. The page fault handler will also record the
+  page address in a special data structure that will track all modified pages.
+  </b>
+</p>
+<p>
+  <b>With the framework, we will introduce a new system call whose role is
+  twofold. First, the system call will read and report the current data
+  collected about the modified working set of the target process, that is the
+  pages that have been modified since the previous call. Second, it will reset
+  the monitor state so that new data will be collected from that point, and only
+  new data will be reported upon the next call. Note that this should be done in
+  an atomic manner, such that any given page modification will be included in
+  one, and only one, such report. </b>
+</p>
+<p>
+  <b>One way to implement this framework is by keeping all the necessary
+  information on the page table of the selected process, using a special bit
+  that marks those entries which are protected due to this monitoring. Since
+  this bit is removed on a subsequent page fault, a straightforward way to
+  collect all the modified pages would be to scan the page table and report all
+  those page table entries that <i>do not</i> possess that bit. </b>
+</p>
+<p>
+  <b>However, this approach does not work in Linux because of how swapped pages
+  are handled. More specifically, when a page is swapped out, the kernel places
+  a special page table entry that identifies its location in the swap space,
+  while marking the page as non present. While normal page table entries have 3
+  unused bits for us to use, entries of swapped out pages use up all the
+  available bits. Therefore, if we discover such an entry in our scan, we cannot
+  tell whether it was changed recently, or perhaps before the previous call (and
+  therefore had already been reported to the user). </b>
+</p>
+<p>
+  <b>Instead, the framework will track the modified pages of a process in a
+  dedicated data structure that is described below. The data structure uses a
+  bitmap in which a bit that corresponds to a page is set if and only if the
+  page has been modified. Since the address space of a process is generally
+  non-contiguous, it would be very wasteful to keep one large bitmap for the
+  entire range of the address space. Consequently, our data structure will
+  mirror the memory layout of the process, and keep a separate bitmap for each
+  memory region (<tt>vm_area_struct</tt>), and only those regions that are writable. </b>
+</p>
+<ol type=a>
+  <p>
+  </p>
+  <li>
+    <b>[35 points] Implement the new system call in Linux. The system call
+    should take three arguments, and will perform two actions: first it will
+    tell the kernel to monitor the modified memory of a given process, and
+    second it will report the modified memory since the previous call to the
+    caller. The new system call should be assigned number 318. </b>
+    <p>
+      <b>The prototype for your system call will be: </b>
+    </p>
+    <pre><b>	int mtrack(pid_t pid, struct mmdesc *mm, int len);<br></b></pre>
+    <b>Where <code>struct mmdesc</code> should be defined as: </b>
+    <pre><b>struct mmdesc {<br>	unsigned long start;		/* starting address */<br>	unsigned long end;		/* ending address */<br>	char bitmap[0]; 		/* modified set */<br>};<br></b></pre>
+    <p>
+      <b>The argument <tt>pid</tt> indicates the process ID of the target process that
+      will be monitored. The argument <tt>mm</tt> points to a buffer that is provided by
+      the caller, in which the system call will fill entries of type <tt>struct mmdesc</tt>. The
+      argument <tt>len</tt> indicates the size of the buffer (in bytes). </b>
+    </p>
+    <p>
+      <b>On success, return the total size in bytes of the current modified set
+      (or 0 if none exists). If the user supplied buffer is large enough to hold
+      the <i>entire</i> data, the system call will also copy the data to the
+      buffer, discard it and allocate a fresh new set of bitmaps for that
+      process. Otherwise it will only report the size without altering the state
+      of the process nor discarding the data, so that the caller can have a
+      chance to reallocate a larger buffer without losing any of that data
+      tracked by the kernel.<br>
+      The system call should return -1 upon an error, and report the appropriate
+      error value. At a minimum it should report <tt>ENOMEM</tt> if it runs out of memory,
+      <tt>ESRCH</tt> if the given process ID does not correspond to any existing process,
+      and <tt>EFAULT</tt> if copying the data to userspace fails. </b>
+    </p>
+    <p>
+      <b>The modified pages are tracked in a series of <code>struct mmdesc</code> (hereinafter:
+      <i>mmdesc</i>), which mirror the memory address space of the process: for
+      every memory region (<tt>struct vm_area_struct</tt> linked in the address space) that has write
+      permissions (<tt>VM_WRITE</tt>) there will be a matching <i>mmdesc</i> entry whose <tt>start</tt>
+      and <tt>end</tt> fields are set accordingly. This entry will be followed by a
+      bitmap of appropriate size that indicates which pages in the given range
+      have been modified since the last invocation of the system call. Following
+      will be the next <i>mmdesc</i> entry describing the next memory region and
+      so forth. The last entry will hold the value <tt>0xffffffff</tt> in the <tt>end</tt> field (to
+      avoid having to maintain a separate length field). Note that each entry is
+      of variable size, since the size of the bitmap depends on the value of the
+      other two fields. </b>
+    </p>
+    <p>
+      <b>For instance, if a process has three writable memory regions,
+      0x8000-0xa000, 0x10000-0x20000 and 0x30000-0x3a000 of 2, 16 and 10 pages
+      respectively, then the <i>mmdesc</i> will have be of total 37 bytes as
+      following: </b>
+    </p>
+    <pre><b>    FIELD           VALUE       LENGTH<br>    -------------   ----------  --------------------------    <br>    mmdesc-&gt;start   0x8000      (4 bytes)<br>    mmdesc-&gt;end     0xa000	(4 bytes)<br>    bitmap                      (1 bytes: to hold 2 bits)<br>    mmdesc-&gt;start   0x10000     (4 bytes)<br>    mmdesc-&gt;end     0x20000	(4 bytes)<br>    bitmap                      (2 bytes: to hold 16 bits)<br>    mmdesc-&gt;start   0x30000     (4 bytes)<br>    mmdesc-&gt;end     0x3a000	(4 bytes)<br>    bitmap                      (2 bytes: to hold 10 bits)<br>    mmdesc-&gt;start   0x0         (4 bytes)<br>    mmdesc-&gt;end     0xffffffff	(4 bytes)<br>    bitmap                      (0 bytes)<br></b></pre>
+    <p>
+      <b>When the system call is invoked it should allocate a new fresh
+      <i>mmdesc</i> that matches the current state of the target address space.
+      The system call should copy the contents of the existing <i>mmdesc</i> (if
+      exists) and discard it. This not only makes management easier, but also
+      avoids race conditions between the target process that is still modifying
+      its memory and the reporting process. </b>
+    </p>
+    <b>For your convenience, you can use the following three utility functions
+    that demonstrate how this data structure is accessed and manipulated: </b>
+    <pre><b>/* report the size of the bitmap given the start/end pair of mmdesc */<br>inline static int mmdesc_bmap(unsigned long start, unsigned long end)<br>{<br>        return ((((end - start) &gt;&gt; PAGE_SHIFT) + 7) / 8);<br>}<br><br>/* get a pointer to the next mmdesc, given the current mmdesc */<br>inline static struct mmdesc *mmdesc_next(struct mmdesc *mmdesc)<br>{<br>        char *ptr = (char *) mmdesc;<br>        ptr += sizeof(struct mmdesc) +<br>                mmdesc_bmap(mmdesc-&gt;start, mmdesc-&gt;end);<br>        return (struct mmdesc *) ptr;<br>}<br><br>/* get the total size of the populated mmdesc structure */<br>inline static int mmdesc_size(struct mmdesc *mmdesc)<br>{<br>        int len = 0;<br>        while (mmdesc-&gt;end != 0xffffffff) {<br>                len += sizeof(struct mmdesc);<br>                len += mmdesc_bmap(mmdesc-&gt;start, mmdesc-&gt;end);<br>                mmdesc = mmdesc_next(mmdesc);<br>        }<br>        return len + sizeof(struct mmdesc);<br>}<br></b></pre>
+    <p>
+      <b>Most of the code you'll need to read for this assignment is in <code>mm/memory.c</code>,
+      in particular <code>handle_mm_fault()</code> and <code>handle_pte_fault()</code>, but you may also find it helpful to revirew
+      <code>follow_page()</code> and <code>copy_one_pte()</code>. Additional useful code can be found in <code>mm/protect.c:change_protection()</code>. </b>
+    </p>
+    <ul>
+      <li>
+        <p>
+          <b>The system call should allocate and prepare the <i>mmdesc</i> for
+          the process's address space, and modify the page table entries to
+          force a page fault on the next write attempt.</b>
+        </p>
+      </li>
+      <li>
+        <p>
+          <b>You will need to modify the page fault handler to be able to
+          identify page faults that result from this. When such page faults
+          occur, you should set the appropriate bit in the relevant
+          <i>mmdesc</i>, as well as undo the write-protection. </b>
+        </p>
+      </li>
+      <li>
+        <p>
+          <b>You can use the unused bits in the page table entries to mark
+          entries that are altered. Pay careful attention to how copy-on-write
+          page entries are handled in the kernel: they are non-writable page
+          table entries in a memory region (vm_area_struct) that is writable.
+          Make sure that the page fault handler knows how to distinguish between
+          regular entries that you modify and copy-on-right page table entries
+          that you modify.</b>
+        </p>
+      </li>
+      <li>
+        <p>
+          <b>The framework should handle both <i>present</i> and
+          <i>non-present</i> page table entries. A <i>non-present</i> entry can
+          be either not yet allocated (or reclaimed), or swapped out. When a
+          page fault occurs due to a non-present page (e.g. demand paging), the
+          page fault handler calls the appropriate subroutine to bring the page
+          in. In turn, that routine does not modify the existing page table
+          entry, but instead overwrites it.</b>
+        </p>
+      </li>
+      <li>
+        <p>
+          <b> Accordingly, the modified page fault handler should handle three
+          cases: pages that aren't present, pages that are present and were
+          writable, and pages that are present and were copy-on-write (and hence
+          non-writable). In particular, make sure your code knows to distinguish
+          between the latter two cases. </b>
+        </p>
+      </li>
+      <li>
+        <p>
+          <b>Also, make sure that you correctly handle the case in which a page
+          is allocated on demand <i>after</i> the system call was called. Since
+          in this case the handler installs a new page table entry, you may need
+          to adjust it so it can be tracked correctly. More specifically, you
+          need to consider both the case of a write-fault (easy) and that of a
+          read-fault (harder). Why would you care about a read-fault ?</b>
+        </p>
+      </li>
+      <li>
+        <p>
+          <b> You do not need to handle or respond to changes in the actual
+          address space that is monitored. Such changes could occur, for
+          instance, by the process calling <code>mmap()</code>, <code>munmap()</code>, and so forth. Since
+          they modify the address space layout or properties, they may cause a
+          mismatch with the <i>mmdesc</i> data structure. You can simply ignore
+          these effects, as long as your code does not crash. Document in your
+          README file why your code is safe with regard to these system calls.
+          </b>
+        </p>
+      </li>
+      <li>
+        <p>
+          <b> You do need to ensure that there is always a proper cleanup of the
+          additional data structures when the address space is freed. </b>
+        </p>
+      </li>
+      <li>
+        <p>
+          <b> You also need to ensure that your code is safe and free of race
+          conditions. Use the appropriate semaphores and locks. Look at <code>mm/rmap.c</code>
+          for information about locks and lock ordering in the memory management
+          system of Linux.</b>
+        </p>
+      </li>
+    </ul>
+    <p>
+      <br>
+      <b><i>Answer:</i></b> There is a sample solution for this problem in the
+      form of a
+      <a href=http://www.cs.columbia.edu/%7Enieh/teaching/w4118/homeworks/solutions/hmwk5/code/hw5.patch><i>patch</i></a>
+      against Linux 2.6.18.8.
+    </p>
+    <p>
+      <br>
+      --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    </p>
+    <pre>--- linux-2.6.18.8.base/include/asm-i386/unistd.h	2007-10-05 23:46:29.000000000 -0400<br>+++ linux-2.6.18.8.hw5/include/asm-i386/unistd.h	2007-11-06 23:39:55.000000000 -0500<br>@@ -323,10 +323,11 @@<br> #define __NR_tee		315<br> #define __NR_vmsplice		316<br> #define __NR_move_pages		317<br>+#define __NR_mtrack             318<br> <br> #ifdef __KERNEL__<br> <br>-#define NR_syscalls 318<br>+#define NR_syscalls 319<br> <br> /*<br>  * user-visible error numbers are in the range -1 - -128: see<br>--- linux-2.6.18.8.base/arch/i386/kernel/syscall_table.S	2007-02-23 18:52:30.000000000 -0500<br>+++ linux-2.6.18.8.hw5/arch/i386/kernel/syscall_table.S	2007-11-06 23:39:36.000000000 -0500<br>@@ -317,3 +317,4 @@<br> 	.long sys_tee			/* 315 */<br> 	.long sys_vmsplice<br> 	.long sys_move_pages<br>+	.long sys_mtrack<br>--- linux-2.6.18.8.base/include/asm-i386/pgtable.h	2007-02-23 18:52:30.000000000 -0500<br>+++ linux-2.6.18.8.hw5/include/asm-i386/pgtable.h	2007-11-20 09:54:09.000000000 -0500<br>@@ -119,6 +119,12 @@<br> #define _PAGE_UNUSED2	0x400<br> #define _PAGE_UNUSED3	0x800<br> <br>+/* mtrack */<br>+#define _PAGE_BIT_WPREG         10<br>+#define _PAGE_BIT_WPCOW         11<br>+#define _PAGE_WPREG     0x400<br>+#define _PAGE_WPCOW     0x800<br>+<br> /* If _PAGE_PRESENT is clear, we use these: */<br> #define _PAGE_FILE	0x040	/* nonlinear file mapping, saved PTE; unset:swap */<br> #define _PAGE_PROTNONE	0x080	/* if the user mapped it with PROT_NONE;<br>@@ -277,6 +283,22 @@<br> 	clear_bit(_PAGE_BIT_RW, &amp;ptep-&gt;pte_low);<br> }<br> <br>+<br>+/* mtrack helpers */<br>+static inline int pte_wpreg(pte_t pte)		{ return (pte).pte_low &amp; _PAGE_WPREG; }<br>+static inline int pte_wpcow(pte_t pte)		{ return (pte).pte_low &amp; _PAGE_WPCOW; }<br>+static inline int pte_wpany(pte_t pte)		{ return (pte).pte_low &amp; (_PAGE_WPREG|_PAGE_WPCOW); }<br>+<br>+static inline pte_t pte_mkwpreg(pte_t pte)	{ (pte).pte_low |= _PAGE_WPREG; return pte; }<br>+static inline pte_t pte_mkwpcow(pte_t pte)	{ (pte).pte_low |= _PAGE_WPCOW; return pte; }<br>+static inline pte_t pte_mkwpnon(pte_t pte)	{ (pte).pte_low &amp;= ~(_PAGE_WPREG|_PAGE_WPCOW); return pte; }<br>+<br>+static inline void ptep_set_wpnon(struct mm_struct *mm, unsigned long addr, pte_t *ptep)<br>+{<br>+	clear_bit(_PAGE_BIT_WPCOW, &amp;ptep-&gt;pte_low);<br>+	clear_bit(_PAGE_BIT_WPREG, &amp;ptep-&gt;pte_low);<br>+}<br>+<br> /*<br>  * clone_pgd_range(pgd_t *dst, pgd_t *src, int count);<br>  *<br>--- linux-2.6.18.8.base/include/linux/mtrack.h	1969-12-31 19:00:00.000000000 -0500<br>+++ linux-2.6.18.8.hw5/include/linux/mtrack.h	2007-11-20 09:49:54.000000000 -0500<br>@@ -0,0 +1,85 @@<br>+#ifndef _LINUX_MTRACK_H<br>+#define _LINUX_MTRACK_H<br>+<br>+struct mmdesc {<br>+	unsigned long start;<br>+	unsigned long end;<br>+	char bitmap[0];<br>+};<br>+<br>+/* compute the size of a bitmap for a given range */<br>+inline static int mmdesc_bmap(unsigned long start, unsigned long end)<br>+{<br>+	return ((((end - start) &gt;&gt; PAGE_SHIFT) + 7) / 8);<br>+}<br>+<br>+/* compute the pointer to the next mmdesc in list */<br>+inline static struct mmdesc *mmdesc_next(struct mmdesc *mmdesc)<br>+{<br>+	char *ptr = (char *) mmdesc;<br>+	ptr += sizeof(struct mmdesc) + <br>+		mmdesc_bmap(mmdesc-&gt;start, mmdesc-&gt;end);<br>+	return (struct mmdesc *) ptr;<br>+}<br>+<br>+/* compute the total size that a given mmdesc requires */<br>+inline static int mmdesc_size(struct mmdesc *mmdesc)<br>+{<br>+	int len = sizeof(struct mmdesc);<br>+	while (mmdesc-&gt;end != 0xffffffff) {<br>+		len += sizeof(struct mmdesc);<br>+		len += mmdesc_bmap(mmdesc-&gt;start, mmdesc-&gt;end);<br>+		mmdesc = mmdesc_next(mmdesc);<br>+	}<br>+	return len;<br>+}<br>+<br>+#ifdef __KERNEL__<br>+<br>+#define CONFIG_MTRACK_DEBUG  1   /* set to 0 to stop debug output */<br>+<br>+#if CONFIG_MTRACK_DEBUG<br>+#define MTRK_DEBUG(str, args...) \<br>+	printk(KERN_ERR "[MTRK][%d][%s]: " str, current-&gt;pid, __func__, ##args)<br>+#else<br>+#define MTRK_DEBUG(str, args...) \<br>+	do { } while (0)<br>+#endif<br>+<br>+/* current version assume no HUGETLB */<br>+#ifdef CONFIG_HUGETLB_PAGE<br>+#error This version of mtrack is not compatible with HUGETLB<br>+#endif<br>+<br>+extern void mtrack_mark_bit(struct mmdesc *mmdesc, unsigned long addr);<br>+<br>+inline static pte_t <br>+maybe_mkwpcow(struct mm_struct *mm, struct vm_area_struct *vma,<br>+	      pte_t pte, char *from)<br>+{<br>+	/* a read fault was caught in page fault handler; the pte<br>+	   is set from scratch, we make sure to track this one too */<br>+	if (unlikely(mm-&gt;mmdesc) &amp;&amp; (vma-&gt;vm_flags &amp; VM_WRITE)) {<br>+		MTRK_DEBUG("read-fault (%s)\n", from);<br>+		pte = pte_mkwpcow(pte);<br>+	}<br>+	return pte;<br>+}<br>+<br>+inline static pte_t<br>+maybe_mkwpany(struct mm_struct *mm, struct vm_area_struct *vma,<br>+	      pte_t pte, char *from)<br>+{<br>+	/* a read fault was caught in page fault handler; the pte<br>+	   is set from scratch, we make sure to track this one too */<br>+	if (unlikely(mm-&gt;mmdesc) &amp;&amp; (vma-&gt;vm_flags &amp; VM_WRITE)) {<br>+		MTRK_DEBUG("read/write fault (%s)\n", from);<br>+		pte = pte_write(pte) ? pte_mkwpreg(pte) : pte_mkwpcow(pte);<br>+		pte = pte_wrprotect(pte);<br>+	}<br>+	return pte;<br>+}<br>+<br>+#endif /* __KERNEL__ */<br>+<br>+#endif<br>--- linux-2.6.18.8.base/mm/mtrack.c	1969-12-31 19:00:00.000000000 -0500<br>+++ linux-2.6.18.8.hw5/mm/mtrack.c	2007-11-20 10:28:38.000000000 -0500<br>@@ -0,0 +1,249 @@<br>+#include &lt;linux/sched.h&gt;<br>+#include &lt;linux/spinlock.h&gt;<br>+#include &lt;linux/mm.h&gt;<br>+#include &lt;linux/mtrack.h&gt;<br>+#include &lt;asm/uaccess.h&gt;<br>+#include &lt;asm/pgtable.h&gt;<br>+#include &lt;asm/tlbflush.h&gt;<br>+#include &lt;asm/cacheflush.h&gt;<br>+<br>+/*<br>+ * mtrack: track modified set of pages of processes<br>+ * <br>+ * when mtrack() is called for a given pid, it will (a) allocate a new<br>+ * mmdesc data structure that matches the process's current address space,<br>+ * then (b) make all page table entries of writable VMAs read-only (while<br>+ * remembering if the original entry was regular or COW), and (c) switch<br>+ * the current mmdesc to the new one, and return the old one. Page table<br>+ * entries of non-present pages remain untouched.<br>+ *<br>+ * the page fault handler handles three cases:<br>+ * (a) write-fault on a page that is present: restore the original value<br>+ * of the PTE, set the appropriate bit in the mmdesc, and proceed to the<br>+ * normal execution path.<br>+ * (b) write-fault on a non-present page: set the appropriate bit in the<br>+ * mmdesc and proceed with the normal execution path.<br>+ * (c) read-fault on a non-present page: there are 4 sub-cases to handle:<br>+ * (c.1) anonymous page: (mapped to ZERO_PAGE) set COW marker on PTE<br>+ * (c.2) no-page: set COW marker on PTE if necessary<br>+ * (c.3) file: calls vm_ops-&gt;populate() which is file system specific;<br>+ * luckily all populate() methods end up calling install_page(), which is<br>+ * modified to change the PTE suitably to induce a fault. <br>+ * (c.4) swap: set COW marker on PTE is necessary<br>+ */<br>+<br>+/* cleanup: this is called from kernel/fork.c:mmput() */<br>+void exit_mtrack(struct mm_struct *mm)<br>+{<br>+	struct mmdesc *mmdesc;<br>+<br>+	spin_lock(&amp;mm-&gt;page_table_lock);<br>+	mmdesc = mm-&gt;mmdesc;<br>+	mm-&gt;mmdesc = NULL;<br>+	spin_unlock(&amp;mm-&gt;page_table_lock);<br>+<br>+	if (mmdesc) {<br>+		MTRK_DEBUG("release desc %p\n", mmdesc);<br>+		kfree(mmdesc);<br>+	}<br>+}<br>+<br>+/* this is called from the page fault handler to set a bit in the map */<br>+void mtrack_mark_bit(struct mmdesc *mmdesc, unsigned long addr)<br>+{<br>+	MTRK_DEBUG("mark page %#lx ?\n", addr &amp; PAGE_MASK);<br>+	while (addr &lt; mmdesc-&gt;start || addr &gt;= mmdesc-&gt;end)<br>+		mmdesc = mmdesc_next(mmdesc);<br>+	if (mmdesc-&gt;end != 0xffffffff) {<br>+		char *bmap = mmdesc-&gt;bitmap;<br>+		int idx = (addr - mmdesc-&gt;start) &gt;&gt; PAGE_SHIFT;<br>+		MTRK_DEBUG("mark %#lx-%#lx idx %d\n",<br>+			   mmdesc-&gt;start, mmdesc-&gt;end, idx);<br>+		bmap[idx / 8] |= 1 &lt;&lt; (idx % 8);<br>+	}<br>+}<br>+<br>+/*<br>+ * scan the (writable) memory regions in the address space twice: first to<br>+ * count how much memory is needed, then to populate a newly allocated mmdesc<br>+ */<br>+static struct mmdesc *do_mtrack_desc(struct mm_struct *mm)<br>+{<br>+	struct mmdesc *mmdesc, *md;<br>+	struct vm_area_struct *vma;<br>+	int len = 0;<br>+<br>+	for (vma = mm-&gt;mmap; vma; vma = vma-&gt;vm_next) {<br>+		if (vma-&gt;vm_flags &amp; VM_WRITE) {<br>+			len += sizeof(struct mmdesc);<br>+			len += mmdesc_bmap(vma-&gt;vm_start, vma-&gt;vm_end);<br>+		}<br>+	}<br>+<br>+	if (!(mmdesc = kzalloc(len + sizeof(struct mmdesc), GFP_KERNEL)))<br>+		return NULL;<br>+	md = mmdesc;<br>+<br>+	for (vma = mm-&gt;mmap; vma; vma = vma-&gt;vm_next) {<br>+		if (vma-&gt;vm_flags &amp; VM_WRITE) {<br>+			MTRK_DEBUG("%#lx-%#lx (mmdesc %p, bmap %d)\n",<br>+				   vma-&gt;vm_start, vma-&gt;vm_end, md,<br>+				   mmdesc_bmap(vma-&gt;vm_start, vma-&gt;vm_end));<br>+			md-&gt;start = vma-&gt;vm_start;<br>+			md-&gt;end = vma-&gt;vm_end;<br>+			md = mmdesc_next(md); <br>+		}<br>+	}<br>+<br>+	md-&gt;start = 0;<br>+	md-&gt;end = 0xffffffff;<br>+<br>+	MTRK_DEBUG("alloc good %p\n", mmdesc);<br>+	return mmdesc;<br>+}<br>+<br>+/*<br>+ * scan the (writable) memory regions in the address space, changing all<br>+ * page table entries that are present to read-only; pages that were writable<br>+ * are marked with _PAGE_WPREG, those that weren't must be copy-on-write,<br>+ * so they are marked with _PAGE_WPCOW (used by the page fault handler)<br>+ */<br>+<br>+static void do_mtrack_pte(struct mm_struct *mm, pmd_t *pmd,<br>+			  unsigned long addr, unsigned long end)<br>+{<br>+	pte_t *pte, e;<br>+	spinlock_t *ptl;<br>+<br>+	pte = pte_offset_map_lock(mm, pmd, addr, &amp;ptl);<br>+	do {<br>+		e = *pte;<br>+<br>+		/* if pte is present: make read-only and set our <br>+		   special bit (regular or copy-on-write bit */<br>+<br>+		if (pte_present(e)) {<br>+			MTRK_DEBUG("pte present %#lx %#lx %d\n", addr,<br>+				   e.pte_low, pte_write(e) ? 0 : 1);<br>+			e = pte_write(e) ? pte_mkwpreg(e) : pte_mkwpcow(e);<br>+			e = pte_wrprotect(pte_mkold(e));<br>+			set_pte_at(mm, addr, pte, e);<br>+		}<br>+	} while (pte++, addr += PAGE_SIZE, addr != end);<br>+	pte_unmap_unlock(pte - 1, ptl);<br>+}<br>+<br>+inline static void do_mtrack_pmd(struct mm_struct *mm, pud_t *pud,<br>+				 unsigned long addr, unsigned long end)<br>+{<br>+	pmd_t *pmd;<br>+	unsigned long next;<br>+<br>+	pmd = pmd_offset(pud, addr);<br>+	do {<br>+		next = pmd_addr_end(addr, end);<br>+		if (pmd_none_or_clear_bad(pmd))<br>+			continue;<br>+		do_mtrack_pte(mm, pmd, addr, next);<br>+	} while (pmd++, addr = next, addr != end);<br>+}<br>+<br>+inline static void do_mtrack_pud(struct mm_struct *mm, pgd_t *pgd,<br>+				 unsigned long addr, unsigned long end)<br>+{<br>+	pud_t *pud;<br>+	unsigned long next;<br>+<br>+	pud = pud_offset(pgd, addr);<br>+	do {<br>+		next = pud_addr_end(addr, end);<br>+		if (pud_none_or_clear_bad(pud))<br>+			continue;<br>+		do_mtrack_pmd(mm, pud, addr, next);<br>+	} while (pud++, addr = next, addr != end);<br>+}<br>+<br>+static struct mmdesc *do_mtrack_mm(struct mm_struct *mm, struct mmdesc *new)<br>+{<br>+	struct mmdesc *old;<br>+	struct vm_area_struct *vma;<br>+	unsigned long addr, end, next;<br>+	pgd_t *pgd;<br>+<br>+	spin_lock(&amp;mm-&gt;page_table_lock);<br>+<br>+	/* loop through all memory regions, examine addresses */<br>+	for (vma = mm-&gt;mmap; vma; vma = vma-&gt;vm_next) {<br>+		if (!(vma-&gt;vm_flags &amp; VM_WRITE))<br>+			continue;<br>+		MTRK_DEBUG("%#lx-%#lx\n",vma-&gt;vm_start,vma-&gt;vm_end);<br>+		addr = vma-&gt;vm_start;<br>+		end = vma-&gt;vm_end;<br>+		pgd = pgd_offset(mm, addr);<br>+		do {<br>+			next = pgd_addr_end(addr, end);<br>+			if (pgd_none_or_clear_bad(pgd))<br>+				continue;<br>+			do_mtrack_pud(mm, pgd, addr, next);<br>+		} while (pgd++, addr = next, addr != end);<br>+	}<br>+<br>+	/* don't forget to flush TLB and cachces for this mm */<br>+	flush_cache_mm(mm);<br>+	flush_tlb_mm(mm);<br>+<br>+	/* finally, switch the old mm-&gt;mmdesc with the new-&gt;mmdesc: this is<br>+	   atomic because it's done after the flush and with the lock  */<br>+	old = mm-&gt;mmdesc;<br>+	mm-&gt;mmdesc = new;       /* from no all write are recorded here */<br>+	spin_unlock(&amp;mm-&gt;page_table_lock);<br>+<br>+	return old;<br>+}<br>+<br>+/* sys_mtrack() system call implementation */<br>+asmlinkage long sys_mtrack(pid_t pid, struct mmdesc __user *ubuf, int len)<br>+{<br>+	struct task_struct *p;<br>+	struct mm_struct *mm;<br>+	struct mmdesc *new = NULL;<br>+	struct mmdesc *old = NULL;<br>+	int ret;<br>+<br>+	MTRK_DEBUG("syscall enter pid %d ptr %p len %d\n", pid, ubuf, len);<br>+<br>+	read_lock(&amp;tasklist_lock);<br>+	if ((p = find_task_by_pid(pid)))<br>+		mm = get_task_mm(p);<br>+	read_unlock(&amp;tasklist_lock);<br>+<br>+	if (!p)<br>+		return -ESRCH;<br>+	else if (!mm)<br>+		return -EINVAL;<br>+<br>+	/*<br>+	 * first allocate a new mmdesc -- this is safe since as long as <br>+	 * we hold the mmap_sem, the memory address space cannot change; <br>+	 * then modify all pte's and switch the old and new mmdesc.<br>+	 */<br>+<br>+	down_write(&amp;mm-&gt;mmap_sem);<br>+	ret = mm-&gt;mmdesc ? mmdesc_size(mm-&gt;mmdesc) : 0;<br>+	if (ret &lt;= len &amp;&amp; (new = do_mtrack_desc(mm)))<br>+		old = do_mtrack_mm(mm, new);<br>+	up_write(&amp;mm-&gt;mmap_sem);<br>+<br>+	mmput(mm);<br>+<br>+	if (!new)<br>+		return -ENOMEM;<br>+	if (old) {<br>+		if (copy_to_user(ubuf, old, ret))<br>+			ret = -EFAULT;<br>+		kfree(old);<br>+	}<br>+<br>+	MTRK_DEBUG("syscall exit len %d ret %d\n", len, ret);<br>+	return ret;<br>+}<br>--- linux-2.6.18.8.base/mm/memory.c	2007-02-23 18:52:30.000000000 -0500<br>+++ linux-2.6.18.8.hw5/mm/memory.c	2007-11-20 10:28:18.000000000 -0500<br>@@ -40,6 +40,7 @@<br> <br> #include &lt;linux/kernel_stat.h&gt;<br> #include &lt;linux/mm.h&gt;<br>+#include &lt;linux/mtrack.h&gt;<br> #include &lt;linux/hugetlb.h&gt;<br> #include &lt;linux/mman.h&gt;<br> #include &lt;linux/swap.h&gt;<br>@@ -465,6 +466,12 @@<br> 	 * in the parent and the child<br> 	 */<br> 	if (is_cow_mapping(vm_flags)) {<br>+		/* mtrack: if pte is tracked (has _PAGE_WPREG), change<br>+		   to _PAGE_WPCOW as it will become copy-on-write now */<br>+		if (unlikely(pte_wpreg(pte))) {<br>+			set_bit(_PAGE_BIT_WPCOW, &amp;src_pte-&gt;pte_low);<br>+			clear_bit(_PAGE_BIT_WPREG, &amp;src_pte-&gt;pte_low);<br>+		}<br> 		ptep_set_wrprotect(src_mm, addr, src_pte);<br> 		pte = *src_pte;<br> 	}<br>@@ -1998,6 +2005,9 @@<br> 	if (write_access &amp;&amp; can_share_swap_page(page)) {<br> 		pte = maybe_mkwrite(pte_mkdirty(pte), vma);<br> 		write_access = 0;<br>+	} else {<br>+		/* mtrack: track pte that is set from scratch */<br>+		pte = maybe_mkwpcow(mm, vma, pte, "swap");<br> 	}<br> <br> 	flush_icache_page(vma, page);<br>@@ -2068,6 +2078,9 @@<br> 		page_cache_get(page);<br> 		entry = mk_pte(page, vma-&gt;vm_page_prot);<br> <br>+		/* mtrack: track pte that is set from scratch */<br>+		entry = maybe_mkwpcow(mm, vma, entry, "anonymous");<br>+<br> 		ptl = pte_lockptr(mm, pmd);<br> 		spin_lock(ptl);<br> 		if (!pte_none(*page_table))<br>@@ -2201,6 +2214,11 @@<br> 		entry = mk_pte(new_page, vma-&gt;vm_page_prot);<br> 		if (write_access)<br> 			entry = maybe_mkwrite(pte_mkdirty(entry), vma);<br>+		else {<br>+			/* mtrack: track pte that is set from scratch */<br>+			entry = maybe_mkwpcow(mm, vma, entry, "no_page");<br>+		}<br>+<br> 		set_pte_at(mm, address, page_table, entry);<br> 		if (anon) {<br> 			inc_mm_counter(mm, anon_rss);<br>@@ -2288,6 +2306,17 @@<br> <br> 	old_entry = entry = *pte;<br> 	if (!pte_present(entry)) {<br>+		/* mtrack: for write-faults, mark the bit here; read-faults<br>+		   are handled inside do_{anonymous,no,file,swap}_page() */<br>+		if (write_access &amp;&amp; mm-&gt;mmdesc) {<br>+			MTRK_DEBUG("non-present pte (addr %#lx)\n", address);<br>+			mtrack_mark_bit(mm-&gt;mmdesc, address);<br>+		}<br>+#if CONFIG_MTRACK_DEBUG<br>+		/* mtrack: for read-fault, debug-display the address */<br>+		if (!write_access &amp;&amp; mm-&gt;mmdesc)<br>+			MTRK_DEBUG("non-present pte (addr %#lx)\n", address);<br>+#endif<br> 		if (pte_none(entry)) {<br> 			if (!vma-&gt;vm_ops || !vma-&gt;vm_ops-&gt;nopage)<br> 				return do_anonymous_page(mm, vma, address,<br>@@ -2307,6 +2336,18 @@<br> 	if (unlikely(!pte_same(*pte, entry)))<br> 		goto unlock;<br> 	if (write_access) {<br>+		/* mtrack: need to mark the bit ? */<br>+		if (pte_wpany(entry)) {<br>+			MTRK_DEBUG("%s pte (addr %#lx)\n",<br>+				   pte_wpreg(entry)?"reg":"cow", address);<br>+			entry = pte_mkwpnon(entry);<br>+			if (pte_wpreg(entry))<br>+				entry = pte_mkwrite(entry);<br>+			else<br>+				ptep_set_wpnon(mm, address, pte);<br>+			if (mm-&gt;mmdesc)<br>+				mtrack_mark_bit(mm-&gt;mmdesc, address);<br>+		}<br> 		if (!pte_write(entry))<br> 			return do_wp_page(mm, vma, address,<br> 					pte, pmd, ptl, entry);<br>--- linux-2.6.18.8.base/mm/fremap.c	2007-02-23 18:52:30.000000000 -0500<br>+++ linux-2.6.18.8.hw5/mm/fremap.c	2007-11-20 02:46:12.000000000 -0500<br>@@ -13,6 +13,7 @@<br> #include &lt;linux/pagemap.h&gt;<br> #include &lt;linux/swapops.h&gt;<br> #include &lt;linux/rmap.h&gt;<br>+#include &lt;linux/mtrack.h&gt;<br> #include &lt;linux/module.h&gt;<br> #include &lt;linux/syscalls.h&gt;<br> <br>@@ -79,7 +80,11 @@<br> 		inc_mm_counter(mm, file_rss);<br> <br> 	flush_icache_page(vma, page);<br>-	set_pte_at(mm, addr, pte, mk_pte(page, prot));<br>+<br>+	/* mtrack: track pte that is set from scratch */<br>+	pte_val = maybe_mkwpany(mm, vma, mk_pte(page, prot), "file/populate");<br>+<br>+	set_pte_at(mm, addr, pte, pte_val);<br> 	page_add_file_rmap(page);<br> 	pte_val = *pte;<br> 	update_mmu_cache(vma, addr, pte_val);<br>--- linux-2.6.18.8.base/mm/Makefile	2007-02-23 18:52:30.000000000 -0500<br>+++ linux-2.6.18.8.hw5/mm/Makefile	2007-11-06 21:03:02.000000000 -0500<br>@@ -5,7 +5,7 @@<br> mmu-y			:= nommu.o<br> mmu-$(CONFIG_MMU)	:= fremap.o highmem.o madvise.o memory.o mincore.o \<br> 			   mlock.o mmap.o mprotect.o mremap.o msync.o rmap.o \<br>-			   vmalloc.o<br>+			   vmalloc.o mtrack.o<br> <br> obj-y			:= bootmem.o filemap.o mempool.o oom_kill.o fadvise.o \<br> 			   page_alloc.o page-writeback.o pdflush.o \<br></pre>
+    <p>
+      --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------<br>
+      <br>
+    </p>
+  </li>
+  <li>
+    <b>[15 points] To test your system call, write a simple program that calls
+    <code>mtrack()</code>. Your program should accept one command line argument - the process ID
+    of a target process (or 0 to track itself). The program should periodically
+    invoke the system call, and print statistics about the modified working set
+    of the target process. </b>
+    <p>
+      <b>Write another program that performs some specific memory access pattern
+      to demonstrate that your implementation works correctly. Make sure the
+      program covers at least the following cases: write-fault, read-fault
+      followed by a write, write (without fault), and copy-on-write. </b>
+    </p>
+    <p>
+      <b>Run the first program (a) on itself (b) on the second program, and (c)
+      on your shell (in the background while you continue to use the shell).
+      Explain the results in your README. </b>
+    </p>
+    <p>
+      <br>
+      <b><i>Answer:</i></b> There is a sample
+      <a href=http://www.cs.columbia.edu/%7Enieh/teaching/w4118/homeworks/solutions/hmwk5/code/mtrack.c><i>syscall
+      test program</i></a> that periodically invokes the system call on a
+      process with a given PID, and a sample
+      <a href=http://www.cs.columbia.edu/%7Enieh/teaching/w4118/homeworks/solutions/hmwk5/code/test.c><i>memory
+      test program</i></a> that implements five distinct scenarios that test the
+      completeness of the solution. Run the second program first (in the
+      background) and then immediately run the first program on the second one.
+    </p>
+    <p>
+      --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    </p>
+    <pre>#include &lt;stdio.h&gt;<br>#include &lt;sys/types.h&gt;<br>#include "asm/unistd.h"<br>#include "asm/page.h"<br>#include &lt;unistd.h&gt;<br>#include &lt;stdlib.h&gt;<br>#include &lt;errno.h&gt;<br>#include &lt;sched.h&gt;<br>#include &lt;time.h&gt;<br><br>/* ======================================================================== */<br>/* taken from sched.h */<br>/* ======================================================================== */<br>struct mmdesc {<br>	unsigned long start;<br>	unsigned long end;<br>	char bitmap[0];<br>};<br><br>inline static int mmdesc_bmap(unsigned long start, unsigned long end)<br>{<br>	return ((((end - start) &gt;&gt; PAGE_SHIFT) + 7) / 8);<br>}<br><br>inline static struct mmdesc *mmdesc_next(struct mmdesc *mmdesc)<br>{<br>	char *ptr = (char *) mmdesc;<br>	ptr += sizeof(struct mmdesc) + <br>		mmdesc_bmap(mmdesc-&gt;start, mmdesc-&gt;end);<br>	return (struct mmdesc *) ptr;<br>}<br><br>inline static int mmdesc_size(struct mmdesc *mmdesc)<br>{<br>	int len = sizeof(struct mmdesc);<br>	while (mmdesc-&gt;end != 0xffffffff) {<br>		len += sizeof(struct mmdesc);<br>		len += mmdesc_bmap(mmdesc-&gt;start, mmdesc-&gt;end);<br>		mmdesc = mmdesc_next(mmdesc);<br>	}<br>	return len;<br>}<br>/* ======================================================================== */<br><br>int mtrack(pid_t pid, struct mmdesc *mmdesc, int len)<br>{<br>	return syscall(__NR_mtrack, pid, mmdesc, len);<br>}<br><br>void exiterr(char *str)<br>{<br>	perror(str);<br>	exit(1);<br>}<br><br>/* should be enough to cover nearly 4GB */<br>#define MMDESC_DEFAULT   (64*4024)<br><br>/* default sleep period */<br>#define MMDESC_SLEEP     2<br>#define MMDESC_PERIOD    10<br><br>void print_data(struct mmdesc *mmdesc, int len, pid_t pid)<br>{<br>	if (len == 0)<br>		printf("\nmtrack: no new data\n");<br>	else {<br>		printf("\nmtrack: data for process %d\n", pid);<br>		while (mmdesc-&gt;end != 0xffffffff) {<br>			printf("mem %#lx-%#lx\n", mmdesc-&gt;start, mmdesc-&gt;end);<br>			mmdesc = mmdesc_next(mmdesc);<br>		}<br>	}<br>}<br><br>void print_bmap(struct mmdesc *mmdesc, int len, pid_t pid)<br>{<br>	int n, i, j;<br>	unsigned long d;<br>	int found = 0;<br><br>	if (len == 0)<br>		return;<br><br>	printf("mtrack: modified pages for process %d\n", pid);<br>	while (mmdesc-&gt;end != 0xffffffff) {<br>		n = mmdesc_bmap(mmdesc-&gt;start, mmdesc-&gt;end);<br>		for (i = 0; i &lt; n; i++) {<br>			for (j = 0; j &lt; 8; j++) {<br>				if (mmdesc-&gt;bitmap[i] &amp; (1&lt;&lt;j)) {<br>					d = mmdesc-&gt;start + <br>						((i*8 + j) &lt;&lt; PAGE_SHIFT);<br>					printf("\tpage %#lx", d);<br>					found = 1;<br>				}<br>			}<br>		}<br>		mmdesc = mmdesc_next(mmdesc);<br>	}<br>	printf("%s\n", found ? "" : "\tnone");<br>}<br><br>int main(int argc, char *argv[])<br>{<br>	struct mmdesc *mmdesc;<br>	int len = MMDESC_DEFAULT;<br>	int count = 0;<br>	pid_t pid;<br>	int ret;<br><br>	if (argc != 2) {<br>		printf("Usage: %s &lt;pid&gt;\n", argv[0]);<br>		exit(1);<br>	}<br><br>	if (*argv[1] &lt; '0' || *argv[1] &gt; '9' || (pid = atoi(argv[1])) &lt; 0) {<br>		printf("invalid pid\n");<br>		exit(1);<br>	}<br><br>	if (pid == 0)<br>		pid = getpid();<br><br>	if (!(mmdesc = malloc(len)))<br>		exiterr("malloc");<br><br>	while (1) {<br>		if ((ret = mtrack(pid, mmdesc, len)) &lt; 0)<br>			exiterr("mtrack");<br>		if (ret &gt; len) {<br>			len *= 2;<br>			if (!(mmdesc = realloc(mmdesc, len)))<br>				exiterr("realloc");<br>		} else {<br>			if (count++ % MMDESC_PERIOD)<br>				print_data(mmdesc, ret, pid);<br>			print_bmap(mmdesc, ret, pid);<br>		}<br>		sleep(MMDESC_SLEEP);<br>	}<br><br>	exit(0);<br>}<br></pre>
+    <p>
+      --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------<br>
+    </p>
+    <pre>#include &lt;stdio.h&gt;<br>#include &lt;sys/types.h&gt;<br>#include "asm/unistd.h"<br>#include "asm/page.h"<br>#include "linux/mtrack.h"<br>#include &lt;sys/stat.h&gt;<br>#include &lt;sys/mman.h&gt;<br>#include &lt;sys/wait.h&gt;<br>#include &lt;unistd.h&gt;<br>#include &lt;stdlib.h&gt;<br>#include &lt;errno.h&gt;<br>#include &lt;fcntl.h&gt;<br><br>#define LEN   (4 * PAGE_SIZE)<br><br>void exiterr(char *str)<br>{<br>	perror(str);<br>	exit(1);<br>}<br><br><br>/*<br>Make sure the program covers at least the following cases: write-fault, read-fault followed by a write, write (without fault), and copy-on-write.<br>*/<br><br>static void test_mtrack(char *mem_a)<br>{<br>	char *mem_b;<br>	char *mem_c;<br>	char *mem_d;<br>	char *mem_e;<br>	int fd;<br><br>	if ((fd = open("/bin/sh", O_RDONLY)) &lt; 0)<br>		exiterr("open");<br>	printf("fd = %d\n", fd);<br><br>	/* case (b) */<br>	if (!(mem_b = mmap(NULL, LEN * 3, PROT_READ|PROT_WRITE,<br>		       MAP_ANONYMOUS | MAP_PRIVATE, 0, 0)))<br>		exiterr("mmap 1");<br><br>	/* case (c) */<br>	mem_c = mem_b + LEN;<br>	mem_c[0] = 53;<br><br>	/* case (d) */<br>	mem_d = mem_b + LEN + LEN;<br><br>	/* case (e) */<br>	if ((mem_e = mmap(NULL, LEN, PROT_READ|PROT_WRITE,<br>			  MAP_PRIVATE, fd, 0)) == MAP_FAILED)<br>		exiterr("mmap 2");<br><br>	printf("mtrack test program ... starting (pid %d)\n", getpid());<br>	printf("will perform the following:\n");<br>	printf("(a): copy-on-write fault (addr %p)\n", mem_a);<br>	printf("(b): write-fault, non-present (addr %p)\n", mem_b);<br>	printf("(c): write-fault, present (addr %p)\n", mem_c);<br>	printf("(d): read-fault then write, anonymous (addr %p)\n", mem_d);<br>	printf("(e): read-fault then write, file mapped (addr %p)\n", mem_e);<br>	printf("(note: the sleep() syscall may provoke additional faults)\n");<br><br>	sleep(10);<br>	mem_a[0] = 51;<br>	mem_b[0] = 52;<br>	mem_c[0] = 53;<br>	mem_c[0] = mem_d[0];<br>	mem_c[0] = 53;<br>	mem_d[0] = 54;<br>	mem_e[0] = mem_d[0];<br>	mem_e[0] = 55;<br>	sleep(10);<br><br>	printf("now verifying memory contents...");<br>	sleep(1);<br>	if (mem_a[0] != 51 || mem_b[0] != 52 || mem_c[0] != 53 ||<br>	    mem_d[0] != 54 || mem_e[0] != 55) <br>		printf("  FAILED.\n");<br>	else<br>		printf("  OK.\n");<br><br>	printf("done.\n");<br>}<br><br>int main(int argc, char *argv[])<br>{<br>	pid_t pid;<br><br>	char *mem;<br><br>	if (!(mem = malloc(LEN)))<br>		exiterr("malloc 1");<br>	if ((pid = fork()) &lt; 0)<br>		exiterr("fork");<br>	else if (pid == 0)<br>		test_mtrack(mem);<br>	else<br>		wait(NULL);<br>	exit(0);<br>}<br></pre>
+    <p>
+      --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    </p>
+  </li>
+  <li>
+    <b>[10 points] For your <code>mtrack()</code> system call implementation, we indicated that
+    you could ignore various effects that can occur as a result of executing
+    other system calls. Give a list of system calls that may interact with the
+    <code>mtrack()</code> system call implementation. For each system call, explain how they
+    affect each other, and what changes would be required to accommodate for the
+    interaction in a safe and sound manner. </b>
+    <p>
+      <br>
+      <b><i>Answer:</i></b> As long as the memory address space of the process
+      does not change between two invocations of <code>mtrack()</code>, it is guaranteed that
+      all (first) writes will be intercepted and reported. However, if the
+      address space is altered (ie. the VMAs list changes) it will require the
+      tracking mechanism to adapt to the new memory layout. Hence, system calls
+      that may interact with our <code>mtrack</code> are such that modify, directly or
+      indirectly, the memory layout. In all cases, the relevant system call must
+      be intercepted to be acted upon, and there should be an interface to tell
+      user-space about any changes to the memory layout.
+    </p>
+    <ul>
+      <li>
+        <p>
+          <code>mmap(),munmap(),mremap(),brk()</code>: explicitly change the memory layout by adding or removing
+          mappings. Action: create or remove the relevant bitmaps.
+        </p>
+      </li>
+      <li>
+        <p>
+          <code>shmdt(),shmat()</code>: map and unmap shared memory of IPC. Action: similar to <code>mmap()</code>.
+        </p>
+      </li>
+      <li>
+        <p>
+          <code>mprotect()</code>: explicitly change the protection of a memory region. Action: if
+          a write-enabled region becomes read-only then any marking must be
+          taken off the corresponding PTEs. If a read-enabled region becomes
+          writable, then the PTEs must be marked and a bitmap allocated.
+        </p>
+      </li>
+      <li>
+        <p>
+          <code>exec()</code>: load a completely new memory layout. Action: update the bitmaps
+          held with the <code>mmdesc</code>.
+        </p>
+        <br>
+        <p>
+          <br>
+          <br>
+          <br>
+        </p>
+      </li>
+    </ul>
+  </li>
+</ol></body>
+</html>

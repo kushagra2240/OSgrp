@@ -1,0 +1,1826 @@
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type="text/css">
+
+  
+
+  
+  table {
+    font-size: 1em;
+  }
+
+  
+  div, address, ol, ul, li, option, select { 
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+
+  p {
+    margin: 0px;
+  }
+
+  body {
+    padding: 0px;
+    
+    
+      margin: 0px;
+    
+  }
+
+  h6 { font-size: 10pt }
+  h5 { font-size: 11pt }
+  h4 { font-size: 12pt }
+  h3 { font-size: 13pt }
+  h2 { font-size: 14pt }
+  h1 { font-size: 16pt }
+
+  blockquote {padding: 10px; border: 1px #DDDDDD dashed }
+
+  a img {border: 0}
+
+  
+  
+
+  
+  body {
+    font-family: Verdana;
+    
+    font-size: 10.0pt;
+    line-height: normal;
+    background-color: #ffffff;
+  }
+
+
+
+
+</style>
+
+
+</head>
+
+
+<body revision="dcgckwk6_15fq5kjr:19">
+
+<CENTER>
+<H2>
+  Homework 3<BR>
+  <FONT size=-1>W4118 Fall 2010<BR>
+  </FONT>
+</H2>
+</CENTER>
+<P>
+  &nbsp;
+  <H3>
+    Individual Written Problems:
+  </H3>
+  <P>
+    &nbsp;
+    <OL>
+      <P>
+        &nbsp;
+        <LI>
+          <I>(Exercise 4.1):</I> <B>Provide two programming examples in which
+          multithreading does not provide better performance than a
+          single-threaded solution </B>
+          <P>
+            &nbsp;
+          </P>
+          <BR>
+          <B><I>Answer:</I></B>
+          <OL type=a>
+            <LI>
+              <P>
+                Any kind of sequential program is not a good candidate to be
+                threaded. An example of this is a program that calculates an
+                individual tax return.
+              </P>
+              <LI>
+                <P>
+                  Another example is a "shell" program such as the C-shell. Such
+                  a program must closely monitor its own working space such as
+                  open files, environment variables, and current working
+                  directory.
+                </P>
+              </LI>
+          </OL>
+          <P>
+            &nbsp;
+          </P>
+          <P>
+            &nbsp;
+          </P>
+          <LI>
+            <I>(Exercise 4.4):</I> <B>Which of the following components of
+            program state are shared across threads in a multithreaded process?
+            <OL type=a>
+              <LI>
+                <P>
+                  Register values
+                </P>
+                <LI>
+                  <P>
+                    Heap memory
+                  </P>
+                  <LI>
+                    <P>
+                      Global variables
+                    </P>
+                    <LI>
+                      <P>
+                        Stack memory
+                      </P>
+                    </LI>
+            </OL>
+            </B>
+            <P>
+              &nbsp;
+            </P>
+            <BR>
+            <B><I>Answer:</I></B> The threads of a multithreaded process share
+            heap memory and global variables. Each thread has its separate set
+            of register values and a separate stack.
+            <P>
+              &nbsp;
+            </P>
+            <P>
+              &nbsp;
+            </P>
+            <LI>
+              <I>(Exercise 4.5):</I> <B>Can a multithreaded solution using
+              multiple user-level threads achieve better performance on a
+              multiprocessor system than on a single-processor system? </B>
+              <P>
+                &nbsp;
+              </P>
+              <BR>
+              <B><I>Answer:</I></B> A multithreaded system comprising of
+              multiple user-level threads cannot make use of the different
+              processors in a multiprocessor system simultaneously. The
+              operating system sees only a single process and will not schedule
+              the different threads of the process on separate processors.
+              Consequently, there is no performance benefit associated with
+              executing multiple user-level threads on a multiprocessor system.
+              <P>
+                &nbsp;
+              </P>
+              <P>
+                &nbsp;
+              </P>
+              <LI>
+                <I>(Exercise 6.1):</I> <B>The first known correct software
+                solution to the critical-section problem for two processes was
+                developed by Dekker. The two processes, P0 and P1, share the
+                following variables:
+                <PRE>              boolean flag[2]; /* initially false */
+              int turn;
+</PRE>
+                The structure of process Pi (i == 0 or 1) is shown in Figure
+                6.25; the other process is P j (j == 1 or 0). Prove that the
+                algorithm satisfies all three requirements for the
+                critical-section problem. </B>
+                <P>
+                  &nbsp;
+                </P>
+                <BR>
+                <B><I>Answer:</I></B> This algorithm satisfies the three
+                conditions of mutual exclusion. (1) Mutual exclusion is ensured
+                through the use of the flag and turn variables. If both
+                processes set their flag to true, only one will succeed, namely,
+                the process whose turn it is. The waiting process can only enter
+                its critical section when the other process updates the value of
+                turn. (2) Progress is provided, again through the flag and turn
+                variables. This algorithm does not provide strict alternation.
+                Rather, if a process wishes to access their critical section, it
+                can set their flag variable to true and enter their critical
+                section. It sets turn to the value of the other process only
+                upon exiting its critical section. If this process wishes to
+                enter its critical section again--before the other process--it
+                repeats the process of entering its critical section and setting
+                turn to the other process upon exiting. (3) Bounded waiting is
+                preserved through the use of the TTturn variable. Assume two
+                processes wish to enter their respective critical sections. They
+                both set their value of flag to true; however, only the thread
+                whose turn it is can proceed; the other thread waits. If bounded
+                waiting were not preserved, it would therefore be possible that
+                the waiting process would have to wait indefinitely while the
+                first process repeatedly entered --and exited --its critical
+                section. However, Dekker's algorithm has a process set the value
+                of turn to the other process, thereby ensuring that the other
+                process will enter its critical section next.
+                <P>
+                  &nbsp;
+                </P>
+                <P>
+                  &nbsp;
+                </P>
+                <LI>
+                  <I>(Exercise 6.4):</I> <B>Explain why spinlocks are not
+                  appropriate for single-processor systems yet are often used in
+                  multiprocessor systems. </B>
+                  <P>
+                    &nbsp;
+                  </P>
+                  <BR>
+                  <B><I>Answer:</I></B> Spinlocks are not appropriate for
+                  single-processor systems because the condition that would
+                  break a process out of the spinlock can be obtained only by
+                  executing a different process. If the process is not
+                  relinquishing the processor, other processes do not get the
+                  opportunity to set the program condition required for the
+                  first process to make progress. In a multiprocessor system,
+                  other processes execute on other processors and thereby modify
+                  the program state in order to release the first process from
+                  the spinlock.
+                  <P>
+                    &nbsp;
+                  </P>
+                  <P>
+                    &nbsp;
+                  </P>
+                  <LI>
+                    <I>(Exercise 6.6):</I> <B>Explain why interrupts are not
+                    appropriate for implementing synchronization primitives in
+                    multiprocessor systems. </B>
+                    <P>
+                      &nbsp;
+                    </P>
+                    <BR>
+                    <B><I>Answer:</I></B> Interrupts are not sufficient in
+                    multiprocessor systems since disabling interrupts only
+                    prevents other processes from executing on the processor in
+                    which interrupts were disabled; there are no limitations on
+                    what processes could be executing on other processors and
+                    therefore the process disabling interrupts cannot guarantee
+                    mutually exclusive access to program state.
+                    <P>
+                      &nbsp;
+                    </P>
+                    <P>
+                      &nbsp;
+                    </P>
+                    <LI>
+                      <I>(Exercise 7.1):</I> <B>Consider the traffic deadlock
+                      depicted in Figure 7.1.
+                      <OL type=a>
+                        <LI>
+                          <P>
+                            Show that the four necessary conditions for deadlock
+                            indeed hold in this example.
+                          </P>
+                          <LI>
+                            <P>
+                              State a simple rule for avoiding deadlocks in this
+                              system.
+                            </P>
+                          </LI>
+                      </OL>
+                      </B>
+                      <P>
+                        &nbsp;
+                      </P>
+                      <IMG src=Homework_3_images/EXTERN_0000.png><BR>
+                      <B><I>Answer:</I></B>
+                      <OL type=a>
+                        <LI>
+                          <P>
+                            The four necessary conditions for a deadlock are (1)
+                            mutual exclusion; (2) hold-and-wait; (3) no
+                            preemption; and (4) circular wait. The mutual
+                            exclusion condition holds since only one car can
+                            occupy a space in the roadway. Hold-and-wait occurs
+                            where a car holds onto its place in the roadway
+                            while it waits to advance in the roadway. A car
+                            cannot be removed (i.e. preempted) from its position
+                            in the roadway. Lastly, there is indeed a circular
+                            wait as each car is waiting for a subsequent car to
+                            advance. The circular wait condition is also easily
+                            observed from the graphic.
+                          </P>
+                          <LI>
+                            <P>
+                              A simple rule that would avoid this traffic
+                              deadlock is that a car may not advance into an
+                              intersection if it is clear it will not be able
+                              immediately to clear the intersection.
+                            </P>
+                          </LI>
+                      </OL>
+                      <P>
+                        &nbsp;
+                      </P>
+                      <P>
+                        &nbsp;
+                      </P>
+                      <LI>
+                        <B>In the Linux 2.6.18.8 kernel, what is the difference
+                        between how a spin lock is implemented for a
+                        uniprocessor versus a multiprocessor ? Is it the same
+                        for a preemptible kernel ? why ? </B>
+                        <P>
+                          &nbsp;
+                        </P>
+                        <BR>
+                        <B><I>Answer:</I></B> In the linux 2.6.x kernels, spin
+                        locks in multiprocessor machines are implemented using
+                        atomic operations at the hardware level such as
+                        test-and-set. These instruction provide the semantics
+                        necessary to effect mutual exclusion in a real
+                        environment. In uni-processor kernels, the spin lock
+                        becomes a NOP (no-operation), since the current process
+                        --the one that is acquiring the spin lock-- will never
+                        be preempted involuntarily by the kernel. However this
+                        argument doesn't hold if preemption is enabled, since
+                        processes that execute in kernel mode can be preempted
+                        in favor of a higher priority process. In this case, the
+                        role of the spin lock is to prohibit (tempororarily)
+                        kernel preemption, for as long as the lock is held.
+                        <P>
+                          &nbsp;
+                        </P>
+                        <P>
+                          &nbsp;
+                        </P>
+                        <LI>
+                          <B>In the group programming assignment for Homework 2,
+                          you were asked to write a system call that makes use
+                          of the tasklist_lock to safely access certain data
+                          structures. Assuming synchronization primitives are
+                          not used by the system call, give a concrete example
+                          of how the system call can fail. Explain why locks are
+                          used by a process for finding children and siblings of
+                          another process. Does a parent need the lock when
+                          traversing its own children list? </B>
+                          <P>
+                            &nbsp;
+                          </P>
+                          <BR>
+                          <B><I>Answer:</I></B> A concrete example in which the
+                          system can fail if synchronization is not performed:
+                          assume B is the parent of C, and A is some other
+                          process that is scanning through the list of the
+                          children of process B. If not locks are used, then it
+                          may happen that process C dies <I>after</I> process A
+                          already obtained (but not yet dereferenced) a pointer
+                          to C. In this case, process A essentially holds a
+                          stale pointer.<BR>
+                          Locks are used by a process to find siblings and
+                          children of another process because by holding the
+                          lock the lock protects those lists from being modified
+                          while they are scanned.<BR>
+                          Normally children are not removed from the parent's
+                          children list, except when the parent explicitly
+                          collects a zombie child. Nevertheless, a parent
+                          process should always hold the lock even when
+                          accessing its own children list, because in Linux a
+                          child can fork a <I>sibling</I> (as opposd to a
+                          child), thus modifying the parent's data structure
+                          that describes the children.
+                          <P>
+                            &nbsp;
+                          </P>
+                          <P>
+                            &nbsp;
+                          </P>
+                          <LI>
+                            <B>In the group programming assignment for Homework
+                            2, you were asked to write a system call that makes
+                            use of the tasklist_lock to safely access certain
+                            data structures. Why must copy_to_user be done
+                            without holding the lock? Give a concrete example of
+                            how the system call can fail if copy_to_user was
+                            done while holding the lock. </B>
+                            <P>
+                              &nbsp;
+                            </P>
+                            <BR>
+                            <B><I>Answer:</I></B> calling copy_to_user() while
+                            holding a spin lock (in our case, tasklist_lock) is
+                            unsafe and may lead to a deadlock in some
+                            situations. For example, assume that process A takes
+                            the tasklist_lock, and then calls copy_to_user();
+                            suppose that this eventually produces a page fault,
+                            which requires lengthy I/O such that the process is
+                            put to sleep. If at this moment other processes
+                            attempt to lock tasklist_lock, they will have to
+                            spin until the lock is released. Since spinning
+                            processes hold on to the CPU, they will end up
+                            spinning perpetually because the other process that
+                            holds the lock will never get a chance to be
+                            scheduled and release the lock. This results in a
+                            classic deadlock.
+                            <P>
+                              &nbsp;
+                            </P>
+                          </LI>
+    </OL>
+    <H3>
+      Group Programming Problems:
+    </H3>
+    <OL>
+      <LI>
+        <P>
+          <b>Synchronization and threads in userspace</b>
+        </P>
+        <b>
+        <P>
+          In this problem you will add synchronization functionality to the
+          implementation of <i>SThreads</i>, a simple threading library. Get the
+          source files found in
+          <A href=http://www.cs.columbia.edu/~nieh/teaching/w4118/homeworks/hmwk3.code>this
+          directory</A>.
+          [http://www.cs.columbia.edu/~nieh/teaching/w4118/homeworks/hmwk3.code/]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          The files provide the source, header, and Makefile for the SThreads
+          library. The publicly available functions and datatypes in the file
+          <CODE>sthread.h</CODE>. The library is used as follows:
+        </P>
+        <UL>
+          <LI>
+            <P>
+              Threads are manipulated using variables of type <CODE>sthread_t</CODE>. Consider
+              <CODE>sthread_t</CODE> to be an opaque data type (i.e. only functions in <CODE>sthread.c</CODE> get
+              to know what it really is).
+            </P>
+            <LI>
+              <P>
+                <CODE>sthread_init()</CODE> must be called exactly once, as the first thing in <CODE>main()</CODE>.
+                It returns 0 normally, and -1 on error.
+              </P>
+              <LI>
+                <P>
+                  A new thread is created using the function:
+                </P>
+                <P>
+                  <CODE>int sthread_create(sthread_t *t, sthread_main_t main, void *arg)</CODE>.
+                </P>
+                <P>
+                  The first argument is where the <CODE>sthread_t</CODE> object is returned. The
+                  second is the function the new thread should run. The third
+                  argument is passed to this function. <CODE>sthread_create()</CODE> returns 0 normally
+                  and -1 on error.
+                </P>
+                <LI>
+                  <P>
+                    You are also provided with <CODE>sthread_self()</CODE>, which returns the <CODE>sthread_t</CODE>
+                    associated with the currently running thread, as well as
+                    <CODE>sthread_suspend()</CODE>, which puts the currently running thread to sleep, and
+                    <CODE>sthread_wake(sthread_t t)</CODE>, which wakes up a thread, given the thread's <CODE>sthread_t</CODE>
+                    object. Note that for the SThreads library, first waking up
+                    a running thread and then suspending it leaves the thread in
+                    a running state.
+                  </P>
+                  <LI>
+                    <P>
+                      Usage example:
+                    </P>
+                    <TABLE border=1>
+                      <TBODY>
+                      <TR>
+                        <TD>
+                          <PRE>#define _REENTRANT
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;errno.h&gt;
+#include &lt;unistd.h&gt;
+#include "sthread.h"
+
+int
+threadmain(void *arg)
+{
+  int threadno = (int)arg;
+  for (;;) {
+    printf("thread %d: I'm going to sleep\n", threadno);
+    sthread_suspend();
+    printf("thread %d: I woke up!\n", threadno);
+  }
+  return 0;
+}
+
+int
+main(int argc, char *argv[])
+{
+  sthread_t thr1, thr2;
+
+  if (sthread_init() == -1)
+    fprintf(stderr, "%s: sthread_init: %s\n", argv[0], strerror(errno));
+
+  if (sthread_create(&amp;thr1, threadmain, (void *)1) == -1)
+    fprintf(stderr, "%s: sthread_create: %s\n", argv[0], strerror(errno));
+
+  if (sthread_create(&amp;thr2, threadmain, (void *)2) == -1)
+    fprintf(stderr, "%s: sthread_create: %s\n", argv[0], strerror(errno));
+
+  sleep(1);
+  sthread_wake(thr1);
+  sleep(1);
+  sthread_wake(thr2);
+  sleep(1);
+  sthread_wake(thr1);
+  sthread_wake(thr2);
+  sleep(1);
+
+  return 0;
+}
+</PRE>
+                        </TD>
+                      </TR>
+                      </TBODY>
+                    </TABLE>
+                  </LI>
+        </UL>
+        <P>
+          Note the <CODE>#define&nbsp;_REENTRANT</CODE> at the top of the file. This is necessary in any
+          multithreaded program, as it tells subsequent include files to use
+          reentrant versions of library functions and thread-safe variables. For
+          example, the <CODE>errno</CODE> variable, since it is a global variable, is
+          normally not thread-safe. A function in thread A can set it on error,
+          and thread B can set it to something else before the caller in thread
+          A ever gets to read the value. This is an example of a <i>race
+          condition</i>. If you <CODE>#define&nbsp;_REENTRANT</CODE>, though, <CODE>errno</CODE> is redefined to <CODE>(*__errno_location())</CODE>,
+          which references a different address for each thread. An
+          implementation of this function is provided in <CODE>sthread.c</CODE>.
+        </P>
+        <P>
+          You will also be provided with the function <CODE>test_and_set(int *x)</CODE>, which atomically
+          sets the integer that x points to to 1, and returns its previous
+          value. Using <CODE>sthread_suspend()</CODE>, <CODE>sthread_wake()</CODE>, and <CODE>test_and_set()</CODE>, you are to implement the missing
+          locking primitives in the SThreads library.
+        </P>
+        <P>
+          You may use <CODE>test_and_set()</CODE> to implement spinlocks, in which you repeatedly call
+          <CODE>test_and_set()</CODE> and a no-op in a tight loop, waiting for the test result to be
+          0. <CODE>sched_yield()</CODE> is a good no-op function to use, but you don't have to worry
+          about precisely what it does (not until the next homework, anyway!).
+          Note that you can use spinlocks to synchronize access on your locks'
+          shared data structures, but not to implement the locks themselves. In
+          other words, if I call <CODE>sthread_mutex_lock()</CODE> on an unavailable mutex, I should suspend
+          rather than spinning until the lock is released.
+        </P>
+        <P>
+          Now comes the fun part. For this assignment, implement mutex locks in
+          the SThreads library. Put your function implementations in a single
+          file, called <CODE>sync.c</CODE>, and your structure definitions in <CODE>sync.h</CODE>. Skeleton
+          files are provided, but you may have to add functions and datatypes to
+          these files. You shouldn't have to change <CODE>sthread.c</CODE> or <CODE>sthread.h</CODE>. In fact, you
+          shouldn't even have to look at the implementations of the functions in
+          <CODE>sthread.c</CODE> (but feel free if you want to, of course). Unless otherwise
+          noted, all functions should return 0 on success and -1 on error.
+        </P>
+        <P>
+          The prototypes for the five functions you must implement are found in
+          <CODE>sync.h</CODE>, and are all named <CODE>sthread_mutex_*</CODE>. You must define <CODE>struct sthread_mutex_struct</CODE>. <CODE>sthread_mutex_init()</CODE> and <CODE>sthread_mutex_destroy()</CODE>
+          should be used to initialize and free resources related to this
+          struct. Either or both may be no-ops if your implementation requires
+          no initialization and/or cleanup. <CODE>sthread_mutex_lock()</CODE> should obtain the lock, if it
+          is available, or else the current thread should block until the lock
+          is available. <CODE>sthread_mutex_unlock()</CODE> should make the lock available. It should be an
+          error for any thread other than the owner of the lock to call this.
+          <CODE>sthread_mutex_trylock()</CODE> should obtain the lock and return 0, if the lock is available,
+          or else return non-zero immediately. This function does not cause the
+          caller to block.
+        </P>
+        <P>
+          Your implementation should be recursive, i.e. if the owner of a lock
+          tries to get the same lock, it should not deadlock, but just require
+          another call to <CODE>sthread_mutex_unlock()</CODE> to fully unlock the mutex. Note that this is not
+          how all mutex implementations work -- many will simply deadlock if the
+          holder of a lock attempts to get it again. The Linux pthread
+          implementation has both standard and recursive mutexes: see the
+          <KBD>pthread_mutex_init(1)</KBD> man page for details. Also note that
+          recursive mutexes are just a programming convenience; it adds no
+          functionality that you couldn't get otherwise. Basically, if you have
+          a critical section in a function that may or may not be called from
+          within another critical section, recursive mutexes allow you to lock
+          and unlock without checking whether you already have the lock.
+        </P>
+        <P>
+          Your implementation should not allow starvation of any thread waiting
+          for the mutex. That is, if two threads are repeatedly locking and
+          unlocking a mutex, that should not prevent a third thread from
+          eventually getting the lock. (Of course, if one thread never unlocks
+          the mutex, the others will starve, but that's a programming error,
+          i.e. not our problem!)
+        </P>
+        </b>
+        <P>
+          <B><I>Answer:</I></B><BR>
+          See
+          <A href=http://www.cs.columbia.edu/~nieh/teaching/w4118/homeworks/solutions/hmwk3/code/sthreads/sync.c>sync.c</A>
+          and
+          <A href=http://www.cs.columbia.edu/~nieh/teaching/w4118/homeworks/solutions/hmwk3/code/sthreads/sync.h>sync.h</A>.
+          And this is the test program,
+          <A href=http://www.cs.columbia.edu/~nieh/teaching/w4118/homeworks/solutions/hmwk3/code/sthreads/test.c>test.c</A>.
+          Note that the solution uses unsigned long for the locks instead of int
+          to avoid compiler warnings (in particular, the test_and_set() sthread
+          function should receive a pointer to unsigned long instead of a
+          pointer to
+          int).&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          --------------------------------------------------------------------------------------------------------------------------------------/*sync.h*/
+        </P>
+        <PRE>/*
+ * sync.h
+ *
+ * SThread, a simple threading library
+ *
+ * Solution
+ */
+
+#ifndef _STHREAD_SYNC_H_
+#define _STHREAD_SYNC_H_
+
+
+/*
+ * Queue data structures
+ */
+
+struct threadq_elt {
+  sthread_t thread;
+  struct threadq_elt *next;
+};
+
+struct threadq {
+  struct threadq_elt *head;
+  struct threadq_elt *tail;
+};
+
+
+/*
+ * Mutex lock structure
+ */
+
+struct sthread_mutex_struct {
+  sthread_t owner;
+  unsigned long lock;
+  int count;
+  struct threadq waitlist;
+  unsigned long spinlock;
+};
+
+typedef struct sthread_mutex_struct sthread_mutex_t;
+
+/*
+ * Function prototypes
+ */
+
+int sthread_mutex_init(sthread_mutex_t *mutex);
+int sthread_mutex_destroy(sthread_mutex_t *mutex);
+int sthread_mutex_lock(sthread_mutex_t *mutex);
+int sthread_mutex_trylock(sthread_mutex_t *mutex);
+int sthread_mutex_unlock(sthread_mutex_t *mutex);
+
+#endif
+</PRE>
+        <P>
+          ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+          /*sync.c*/
+        </P>
+        <PRE>/*
+ * sync.c
+ *
+ * Synchronization routines for SThread
+ *
+ * Solution
+ */
+
+#define _REENTRANT
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;sched.h&gt;
+#include "sthread.h"
+
+
+/*
+ * Queue functions, for wait lists
+ */
+
+static void init_queue(struct threadq *q)
+{
+  q-&gt;head = NULL;
+  q-&gt;tail = NULL;
+}
+
+static int enqueue(struct threadq *q, sthread_t t)
+{
+  struct threadq_elt *newelt;
+
+  newelt = (struct threadq_elt *)malloc(sizeof(struct threadq_elt));
+  if (newelt == NULL)
+    return -1;
+  newelt-&gt;thread = t;
+  newelt-&gt;next = NULL;
+
+  if (q-&gt;head) {
+    q-&gt;tail-&gt;next = newelt;
+    q-&gt;tail = newelt;
+  } else {
+    /* if the head is NULL, the queue is empty */
+    q-&gt;head = q-&gt;tail = newelt;
+  }
+
+  return 0;
+}
+
+static sthread_t dequeue(struct threadq *q)
+{
+  struct threadq_elt *elt;
+  sthread_t retval = NO_THREAD;
+
+  elt = q-&gt;head;
+  if (elt) {
+    q-&gt;head = q-&gt;head-&gt;next;
+    retval = elt-&gt;thread;
+    free(elt);
+  }
+
+  return retval;
+}
+
+static void destroy_queue(struct threadq *q)
+{
+  while (q-&gt;head)
+    (void)dequeue(q);
+}
+
+
+/*
+ * Spinlock functions
+ */
+
+static void acquire_spinlock(unsigned long *x)
+{
+  while (test_and_set(x))
+    sched_yield(); /* any no-op can go here */
+}
+
+static void release_spinlock(unsigned long *x)
+{
+  *x = 0;
+}
+
+/*
+ * Mutex routines
+ */
+
+int sthread_mutex_init(sthread_mutex_t *mutex)
+{
+  mutex-&gt;owner = NO_THREAD;
+  mutex-&gt;lock = 0;
+  mutex-&gt;count = 0;
+  init_queue(&amp;mutex-&gt;waitlist);
+  mutex-&gt;spinlock = 0;
+  return 0;
+}
+
+int sthread_mutex_destroy(sthread_mutex_t *mutex)
+{
+  destroy_queue(&amp;mutex-&gt;waitlist);
+  return 0;
+}
+
+int sthread_mutex_lock(sthread_mutex_t *mutex)
+{
+  int retval = 0;
+  sthread_t self = sthread_self();
+
+  /*
+   * We spinlock here to prevent the following situation:
+   *
+   *	1. Thread A holds the lock.
+   *	2. Thread B enters this function, and fails the test-and-set, but
+   *		 doesn't enqueue itself yet.
+   *	3. Thread A enters and completes sthread_mutex_unlock(), finds
+   *		 the waitlist empty, and doesn't wake any thread.
+   *	4. Thread B enqueues itself and suspends, but the mutex is available!
+   */
+  acquire_spinlock(&amp;mutex-&gt;spinlock);
+
+  /* unlock makes sure that when we wake up we will have the lock
+   * and we will be the owners of the lock. therefore nobody else can get 
+   * it and there's no need to loop to check again */
+  if(test_and_set(&amp;mutex-&gt;lock) &amp;&amp; mutex-&gt;owner != self) {
+    /* someone has the lock, and it's not us */
+    if (enqueue(&amp;mutex-&gt;waitlist, self) == -1) {
+      retval = -1;
+      goto out_unlock;
+    }
+    release_spinlock(&amp;mutex-&gt;spinlock);
+    sthread_suspend();
+    acquire_spinlock(&amp;mutex-&gt;spinlock);
+  }
+
+  /* we got the lock */
+  mutex-&gt;owner = self;
+  mutex-&gt;count++;
+
+ out_unlock:
+  release_spinlock(&amp;mutex-&gt;spinlock);
+
+  return retval;
+}
+
+int sthread_mutex_trylock(sthread_mutex_t *mutex)
+{
+  int retval = 0;
+  sthread_t self = sthread_self();
+
+  /* we don't need the spinlock as in lock() because we only return instead
+   * of sleeping if the lock is taken. we may still miss the case of unlock
+   * being in progress while we check if the lock is free but since we're
+   * only _trying_ to get the lock that's ok */
+  if (test_and_set(&amp;mutex-&gt;lock) &amp;&amp; mutex-&gt;owner != self) {
+    /* somebody else has the lock */
+    retval = 1;
+  } else {
+    /* ok we got the lock */
+    mutex-&gt;owner = self; 
+    mutex-&gt;count++; 
+  }
+
+  return retval;
+}
+
+int sthread_mutex_unlock(sthread_mutex_t *mutex)
+{
+  sthread_t self = sthread_self();
+  sthread_t towake;
+
+  if (mutex-&gt;owner != self)
+    return -1;
+
+  /*
+   * See sthread_mutex_lock(), above, for an explanation of why we
+   * need to spinlock here.
+   */
+  acquire_spinlock(&amp;mutex-&gt;spinlock);
+
+  if (--mutex-&gt;count == 0) {
+    /* check if somebody's waiting before letting the lock go. this
+     * avoids race conditions with trylock */
+    if ((towake = dequeue(&amp;mutex-&gt;waitlist)) != NO_THREAD){
+      /* assign the lock to the next waiting thread and wake it up */
+      mutex-&gt;owner = towake;
+      sthread_wake(towake);
+    } else {
+      /* nobody waiting, just let it go */
+      mutex-&gt;owner = NO_THREAD;
+      mutex-&gt;lock = 0;
+    }
+  }
+
+  release_spinlock(&amp;mutex-&gt;spinlock);
+
+  return 0;
+}
+</PRE>
+        <P>
+          ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------&nbsp;
+          /*test.c*/
+        </P>
+        <PRE>#define _REENTRANT
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;errno.h&gt;
+#include &lt;unistd.h&gt;
+#include "sthread.h"
+#include "sync.h"
+
+
+/* use 2 locks, A and B */
+static sthread_mutex_t *lockA;
+static sthread_mutex_t *lockB;
+
+static sthread_t control_thread; /* parent thread */
+static int active_client; /* client that is in the 'critical section' */
+
+static int client_thread_main(void *);
+static int control_thread_main(void *);
+
+static int control_thread_main(void *arg)
+{
+  int num_clients = (int)arg;
+  sthread_t *client_list;
+  int i;
+
+  if(!(client_list = (sthread_t *) malloc(num_clients*sizeof(sthread_t)))) {
+    perror("out of memory?");
+    return -1;
+  }
+	
+  /* mutexes initialized in sthread_mutex_init */
+  lockA = (sthread_mutex_t *) malloc(sizeof(sthread_mutex_t));
+  lockB = (sthread_mutex_t *) malloc(sizeof(sthread_mutex_t));
+  if(!lockA || !lockB) {
+    perror("out of memory?");
+    free(client_list);
+    return -1;
+  }
+			
+  sthread_mutex_init(lockA);
+  sthread_mutex_init(lockB);
+	
+  sthread_mutex_lock(lockA);
+
+  /* check for correct recursive implementation */
+  printf("checking recursive lock...");
+  sthread_mutex_lock(lockA);
+  sthread_mutex_unlock(lockA);
+  printf("ok\n");
+	
+  for ( i = 0; i &lt; num_clients; i++ ){
+    sthread_t thread;
+    /* create a bunch of clients */
+    sthread_create(&amp;thread, client_thread_main, (void *)i);
+    client_list[i] = thread;
+  }
+	
+  while (1) {
+    printf("Control monitoring clients ...\n");
+
+    /* check if there are any clients waiting */
+    if (!sthread_mutex_trylock(lockB)) {
+      /* if we can grab the lock, there are none, so free lock B and
+       * continue waiting... This repeated locking/unlocking shouldn't
+       * starve the clients */ 
+      sthread_mutex_unlock(lockB);
+    } else {
+#ifdef DEBUG
+      printf("We got one...\n");
+#endif
+      /* the lock has been grabbed by a client */
+      sthread_mutex_unlock(lockA); /* allow the client to proceed */
+#ifdef DEBUG
+      printf("Unlocked A and going to sleep...\n");
+      sthread_suspend();
+      printf("Control woken up\n");
+#endif
+      sthread_mutex_lock(lockA); /* should grab it back *after* the 
+				    client, if starvation is properly 
+				    avoided */
+			
+      /* access to active_client variable is serialized by lock A */
+      sthread_wake(client_list[active_client]);
+    }
+    sleep(1);	
+  }
+}
+
+static int client_thread_main(void *arg)
+{
+  int threadno = (int)arg;
+	
+  if (sthread_mutex_unlock(lockA) != -1){
+    /* error: only owner should be allowed to successfully unlock */
+    printf("error: shouldn't be able to unlock!\n");
+    sthread_mutex_lock(lockA);
+  }
+	
+  while (1) {
+    /* if starvation is dealt with properly, the clients will get lock B
+     * in a circular manner, in the order in which they were created */
+#ifdef DEBUG
+    printf("Client %d waiting on lock B\n", threadno);
+#endif
+    sthread_mutex_lock(lockB);
+#ifdef DEBUG
+    printf("Client %d waiting on lock A\n", threadno);
+#endif
+    sthread_mutex_lock(lockA); 
+    /* client grabs A only after control notices B is taken, so releases A */
+    /* inside 'critical section' */
+    active_client = threadno;
+    printf("Client %d is active...", threadno);
+    sleep(1);
+    printf("no longer active\n");
+		
+    /* give control back to control_thread */
+    sthread_mutex_unlock(lockA);
+    //sthread_wake(control_thread);
+#ifdef DEBUG
+    printf("%d woke up control and is now going to sleep\n", threadno);
+#endif
+    /* no other client will be able to get lock A before control_thread
+     * since all the other clients are still waiting on lock B */
+    /* sleep until control_thread wakes it up: necessary since we want to
+     * avoid another client grabbing A before the control grabs A back */
+    sthread_suspend();
+    /* now we can let the next client in */
+#ifdef DEBUG
+    printf("%d woken up. Unlocking B...\n", threadno);
+#endif
+    sthread_mutex_unlock(lockB);
+  }
+}
+
+int main(int argc, char *argv[])
+{
+  int num_clients;
+	
+  if (argc &lt; 2){
+    printf("Usage: %s &lt;number clients&gt;\n", argv[0]);
+    exit(1);
+  }
+  num_clients = atoi(argv[1]);
+
+  sthread_init();
+  sthread_create(&amp;control_thread, control_thread_main, (void *)num_clients);
+  while(1){};
+  return 0;
+}
+</PRE>
+        <P>
+          --------------------------------------------------------------------------------------------------------------------------------------
+        </P>
+        <LI>
+          <P>
+            <b><U>Synchronization in the Linux
+            kernel</U></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            -----<b>For this problem, you will implement a new kernel
+            synchronization primitive. Review chapters 7, 8, and the "Sleeping
+            and Waking Up" section in chapter 3 in <i>Linux Kernel
+            Development</i>. In chapter 3, pay particular attention to the
+            material about wait queues. Note that the kernel calls its semaphore
+            operations <i>down</i> and <i>up</i> instead of <i>P</i> and
+            <i>V</i>, but the operations are the same. Note that unlike the
+            userspace mutexes you implemented for question 1, the
+            synchronization primitives in Linux generally do not have owners and
+            are not recursive. No owners means that there's nothing stopping any
+            piece of code from unlocking every lock in the kernel (and bringing
+            the kernel to a fiery screeching halt, probably). Not recursive
+            means that the owner of a lock (even if there was such a thing)
+            can't obtain the lock twice. </b>
+          </P>
+          <LI>
+            <OL type=a>
+              <LI>
+                <P>
+                  <b>Design and implement a new kernel synchronization primitive
+                  that will allow multiple processes to block on an event until
+                  some other process signals the event. When a process signals
+                  the event, all processes that are blocked on the event are
+                  unblocked. If no processes are blocked on an event when it is
+                  signaled, then the signal has no effect. Implement the
+                  following new system calls in the Linux kernel, which should
+                  be numbered 318 to 321, respectively.
+                </P>
+                <UL>
+                  <LI>
+                    <CODE>int doeventopen();</CODE> Creates a new event, returning event ID on success, -1
+                    on failure.
+                    <LI>
+                      <CODE>int doeventclose(int eventID);</CODE> Destroy the event with the given event ID and notify
+                      any processes waiting on the event to leave the event.
+                      Return number of processes signaled on success and -1 on
+                      failure.
+                      <LI>
+                        <CODE>int doeventwait(int eventID);</CODE> Blocks process until the event is triggered; must
+                        verify that the event ID is valid. Return 0 on success
+                        and -1 on failure.
+                        <LI>
+                          <CODE>void doeventsig(int eventID);</CODE> Unblocks all waiting processes; ignored if no
+                          processes are blocked. Return number of processes
+                          signaled on success and -1 on failure.
+                        </LI>
+                </UL>
+                <P>
+                  You should begin by thinking carefully about the data
+                  structures that you will need to solve this problem. Your
+                  system will need to support having multiple events open at the
+                  same time, so you will probably need a set of event descriptor
+                  data structures, each of which identifies an event. Those data
+                  structures will need to be put in a list from which your code
+                  can find the appropriate event descriptor correponding to the
+                  event that you need. Space for the event descriptors should be
+                  dynamically allocated, most likely using the kernel functions
+                  <CODE>kmalloc()</CODE> and <CODE>kfree()</CODE>. You should not make any assumptions about
+                  whether the system is a uniprocessor or multiprocessor system.
+                  Be sure to properly synchronize access to your data
+                  structures. Moreover, be sure to select the appropriate
+                  synchronization primitives such that they are both correct and
+                  efficient, in this order. For instance, you should prefer a
+                  spinlock over a semaphore if-and-only-if you don't plan to
+                  sleep while holding it. You can choose to work at the level of
+                  wait queues using either the associated low-level routines
+                  such as <CODE>add_wait_queue()</CODE>, <CODE>remove_wait_queue()</CODE>, or the higher-level routines such as
+                  <CODE>prepare_to_wait()</CODE>, <CODE>finish_wait()</CODE>. You can find code examples both in the book and
+                  in the kernel. If you prefer to use functions such as <CODE>interruptible_sleep_on()</CODE>
+                  and <CODE>sleep_on()</CODE>, then plan carefully because they can be racy in
+                  certain circumstances. HINT: a useful method to guarantee the
+                  validity of a data structure in the presence of concurrent
+                  create, access and delete operations, is to maintain a
+                  reference count for the object. Then, the object should only
+                  be freed by the last user. The file system, for example, keeps
+                  a reference count for inodes: when a process opens a file the
+                  reference count of the inode is incremented. Thus if another
+                  process deletes the file, the inode remains valid in the
+                  system (albeit invisible) because its count is positive. The
+                  count is decremented when the process closes the corresponding
+                  file descriptor, and if it reaches zero then the inode is
+                  freed. A reference count must be protected against concurrent
+                  access, either using explicit synchronization or usingtomic
+                  types (see (<CODE>natomic_t</CODE> in Chapter 5 in Understanding the Linux
+                  Kernel). You are designing a completely new facility to add to
+                  the kernel. You will need to create a new implementation file
+                  and change the Makefile so that it compiles your new file. You
+                  are also likely to need to change a few parts of the existing
+                  kernel. You should properly handle errors that may occur and
+                  report meaningful error codes, e.g. -ENOMEM in the event that
+                  a memory allocation fails. As always, you are encouraged to
+                  look for existing kernel code that performs similar tasks and
+                  follow the coventions and practices it provides. # </b>
+                </P>
+                <P>
+                  <B><I>Answer:</I></B><BR>
+                  See
+                  <A href=http://www.cs.columbia.edu/~nieh/teaching/w4118/homeworks/solutions/hmwk3/code/events/event.c>event.c</A>
+                  for the event implementation. The following kernel files were
+                  also modified: <i>syscall_table.S</i>, <i>sched.c</i>,
+                  <i>wait.h</i>, <i>kernel/Makefile</i>
+                  <P>
+                    Here's the patch to linux 2.6.18 with kdb installed:
+                    <A href=http://www.cs.columbia.edu/~nieh/teaching/w4118/homeworks/solutions/hmwk3/code/events/kernel.patch>patch
+                    hw3</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    ---------------------------------------------------------------------------------------------------------------------------------<U><b>/*event.c*/</b></U>
+                  </P>
+                  <PRE>/*  -*- linux-c -*- */
+
+#include &lt;linux/sched.h&gt;
+#include &lt;linux/slab.h&gt;
+#include &lt;linux/errno.h&gt;
+#include &lt;linux/wait.h&gt;
+#include &lt;linux/event.h&gt;
+#include &lt;linux/spinlock.h&gt;
+#include &lt;linux/list.h&gt;
+#include &lt;linux/kernel.h&gt;
+
+/* internal data structures to represent event objects */
+struct event {
+	int ev_id;
+	atomic_t ev_count;
+	struct list_head ev_list;
+	wait_queue_head_t ev_waitq;
+};
+
+/* the list of event objects is ordered by event id */
+static LIST_HEAD(eventlist);
+rwlock_t eventlist_lock = RW_LOCK_UNLOCKED;
+
+/*
+ * [helper] find_event(id): locate an event of specifc id in the list
+ * caller must acquire eventlist_lock
+ */
+static inline struct event *find_event(int evid)
+{
+	struct event *ev;
+
+	list_for_each_entry(ev, &amp;eventlist, ev_list) {
+		if (ev-&gt;ev_id == evid)
+			return ev;
+		else if (ev-&gt;ev_id &gt; evid)
+			break;
+	}
+	return NULL;
+}
+
+/*
+ * [helper] get_event(ev): increment a given event's reference count
+ * caller must acquire eventlist_lock
+ */
+static inline void get_event(struct event *ev)
+{
+	atomic_inc(&amp;ev-&gt;ev_count);
+}
+
+/* [helper] put_event(ev): decrement a given event's reference count */
+static inline void put_event(struct event *ev)
+{
+	/* if the count goes to zero then free the object */
+	if (atomic_dec_and_test(&amp;ev-&gt;ev_count))
+		kfree(ev);
+}
+
+/*
+ * insert a new event to the list and allocate a new id for this event.
+ * return event id on success or -ENOSPC if failed to allocate a new id.
+ * caller must acquire evenlist_lock (write-lock).
+ */
+static int insert_event(struct event *ev)
+{
+	struct list_head *prev = &amp;eventlist;
+	struct event *next;
+	int newid = 1;
+
+	/* reminder: the list is ordered by event id */
+	list_for_each_entry(next, &amp;eventlist, ev_list) {
+		if (newid &lt; next-&gt;ev_id)
+			break;
+		prev = &amp;next-&gt;ev_list;
+		newid++;
+	}
+
+	/* if all ids are used then newid may have overflowed ... */
+	if (newid &gt; 0) {
+		ev-&gt;ev_id = newid;
+		list_add(&amp;ev-&gt;ev_list, prev);
+	} else {
+		/* ... in which case return an error */
+		newid = -ENOSPC;
+	}
+
+	return newid;
+}
+
+/* sys_eventopen(): open/create an event object */
+asmlinkage long sys_eventopen(void)
+{
+	struct event *ev;
+	int ret;
+
+	if (!(ev = kmalloc(sizeof(*ev), GFP_KERNEL)))
+		return -ENOMEM;
+
+	INIT_LIST_HEAD(&amp;ev-&gt;ev_list);
+	init_waitqueue_head(&amp;ev-&gt;ev_waitq);
+	atomic_set(&amp;ev-&gt;ev_count, 1);
+
+	write_lock(&amp;eventlist_lock);
+	ret = insert_event(ev);
+	write_unlock(&amp;eventlist_lock);
+	
+	return ret;
+}
+
+/* sys_eventclose(id): close/destroy an event object */
+asmlinkage long sys_eventclose(int evid)
+{
+	struct event *ev;
+	int ret = -EINVAL;
+
+	if (evid &lt; 0)
+		return -EINVAL;
+
+	/* 
+	 * atomically remove the event from the list and at the same time 
+	 * mark the event as dead by setting its id to -1; by doing this
+	 * prior to calling wake_up_cnt() we ensure that there concurrent
+	 * waiter will either (a) be awaken, or (b) not sleep by skipping
+	 * the call to schedule()
+	 */
+	write_lock(&amp;eventlist_lock);
+	if ((ev = find_event(evid))) {
+		list_del(&amp;ev-&gt;ev_list);
+		ev-&gt;ev_id = -1;
+	}
+	write_unlock(&amp;eventlist_lock);
+
+	ret = wake_up_cnt(&amp;ev-&gt;ev_waitq);
+	put_event(ev);
+
+	return ret;
+}
+
+/* sys_eventecvent(id): wait on the event until it is triggered */
+asmlinkage long sys_eventwait(int evid)
+{
+	struct event *ev;
+	DEFINE_WAIT(wait);
+	int ret = -EINVAL;
+
+	if (evid &lt; 0)
+		return -EINVAL;
+
+	read_lock(&amp;eventlist_lock);
+	if ((ev = find_event(evid)))
+		get_event(ev);
+	read_unlock(&amp;eventlist_lock);
+
+	/*
+	 * wait on the event: call prepare_to_wait() to get on the queue,
+	 * then test if the event is still valid, as the event could have
+	 * been closed since we dropped the eventlist_lock;
+	 * (1) if a close occured before the test, then the test will fail
+	 * and we won't call schedule()
+	 * (2) if a close occured after the test but before the call to
+	 * schedule(), then the wake_up() will remove us from the queue 
+	 * changing our state to TASK_RUNNABLE (again, no sleep)
+	 * if a close occurs after the call to schedule(), then the call
+	 * to wake_up() will eventually wake us from the sleep
+	 */
+	if (ev) {
+		prepare_to_wait(&amp;ev-&gt;ev_waitq, &amp;wait, TASK_INTERRUPTIBLE);
+		if (ev-&gt;ev_id &gt; 0)
+			schedule();
+		/* if a signal occured thusfar, notify the user */
+		ret = signal_pending(current) ? -EINTR : 0;
+		finish_wait(&amp;ev-&gt;ev_waitq, &amp;wait);
+		put_event(ev);
+	}
+
+	return ret;
+}
+
+/* sys_eventsig(id): trigger the event (wake up all waiters) */
+asmlinkage long sys_eventsig(int evid)
+{
+	struct event *ev;
+	int ret = -EINVAL;
+
+	if (evid &lt; 0)
+		return -EINVAL;
+
+	read_lock(&amp;eventlist_lock);
+	if ((ev = find_event(evid)))
+		get_event(ev);
+	read_unlock(eventlist_lock);
+
+	if (ev) {
+		ret = wake_up_cnt(&amp;ev-&gt;ev_waitq);
+		put_event(ev);
+	}
+
+	return ret;
+}&nbsp;&nbsp;&nbsp;&nbsp;
+-----------------------------------/*patch hw3*/-------------------------------------------------------------------<PRE>diff -Naur linux-2.6.18.8.base/arch/i386/kernel/syscall_table.S linux-2.6.18.8.hw3/arch/i386/kernel/syscall_table.S
+--- linux-2.6.18.8.base/arch/i386/kernel/syscall_table.S	2007-02-23 18:52:30.000000000 -0500
++++ linux-2.6.18.8.hw3/arch/i386/kernel/syscall_table.S	2007-10-03 19:43:15.000000000 -0400
+@@ -317,3 +317,7 @@
+ 	.long sys_tee			/* 315 */
+ 	.long sys_vmsplice
+ 	.long sys_move_pages
++	.long sys_eventopen
++	.long sys_eventclose
++	.long sys_eventwait
++	.long sys_eventsig
+\ No newline at end of file
+diff -Naur linux-2.6.18.8.base/include/asm-i386/unistd.h linux-2.6.18.8.hw3/include/asm-i386/unistd.h
+--- linux-2.6.18.8.base/include/asm-i386/unistd.h	2007-10-05 23:46:29.000000000 -0400
++++ linux-2.6.18.8.hw3/include/asm-i386/unistd.h	2007-10-03 19:43:09.000000000 -0400
+@@ -228,7 +228,7 @@
+ #define __NR_madvise1		219	/* delete when C lib stub is removed */
+ #define __NR_getdents64		220
+ #define __NR_fcntl64		221
+-/* 223 is unused */
++#define __NR_ptree		223
+ #define __NR_gettid		224
+ #define __NR_readahead		225
+ #define __NR_setxattr		226
+@@ -323,10 +323,13 @@
+ #define __NR_tee		315
+ #define __NR_vmsplice		316
+ #define __NR_move_pages		317
+-
++#define __NR_eventopen          318
++#define __NR_eventclose         319
++#define __NR_eventwait          320
++#define __NR_eventsig           321
+ #ifdef __KERNEL__
+ 
+-#define NR_syscalls 318
++#define NR_syscalls 322
+ 
+ /*
+  * user-visible error numbers are in the range -1 - -128: see
+diff -Naur linux-2.6.18.8.base/include/linux/wait.h linux-2.6.18.8.hw3/include/linux/wait.h
+--- linux-2.6.18.8.base/include/linux/wait.h	2007-02-23 18:52:30.000000000 -0500
++++ linux-2.6.18.8.hw3/include/linux/wait.h	2007-10-18 12:25:35.000000000 -0400
+@@ -132,6 +132,9 @@
+ 	list_del(&amp;old-&gt;task_list);
+ }
+ 
++int FASTCALL(__wake_up_cnt(wait_queue_head_t *q, unsigned int mode, int nr, void *key));
++#define wake_up_cnt(x)  __wake_up_cnt(x, TASK_UNINTERRUPTIBLE | TASK_INTERRUPTIBLE, 1, NULL)
++
+ void FASTCALL(__wake_up(wait_queue_head_t *q, unsigned int mode, int nr, void *key));
+ extern void FASTCALL(__wake_up_locked(wait_queue_head_t *q, unsigned int mode));
+ extern void FASTCALL(__wake_up_sync(wait_queue_head_t *q, unsigned int mode, int nr));
+diff -Naur linux-2.6.18.8.base/kernel/Makefile linux-2.6.18.8.hw3/kernel/Makefile
+--- linux-2.6.18.8.base/kernel/Makefile	2007-02-23 18:52:30.000000000 -0500
++++ linux-2.6.18.8.hw3/kernel/Makefile	2007-10-03 18:47:38.000000000 -0400
+@@ -8,7 +8,7 @@
+ 	    signal.o sys.o kmod.o workqueue.o pid.o \
+ 	    rcupdate.o extable.o params.o posix-timers.o \
+ 	    kthread.o wait.o kfifo.o sys_ni.o posix-cpu-timers.o mutex.o \
+-	    hrtimer.o rwsem.o
++	    hrtimer.o rwsem.o event.o
+ 
+ obj-$(CONFIG_STACKTRACE) += stacktrace.o
+ obj-y += time/
+diff -Naur linux-2.6.18.8.base/kernel/sched.c linux-2.6.18.8.hw3/kernel/sched.c
+--- linux-2.6.18.8.base/kernel/sched.c	2007-02-23 18:52:30.000000000 -0500
++++ linux-2.6.18.8.hw3/kernel/sched.c	2007-10-04 17:40:41.000000000 -0400
+@@ -3558,36 +3558,60 @@
+  * started to run but is not in state TASK_RUNNING.  try_to_wake_up() returns
+  * zero in this (rare) case, and we handle it by continuing to scan the queue.
+  */
+-static void __wake_up_common(wait_queue_head_t *q, unsigned int mode,
+-			     int nr_exclusive, int sync, void *key)
++static int __wake_up_common_cnt(wait_queue_head_t *q, unsigned int mode,
++				 int nr_exclusive, int sync, void *key)
+ {
+ 	struct list_head *tmp, *next;
++	int cnt = 0;
+ 
+ 	list_for_each_safe(tmp, next, &amp;q-&gt;task_list) {
+ 		wait_queue_t *curr = list_entry(tmp, wait_queue_t, task_list);
+ 		unsigned flags = curr-&gt;flags;
+-
++		cnt++;
+ 		if (curr-&gt;func(curr, mode, sync, key) &amp;&amp;
+ 				(flags &amp; WQ_FLAG_EXCLUSIVE) &amp;&amp; !--nr_exclusive)
+ 			break;
+ 	}
++	return cnt;
++}
++
++static void __wake_up_common(wait_queue_head_t *q, unsigned int mode,
++			     int nr_exclusive, int sync, void *key)
++{
++	(void) __wake_up_common_cnt(q, mode, nr_exclusive, sync, key);
+ }
+ 
+ /**
+- * __wake_up - wake up threads blocked on a waitqueue.
++ * __wake_up_cnt - wake up threads blocked on a waitqueue, and count threads
+  * @q: the waitqueue
+  * @mode: which threads
+  * @nr_exclusive: how many wake-one or wake-many threads to wake up
+  * @key: is directly passed to the wakeup function
+  */
+-void fastcall __wake_up(wait_queue_head_t *q, unsigned int mode,
+-			int nr_exclusive, void *key)
++int fastcall __wake_up_cnt(wait_queue_head_t *q, unsigned int mode,
++			    int nr_exclusive, void *key)
+ {
+ 	unsigned long flags;
++	int nr;
+ 
+ 	spin_lock_irqsave(&amp;q-&gt;lock, flags);
+-	__wake_up_common(q, mode, nr_exclusive, 0, key);
++	nr = __wake_up_common_cnt(q, mode, nr_exclusive, 0, key);
+ 	spin_unlock_irqrestore(&amp;q-&gt;lock, flags);
++	
++	return nr;
++}
++
++/**
++ * __wake_up - wake up threads blocked on a waitqueue.
++ * @q: the waitqueue
++ * @mode: which threads
++ * @nr_exclusive: how many wake-one or wake-many threads to wake up
++ * @key: is directly passed to the wakeup function
++ */
++void fastcall __wake_up(wait_queue_head_t *q, unsigned int mode,
++				      int nr_exclusive, void *key)
++{
++	(void) __wake_up_cnt(q, mode, nr_exclusive, key);
+ }
+ EXPORT_SYMBOL(__wake_up);
+ 
+--------------------------------------------------------------------------------------------------------------</PRE></PRE>
+                  <LI>
+                    <P>
+                      (5 pts.) <b>Write an application program to test your new
+                      kernel functions. Your test program should show that the
+                      kernel functions work for the usual cases, for example,
+                      with one process waiting, and also for boundary conditions
+                      such as
+                    </P>
+                    <UL>
+                      <LI>
+                        no tasks waiting when <CODE>doeventsig()</CODE> is called,
+                        <LI>
+                          multiple tasks waiting when <CODE>doeventsig()</CODE> is called,
+                          <LI>
+                            multiple events open at one time, and
+                            <LI>
+                              processes waiting when <CODE>doeventclose()</CODE> is called.
+                            </LI>
+                    </UL>
+                    </b>
+                    <P>
+                      <B><I>Answer:</I></B><BR>
+                      See
+                      <A href=http://www.cs.columbia.edu/~nieh/teaching/w4118/homeworks/solutions/hmwk3/code/events/test.c>test.c</A>.
+                      Once you have recompiled the kernel with the changes
+                      above, install the new kernel image on your VM and boot
+                      into it. Compile test.c in the computer where you
+                      recompiled the kernel, making sure to set the appropriate
+                      include path (see -I flag to gcc). Then, just copy the
+                      compiled test program to the VM and run it.
+                    </P>
+                  </LI>
+            </OL>
+          </LI>
+    </OL>
+    <P>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-------------------------------------------------------------------------------------------------------------------------------
+    </P>
+    <BLOCKQUOTE dir=ltr style=MARGIN-RIGHT:0px>
+      <BLOCKQUOTE dir=ltr style=MARGIN-RIGHT:0px>
+        #include &lt;sys/types.h&gt;<BR>
+        #include &lt;unistd.h&gt;<BR>
+        #include &lt;stdlib.h&gt;<BR>
+        #include &lt;stdio.h&gt;<BR>
+        #include &lt;signal.h&gt;<BR>
+        #include &lt;sys/wait.h&gt;<BR>
+        <BR>
+        #include "asm/unistd.h"<BR>
+        <BR>
+        #define DEBUG<BR>
+        <BR>
+        #ifdef DEBUG<BR>
+        #define msg(args)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf args<BR>
+        #else<BR>
+        #define msg(args)<BR>
+        #endif<BR>
+        <BR>
+        static int do_wait(int evID);<BR>
+        static int do_signal(int evID);<BR>
+        static int do_close(int evID);<BR>
+        static int do_open();<BR>
+        <BR>
+        /* tests tests tests */<BR>
+        static int test_basic();<BR>
+        static inline int test_sigmany(unsigned int nr, unsigned int events);<BR>
+        static inline int test_closemany(unsigned int nr, unsigned int events);<BR>
+        static int real_test(unsigned int nr, unsigned int events, int signot);<BR>
+        <BR>
+        <BR>
+        #define TEST(test, func, ret, val) do { \<BR>
+        printf("testing %s...", test); \<BR>
+        ret = func; \<BR>
+        if(ret == val) \<BR>
+        printf("ok\n"); \<BR>
+        else { \<BR>
+        printf("failed\n"); \<BR>
+        err = -1; \<BR>
+        } \<BR>
+        } while(0);<BR>
+        <BR>
+        /* useful when we don't know the correct return value, but do know the
+        error<BR>
+        * return value */<BR>
+        #define TEST_NOT(test, func, ret, val) do { \<BR>
+        printf("testing %s...", test); \<BR>
+        ret = func; \<BR>
+        if(ret != val) \<BR>
+        printf("ok\n"); \<BR>
+        else { \<BR>
+        printf("failed\n"); \<BR>
+        err = -1; \<BR>
+        } \<BR>
+        } while(0);<BR>
+        <BR>
+        static int test_basic()<BR>
+        {<BR>
+        &nbsp; int ret, err = 0, ev;<BR>
+        <BR>
+        &nbsp; printf("==== basic tests ====\n");<BR>
+        <BR>
+        &nbsp; TEST_NOT("open", do_open(), ev, -1);<BR>
+        &nbsp; TEST("signal when nobody waiting", do_signal(ev), ret, 0);<BR>
+        &nbsp; TEST("empty close", do_close(ev), ret, 0);<BR>
+        &nbsp; TEST("invalid close", do_close(-1), ret, -1);<BR>
+        &nbsp; TEST("invalid wait", do_wait(-1), ret, -1);<BR>
+        &nbsp; TEST("invalid signal", do_signal(-1), ret, -1);<BR>
+        <BR>
+        &nbsp; return err;<BR>
+        }<BR>
+        <BR>
+        #define fork_and_wait(p, ev) do { &nbsp;&nbsp;&nbsp;&nbsp; \<BR>
+        p = fork(); &nbsp;&nbsp;&nbsp;&nbsp; \<BR>
+        if(p == -1) { &nbsp;&nbsp;&nbsp;&nbsp; \<BR>
+        perror("couldn't fork. we screwed man\n"); &nbsp;&nbsp;&nbsp;&nbsp; \<BR>
+        return -1; &nbsp;&nbsp;&nbsp;&nbsp; \<BR>
+        } else if(p == 0) { &nbsp;&nbsp;&nbsp;&nbsp; \<BR>
+        if(do_wait(ev) == -1) { &nbsp;&nbsp;&nbsp;&nbsp; \<BR>
+        printf("[%d] failed wait event %d\n", getpid(), ev); \<BR>
+        exit(1); &nbsp;&nbsp;&nbsp;&nbsp; \<BR>
+        } &nbsp;&nbsp;&nbsp;&nbsp; \<BR>
+        exit(0); &nbsp;&nbsp;&nbsp;&nbsp; \<BR>
+        } &nbsp;&nbsp;&nbsp;&nbsp; \<BR>
+        } while(0);<BR>
+        <BR>
+        static inline int test_sigmany(unsigned int kidcount, unsigned int
+        evcount)<BR>
+        {<BR>
+        &nbsp; return real_test(kidcount, evcount, 1);<BR>
+        }<BR>
+        <BR>
+        static inline int test_closemany(unsigned int kidcount, unsigned int
+        evcount)<BR>
+        {<BR>
+        &nbsp; return real_test(kidcount, evcount, 0);<BR>
+        }<BR>
+        <BR>
+        /* test: a bunch of kids, and a bunch of events. a single kid signaling
+        all<BR>
+        * events. kidcount: how many kids per event */<BR>
+        static int real_test(unsigned int kidcount, unsigned int evcount,<BR>
+        &nbsp;&nbsp;&nbsp;&nbsp; int signotclose)<BR>
+        {<BR>
+        &nbsp; unsigned int *events, i, currev, total;<BR>
+        &nbsp; pid_t p, waker;<BR>
+        &nbsp; int howmany, err, status;<BR>
+        <BR>
+        &nbsp; if(signotclose)<BR>
+        &nbsp;&nbsp;&nbsp; printf("\n==== testing signal %d events, %d
+        processes/event ====\n",<BR>
+        &nbsp;&nbsp; evcount, kidcount);<BR>
+        &nbsp; else<BR>
+        &nbsp;&nbsp;&nbsp; printf("\n==== testing close %d events, %d
+        processes/event ====\n",<BR>
+        &nbsp;&nbsp; evcount, kidcount);<BR>
+        <BR>
+        &nbsp; printf("initializing...");<BR>
+        &nbsp; events = malloc(evcount*sizeof(*events));<BR>
+        &nbsp; if(!events) {<BR>
+        &nbsp;&nbsp;&nbsp; perror("failed. no memory");<BR>
+        &nbsp;&nbsp;&nbsp; return -1;<BR>
+        &nbsp; }<BR>
+        &nbsp; for(i=0; i&lt;evcount; ++i) {<BR>
+        &nbsp;&nbsp;&nbsp; events[i] = do_open();<BR>
+        &nbsp;&nbsp;&nbsp; if(!events[i]) {<BR>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("failed. couldn't open event
+        %d\n", i);<BR>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; free(events);<BR>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return -1;<BR>
+        &nbsp;&nbsp;&nbsp; }<BR>
+        &nbsp; }<BR>
+        &nbsp; printf("ok\nforking the kids...");<BR>
+        &nbsp; fflush(stdout);<BR>
+        <BR>
+        &nbsp; for(currev = 0; currev &lt; evcount; ++currev) {<BR>
+        &nbsp;&nbsp;&nbsp; for(i=0; i&lt;kidcount; ++i) {<BR>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fork_and_wait(p, events[currev]);<BR>
+        &nbsp;&nbsp;&nbsp; }<BR>
+        &nbsp; }<BR>
+        <BR>
+        &nbsp; printf("ok\nforking the waker to signal the waiters...");<BR>
+        &nbsp; fflush(stdout);<BR>
+        <BR>
+        &nbsp; waker = fork();<BR>
+        &nbsp; if(waker == -1) {<BR>
+        &nbsp;&nbsp;&nbsp; perror("failed");<BR>
+        &nbsp;&nbsp;&nbsp; free(events);<BR>
+        &nbsp;&nbsp;&nbsp; return -1;<BR>
+        &nbsp; } else if(waker == 0) {<BR>
+        &nbsp;&nbsp;&nbsp; /* see test_manytoone */<BR>
+        &nbsp;&nbsp;&nbsp; sleep(5);<BR>
+        &nbsp;&nbsp;&nbsp; total = 0;<BR>
+        &nbsp;&nbsp;&nbsp; for(i=0; i&lt;evcount; ++i) {<BR>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if(signotclose)<BR>
+        howmany = do_signal(events[i]);<BR>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else<BR>
+        howmany = do_close(events[i]);<BR>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if(howmany == -1) {<BR>
+        printf("[waker %d]: Couldn't signal/close event %d\n",<BR>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; getpid(), i);<BR>
+        exit(1);<BR>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<BR>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; total += howmany;<BR>
+        &nbsp;&nbsp;&nbsp; }<BR>
+        &nbsp;&nbsp;&nbsp; printf("[waker %d]: woke up %d kids. c-ya!\n",
+        getpid(), total);<BR>
+        &nbsp;&nbsp;&nbsp; exit(0);<BR>
+        &nbsp; }<BR>
+        <BR>
+        &nbsp; printf("ok\nwaiting for kids to stop playing...");<BR>
+        &nbsp; err = 0;<BR>
+        &nbsp; total = evcount*kidcount;<BR>
+        &nbsp; for(i=0; i&lt;total; ++i) {<BR>
+        &nbsp;&nbsp;&nbsp; wait(&amp;status);<BR>
+        &nbsp;&nbsp;&nbsp; err = err || ( (!WIFEXITED(status)) ||
+        !(WEXITSTATUS(status) == 0) );<BR>
+        &nbsp; }<BR>
+        &nbsp; if(err) {<BR>
+        &nbsp;&nbsp;&nbsp; printf("waaaaaah, one of the kids died a horrible
+        death :(\n");<BR>
+        &nbsp;&nbsp;&nbsp; return -1;<BR>
+        &nbsp; }<BR>
+        <BR>
+        &nbsp; if(signotclose) {<BR>
+        &nbsp;&nbsp;&nbsp; printf("ok\nclosing the events...");<BR>
+        &nbsp;&nbsp;&nbsp; for(i=0; i&lt;evcount; ++i) {<BR>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if(do_close(events[i]) == -1 ) {<BR>
+        printf("failed on event %d\n", i);<BR>
+        free(events);<BR>
+        return -1;<BR>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<BR>
+        &nbsp;&nbsp;&nbsp; }<BR>
+        &nbsp;&nbsp;&nbsp; printf("ok\n");<BR>
+        &nbsp; } else<BR>
+        &nbsp;&nbsp;&nbsp; printf("ok\n");<BR>
+        <BR>
+        &nbsp; free(events);<BR>
+        &nbsp; return 0;<BR>
+        }<BR>
+        <BR>
+        #define check_test(err) \<BR>
+        if(err) { \<BR>
+        printf("==== FAILED, GIVING UP ====\n"); \<BR>
+        return 1; \<BR>
+        } else \<BR>
+        printf("==== OK ====\n"); \<BR>
+        <BR>
+        int main(int argc, char **argv)<BR>
+        {<BR>
+        &nbsp; int err;<BR>
+        <BR>
+        &nbsp; if(test_basic()) {<BR>
+        &nbsp;&nbsp;&nbsp; printf("basic tests failed. giving up\n");<BR>
+        &nbsp;&nbsp;&nbsp; return 1;<BR>
+        &nbsp; } else<BR>
+        &nbsp;&nbsp;&nbsp; printf("==== OK ====\n");<BR>
+        <BR>
+        &nbsp; err = test_sigmany(1, 1);<BR>
+        &nbsp; check_test(err);<BR>
+        &nbsp; err = test_sigmany(10, 1);<BR>
+        &nbsp; check_test(err);<BR>
+        &nbsp; err = test_sigmany(1, 10);<BR>
+        &nbsp; check_test(err);<BR>
+        &nbsp; err = test_sigmany(10, 10);<BR>
+        &nbsp; check_test(err);<BR>
+        &nbsp; err = test_closemany(10, 10);<BR>
+        &nbsp; check_test(err);<BR>
+        <BR>
+        &nbsp; printf("press any key to finish...");<BR>
+        &nbsp; getc(stdin);<BR>
+        <BR>
+        &nbsp; return 0;<BR>
+        }<BR>
+        <BR>
+        static int do_open()<BR>
+        {<BR>
+        &nbsp; int evID;<BR>
+        #ifdef DEBUG<BR>
+        &nbsp; pid_t pid = getpid();<BR>
+        #endif<BR>
+        <BR>
+        &nbsp; if ((evID = syscall(__NR_eventopen)) == -1 ){<BR>
+        &nbsp;&nbsp;&nbsp; msg(("[%d]: error opening event\n", pid));<BR>
+        &nbsp;&nbsp;&nbsp; return -1;<BR>
+        &nbsp; }<BR>
+        <BR>
+        &nbsp; msg(("[%d]: opened event %d\n", pid, evID));<BR>
+        <BR>
+        &nbsp; return evID;<BR>
+        }<BR>
+        <BR>
+        static int do_close(int evID)<BR>
+        {<BR>
+        &nbsp; int woken;<BR>
+        #ifdef DEBUG<BR>
+        &nbsp; pid_t pid = getpid();<BR>
+        #endif<BR>
+        <BR>
+        &nbsp; msg(("Process [%d] closing event %d\n", pid, evID));<BR>
+        &nbsp; if ((woken = syscall(__NR_eventclose, evID)) == -1) {<BR>
+        &nbsp;&nbsp;&nbsp; msg(("[%d]: error closing event\n", pid));<BR>
+        &nbsp;&nbsp;&nbsp; return -1;<BR>
+        &nbsp; }<BR>
+        <BR>
+        &nbsp; msg(("Process [%d] closed event %d. Woke %d processes.\n", pid,<BR>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; evID, woken));<BR>
+        <BR>
+        &nbsp; return woken;<BR>
+        }<BR>
+        <BR>
+        static int do_wait(int evID)<BR>
+        {<BR>
+        #ifdef DEBUG<BR>
+        &nbsp; pid_t pid = getpid();<BR>
+        #endif<BR>
+        &nbsp; msg(("Process [%d] waiting on event %d\n", pid, evID));<BR>
+        &nbsp; if (syscall(__NR_eventwait, evID) == -1){<BR>
+        &nbsp;&nbsp;&nbsp; msg(("[%d]: error waiting on event\n", pid));<BR>
+        &nbsp;&nbsp;&nbsp; return -1;<BR>
+        &nbsp; }<BR>
+        &nbsp; msg(("Process [%d] signalled by event %d\n", pid, evID));<BR>
+        <BR>
+        &nbsp; return 0;<BR>
+        }<BR>
+        <BR>
+        static int do_signal(int evID)<BR>
+        {<BR>
+        &nbsp; int woken;<BR>
+        #ifdef DEBUG<BR>
+        &nbsp; pid_t pid = getpid();<BR>
+        #endif<BR>
+        <BR>
+        &nbsp; msg(("Process [%d] signalling event %d\n", pid, evID));<BR>
+        <BR>
+        &nbsp; if ((woken = syscall(__NR_eventsig, evID)) == -1){<BR>
+        &nbsp;&nbsp;&nbsp; msg(("[%d]: error signalling event\n", pid));<BR>
+        &nbsp;&nbsp;&nbsp; return -1;<BR>
+        &nbsp; }<BR>
+        &nbsp; msg(("Process [%d] has signalled event %d. Woke up %d
+        processes.\n",<BR>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pid, evID, woken));<BR>
+        <BR>
+        &nbsp; return woken;<BR>
+        }<BR>
+      </BLOCKQUOTE>
+    </BLOCKQUOTE></body>
+</html>

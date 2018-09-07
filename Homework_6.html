@@ -1,0 +1,864 @@
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type="text/css">
+
+  
+
+  
+  table {
+    font-size: 1em;
+  }
+
+  
+  div, address, ol, ul, li, option, select { 
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+
+  p {
+    margin: 0px;
+  }
+
+  body {
+    padding: 0px;
+    
+    
+      margin: 0px;
+    
+  }
+
+  h6 { font-size: 10pt }
+  h5 { font-size: 11pt }
+  h4 { font-size: 12pt }
+  h3 { font-size: 13pt }
+  h2 { font-size: 14pt }
+  h1 { font-size: 16pt }
+
+  blockquote {padding: 10px; border: 1px #DDDDDD dashed }
+
+  a img {border: 0}
+
+  
+  
+
+  
+  body {
+    font-family: Verdana;
+    
+    font-size: 10.0pt;
+    line-height: normal;
+    background-color: #ffffff;
+  }
+
+
+
+
+</style>
+
+
+</head>
+
+
+<body revision="dcgckwk6_22f39kjtc9:3">
+
+<p>
+</p>
+<center>
+<h2>
+  Homework 6<br>
+  <font size=-1>W4118 Fall 2010<br>
+  </font>
+</h2>
+</center>
+<p>
+</p>
+<h3>
+  Individual Written Problems:
+</h3>
+<p>
+</p>
+<ol>
+  <li>
+    <i>(Exercise 10.4):</i><br>
+    <b> What are the advantages and disadvantages of recording the name of the
+    creating program with the file's attributes (as is done in the Macintosh
+    Operating System)?<br>
+    </b> <b><i>Answer:</i></b><br>
+    By recording the name of the creating program, the operating system is able
+    to implement features (such as automatic program invocation when the file is
+    accessed) based on this information. It does add overhead in the operating
+    system and require space in the file descriptor, however.
+    <p>
+      &nbsp;
+    </p>
+  </li>
+  <li>
+    <i>(Exercise 10.6):</i><br>
+    <b>If the operating system were to know that a certain application is going
+    to access the file data in a sequential manner, how could it exploit this
+    information to improve performance?<br>
+    </b>
+    <p>
+      <b><i>Answer:</i></b><br>
+      When a block is accessed, the file system could prefetch the subsequent
+      blocks in anticipation of future requests to these blocks. This
+      prefetching optimization would reduce the waiting time experienced by the
+      process for future requests.
+    </p>
+    <p>
+      &nbsp;
+    </p>
+  </li>
+  <li>
+    <i>(Exercise 11.6):</i><br>
+    <b> Consider a file system on a disk that has both logical and physical
+    block sizes of 512 bytes. Assume that the information about each file is
+    already in memory. For each of the three allocation strategies (contiguous,
+    linked, and indexed), answer these questions:<br>
+    </b>
+    <p>
+    </p>
+    <ol type=a>
+      <li>
+        <p>
+          <b>How is the logical-to-physical address mapping accomplished in this
+          system? (For the indexed allocation, assume that a file is always less
+          than 512 blocks long.)</b>
+        </p>
+      </li>
+      <li>
+        <b>If we are currently at logical block 10 (the last block accessed was
+        block 10) and want to access logical block 4, how many physical blocks
+        must be read from the disk? </b>
+      </li>
+    </ol>
+    <b><i>Answer:</i></b><br>
+    Let Z be the starting file address (block number)<br>
+    <p>
+    </p>
+    <ol type=a>
+      <li>
+        <p>
+          <b>Contiguous:&nbsp;</b>Divide the logical address by 512 with X and Y
+          the resulting quotient and remainder respectively.<br>
+        </p>
+        <ol type=1>
+          <li>
+            <p>
+              Add X to Z to obtain the physical block number. Y is the
+              displacement into that block.
+            </p>
+          </li>
+          <li>
+            <p>
+              1
+            </p>
+          </li>
+        </ol>
+      </li>
+      <li>
+        <p>
+          <b>Linked:&nbsp;</b>Assume we need 4 bytes to store the disk
+          address(the pointer).<br>
+          Divide the logical address by 508 with X and Y the resulting quotient
+          and remainder respectively.<br>
+        </p>
+        <ol type=1>
+          <li>
+            <p>
+              Chase down the linked list(getting X + 1 blocks). Y is the
+              displacement into the last physical block.
+            </p>
+          </li>
+          <li>
+            <p>
+              4
+            </p>
+            <p>
+            </p>
+          </li>
+        </ol>
+      </li>
+      <li>
+        <p>
+          <b>Index:&nbsp;</b>Divide the logical address by 512 with X and Y the
+          resulting quotient and remainder respectively.<br>
+        </p>
+        <ol type=1>
+          <li>
+            <p>
+              Get the index block into memory. Physical block address is
+              contained in the index block at location X. Y is the displacement
+              into the desired physical block.
+            </p>
+          </li>
+          <li>
+            <p>
+              2
+            </p>
+          </li>
+        </ol>
+      </li>
+    </ol>
+    <p>
+      &nbsp;
+    </p>
+  </li>
+  <li>
+    <i>(Exercise 11.10):</i><br>
+    <b>Explain why logging metadata updates ensures recovery of a file system
+    after a file system crash.<br>
+    </b>
+    <p>
+      <b><i>Answer:</i></b><br>
+      For a file system to be recoverable after a crash, it must be consistent
+      or must be able to be made consistent. Therefore, we have to prove that
+      logging metadata updates keeps the file system in a consistent or
+      able-to-be-consistent state. For a file system to become inconsistent, the
+      metadata must be written incompletely or in the wrong order to the file
+      system data structures. With metadata logging, the writes are made to a
+      sequential log. The complete transaction is written there before it is
+      moved to the file system structures. If the system crashes during file
+      system data updates, the updates can be completed based on the information
+      in the log. Thus, logging ensures that file system changes are made
+      completely (either before or after a crash). The order of the changes is
+      guaranteed to be correct because of the sequential writes to the log. If a
+      change was made incompletely to the log, it is discarded, with no changes
+      made to the file system structures. Therefore, the structures are either
+      consistent or can be trivially made consistent via metadata logging
+      replay.
+    </p>
+    <p>
+      &nbsp;
+    </p>
+  </li>
+  <li>
+    <i>(Exercise 12.2):</i><br>
+    <b>Suppose that a disk drive has 5000 cylinders, numbered 0 to 4999. The
+    drive is currently serving a request at cylinder 143, and the previous
+    request was at cylinder 125. The queue of pending requests, in FIFO order,
+    is<br>
+    </b>
+    <p>
+      <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 86, 1470, 913, 1774, 948,
+      1509, 1022, 1750, 130<br>
+      </b>
+    </p>
+    <b>Starting from the current head position, what is the total distance (in
+    cylinders) that the disk arm moves to satisfy all the pending requests, for
+    each of the following disk-scheduling algorithms? </b>
+    <ol type=a>
+      <li>
+        <p>
+          <b>FCFS</b>
+        </p>
+      </li>
+      <li>
+        <p>
+          <b>SSTF</b>
+        </p>
+      </li>
+      <li>
+        <p>
+          <b>SCAN</b>
+        </p>
+      </li>
+      <li>
+        <p>
+          <b>LOOK</b>
+        </p>
+      </li>
+      <li>
+        <p>
+          <b>C-SCAN</b>
+        </p>
+      </li>
+      <li>
+        <p>
+          <b>C-LOOK</b>
+        </p>
+      </li>
+    </ol>
+    <br>
+    <b><i>Answer:</i></b><br>
+    (the number in parentheses is not the scheduled request, but the cylinder
+    arm will actually move to.)
+    <ol type=a>
+      <li>
+        <p>
+          The FCFS schedule is 143, 86, 1470, 913, 1774, 948, 1509, 1022, 1750,
+          130. The total seek distance is 7081.
+        </p>
+      </li>
+      <li>
+        <p>
+          The SSTF schedule is 143, 130, 86, 913, 948, 1022, 1470, 1509, 1750,
+          1774. The total seek distance is 1745.
+        </p>
+      </li>
+      <li>
+        <p>
+          The SCAN schedule is 143, 913, 948, 1022, 1470, 1509, 1750, 1774,
+          (4999), 130, 86. The total seek distance is 9769.
+        </p>
+      </li>
+      <li>
+        <p>
+          The LOOK schedule is 143, 913, 948, 1022, 1470, 1509, 1750, 1774, 130,
+          86. The total seek distance is 3319.
+        </p>
+      </li>
+      <li>
+        <p>
+          The C-SCAN schedule is 143, 913, 948, 1022, 1470, 1509, 1750, 1774,
+          (4999), (0), 86, 130. The total seek distance is 9985.
+        </p>
+      </li>
+      <li>
+        <p>
+          The C-LOOK schedule is 143, 913, 948, 1022, 1470, 1509, 1750, 1774,
+          86, 130. The total seek distance is 3363.
+        </p>
+      </li>
+    </ol>
+    <p>
+      &nbsp;
+    </p>
+  </li>
+  <li>
+    <i>(Exercise 12.3):</i><br>
+    <b>From elementary physics, we know that when an object is subjected to a
+    constant acceleration <i>a</i>, the relationship between distance d and time
+    t is given by <i>d = 1/2*at^2</i>. Suppose that, during a seek, the disk in
+    Exercise 12.2 accelerates the disk arm at a constant rate for the first half
+    of the seek, then decelerates the disk arm at the same rate for the second
+    half of the seek. Assume that the disk can perform a seek to an adjacent
+    cylinder in 1 millisecond and a full-stroke seek over all 5000 cylinders in
+    18 milliseconds.<br>
+    </b>
+    <ol type=a>
+      <li>
+        <p>
+          <b> The distance of a seek is the number of cylinders that the head
+          moves. Explain why the seek time is proportional to the square root of
+          the seek distance. </b>
+        </p>
+      </li>
+      <li>
+        <p>
+          <b> Write an equation for the seek time as a function of the seek
+          distance. This equation should be of the form t = x + y * sqrt(L),
+          where t is the time in milliseconds and L is the seek distance in
+          cylinders. </b>
+        </p>
+      </li>
+      <li>
+        <p>
+          <b> Calculate the total seek time for each of the schedules in
+          Exercise 12.2. Determine which schedule is the fastest (has the
+          smallest total seek time). </b>
+        </p>
+      </li>
+      <li>
+        <p>
+          <b> The <i>percentage speedup</i> is the time saved divided by the
+          original time.What is the percentage speedup of the fastest schedule
+          over FCFS? </b>
+        </p>
+      </li>
+    </ol>
+    <br>
+    <b><i>Answer:</i></b><br>
+    <ol type=a>
+      <li>
+        <p>
+          First half of the seek, we have:&nbsp; &nbsp; d/2 = a*t1^2/2<br>
+          Second half of the seek, we have:&nbsp;&nbsp; d/2 = a*t2^2/2<br>
+          We know that in two equations t1=t2 (same acceleration. So the total
+          seek time is:<br>
+          <br>
+          &nbsp;&nbsp;t = t1 + t2 = 2*sqrt(d/a)<br>
+          <br>
+          so the seek time is proportional to the square root of the seek
+          distance.
+        </p>
+      </li>
+      <li>
+        <p>
+          Solve the simultaneous equations t = x + y * sqrt(L):<br>
+          result from (t = 1, L = 1) and (t = 18, L = 4999)<br>
+          We obtain t = 0.7561 + 0.2439 * sqrt(L).
+        </p>
+      </li>
+      <li>
+        <p>
+          The seek times are calculated by equation <i>t = 0.7561 + 0.2439 *
+          sqrt(L)</i>, in millisecond:<br>
+          FCFS: 65.22<br>
+          SSTF: 31.53<br>
+          SCAN: 62.05<br>
+          LOOK: 40.30<br>
+          C-SCAN: 62.92<br>
+          C-LOOK: 40.43<br>
+          <br>
+          Thus, SSTF is fastest.
+        </p>
+      </li>
+      <li>
+        <p>
+          (65.22 - 31.53)/65.22 = 0.5165.<br>
+          The percentage speedup of SSTF over FCFS is 51.65%.
+        </p>
+      </li>
+    </ol>
+    <p>
+      &nbsp;
+    </p>
+  </li>
+  <li>
+    <i>(Exercise 12.5):</i><br>
+    <b>One possible implementation of the SSTF algorithm uses a binary tree data
+    structure. We initialize the binary tree by storing the position of the head
+    before any requests are inserted into the tree. Requests are stored in the
+    tree as they arrive, using the cylinder of the request as the key of the
+    binary tree.<br>
+    &nbsp;&nbsp;When a request has been serviced, the scheduler compares the
+    cylinder position of the root node with the cylinder positions of its
+    predecessor and successor, servicing the closer of the two. The root node,
+    which has already been serviced, is then removed and replaced by the next
+    request to be serviced¡ªeither the predecessor or the successor. This
+    process continues until the tree has a single element,which represents the
+    last request to have been serviced.<br>
+    &nbsp;&nbsp;Based on this proposed scheme, answer the following:<br>
+    </b>
+    <ol type=a>
+      <li>
+        <p>
+          <b> Assuming the initial position of the head is at cylinder 53,
+          insert the following request sequence into the binary tree:<br>
+          <br>
+          &nbsp;&nbsp;&nbsp;&nbsp;98, 183, 37, 122, 14, 124, 65, 67 </b>
+        </p>
+      </li>
+      <li>
+        <p>
+          <b> Illustrate execution of the proposed algorithm. After each node is
+          serviced, draw the binary tree, highlighting the predecessor and
+          successor nodes. </b>
+        </p>
+      </li>
+      <li>
+        <p>
+          <b> Outline an algorithm for the SSTF disk scheduler. Assume the
+          binary tree provides <i>insert(), remove(), size(), successor()</i>
+          and <i>predecessor()</i> operations. </b>
+        </p>
+      </li>
+      <li>
+        <p>
+          <b> Are there any problems with this proposed scheme? If so, how might
+          they be fixed? </b>
+        </p>
+      </li>
+    </ol>
+    <br>
+    <b><i>Answer:</i></b><br>
+    <ol type=a>
+      <li>
+        <p>
+          The initial tree appears as shown following:<br>
+          <img src=Homework_6_images/EXTERN_0000.jpg>
+        </p>
+      </li>
+      <li>
+        <p>
+        </p>
+        <ol type=1>
+          <li>
+            <p>
+              Node being serviced : 53<br>
+              predecessor node: 37<br>
+              successor node:65<br>
+              successor node is closer, so 65 will move to root, and the tree
+              will become as following:<br>
+              <img src=Homework_6_images/EXTERN_0001.jpg>
+            </p>
+          </li>
+          <li>
+            <p>
+              Node being serviced : 65<br>
+              predecessor node: 37<br>
+              successor node:67<br>
+              successor node is closer, so 67 will move to root, and the tree
+              will become as following:<br>
+              <img src=Homework_6_images/EXTERN_0002.jpg>
+            </p>
+          </li>
+          <li>
+            <p>
+              Node being serviced : 67<br>
+              predecessor node: 37<br>
+              successor node:98<br>
+              predecessor node is closer, so 37 will move to root, and the tree
+              will become as following:<br>
+              <img src=Homework_6_images/EXTERN_0003.jpg>
+            </p>
+          </li>
+          <li>
+            <p>
+              Node being serviced : 37<br>
+              predecessor node: 14<br>
+              successor node:98<br>
+              predecessor node is closer, so 14 will move to root, and the tree
+              will become as following:<br>
+              <img src=Homework_6_images/EXTERN_0004.jpg>
+            </p>
+          </li>
+          <li>
+            <p>
+              Node being serviced : 14<br>
+              predecessor node: NULL<br>
+              successor node:98<br>
+              successor node is closer, so 98 will move to root, and the tree
+              will become as following:<br>
+              <img src=Homework_6_images/EXTERN_0005.jpg>
+            </p>
+          </li>
+          <li>
+            <p>
+              Node being serviced : 98<br>
+              predecessor node: NULL<br>
+              successor node:122<br>
+              successor node is closer, so 122 will move to root, and the tree
+              will become as following:<br>
+              <img src=Homework_6_images/EXTERN_0006.jpg>
+            </p>
+          </li>
+          <li>
+            <p>
+              Node being serviced : 122<br>
+              predecessor node: NULL<br>
+              successor node:124<br>
+              successor node is closer, so 124 will move to root, and the tree
+              will become as following:<br>
+              <img src=Homework_6_images/EXTERN_0007.jpg>
+            </p>
+          </li>
+          <li>
+            <p>
+              Node being serviced : 124<br>
+              predecessor node: NULL<br>
+              successor node:183<br>
+              successor node is closer, so 183 will move to root, and the tree
+              will become as following:<br>
+              <img src=Homework_6_images/EXTERN_0008.jpg>
+            </p>
+          </li>
+          <li>
+            <p>
+              Node being serviced : 183<br>
+              predecessor node: NULL<br>
+              successor node:NULL<br>
+              Only one element left, the algorithm terminates.<br>
+              <br>
+            </p>
+          </li>
+        </ol>
+      </li>
+      <li>
+        <p>
+          The pseudo-code algorithm appears as shown following:<br>
+          <img src=Homework_6_images/EXTERN_0009.jpg>
+        </p>
+      </li>
+      <li>
+        <p>
+          The structure will lose balance quickly, degrading to near linear
+          performance. One possible solution to this problem would be to use a
+          balanced tree structure such as a red-black or AVL tree.
+        </p>
+      </li>
+    </ol>
+    <p>
+      &nbsp;
+    </p>
+  </li>
+  <li>
+    <i>(Exercise 12.13):</i><br>
+    <b>Assume that you have a mixed configuration comprising disks organized as
+    RAID Level 1 and as RAID Level 5 disks. Assume that the system has
+    flexibility in deciding which disk organization to use for storing a
+    particular file. Which files should be stored in the RAID Level 1 disks and
+    which in the RAID Level 5 disks in order to optimize performance?<br>
+    </b><br>
+    <b><i>Answer:</i></b><br>
+    Frequently updated data need to be stored on RAID Level 1 disks while data
+    that is more frequently read as opposed to being written should be stored in
+    RAID Level 5 disks.
+    <p>
+      &nbsp;
+    </p>
+  </li>
+  <li>
+    <i>(Exercise 13.3):</i><br>
+    <b>Consider the following I/O scenarios on a single-user PC.<br>
+    </b>
+    <ol type=a>
+      <li>
+        <p>
+          <b>A mouse used with a graphical user interface </b>
+        </p>
+      </li>
+      <li>
+        <p>
+          <b>A tape drive on a multitasking operating system (assume no device
+          preallocation is available) </b>
+        </p>
+      </li>
+      <li>
+        <p>
+          <b>A disk drive containing user files </b>
+        </p>
+      </li>
+      <li>
+        <p>
+          <b>A graphics card with direct bus connection, accessible through
+          memory-mapped I/O </b>
+        </p>
+      </li>
+    </ol>
+    <b>For each of these I/O scenarios, would you design the operating system to
+    use buffering, spooling, caching, or a combination? Would you use polled
+    I/O, or interrupt-driven I/O? Give reasons for your choices.<br>
+    </b><br>
+    <b><i>Answer:</i></b>
+    <p>
+    </p>
+    <ol type=a>
+      <li>
+        <p>
+          <i>A mouse used with a graphical user interface</i><br>
+          <br>
+          Buffering may be needed to record mouse movement during times when
+          higher-priority operations are taking place. Spooling and caching are
+          inappropriate. Interrupt-driven I/O is most appropriate.
+        </p>
+      </li>
+      <li>
+        <p>
+          <i>A tape drive on a multitasking operating system (assume no device
+          preallocation is available)</i><br>
+          <br>
+          Buffering may be needed to manage throughput difference between the
+          tape drive and the source or destination of the I/O. Caching can be
+          used to hold copies of data that resides on the tape, for faster
+          access. Spooling could be used to stage data to the device when
+          multiple users desire to read fromor write to it. Interrupt-driven I/O
+          is likely to allow the best performance.
+        </p>
+      </li>
+      <li>
+        <p>
+          <i>A disk drive containing user files</i><br>
+          <br>
+          Buffering can be used to hold data while in transit from user space to
+          the disk, and visa versa. Caching can be used to hold disk-resident
+          data for improved performance. Spooling is not necessary because disks
+          are shared-access devices. Interruptdriven I/O is best for devices
+          such as disks that transfer data at slow rates.
+        </p>
+      </li>
+      <li>
+        <p>
+          <i>A graphics card with direct bus connection, accessible through
+          memory-mapped I/O</i><br>
+          <br>
+          Buffering may be needed to control multiple access and for performance
+          (double-buffering can be used to hold the next screen image while
+          displaying the current one). Caching and spooling are not necessary
+          due to the fast and shared-access natures of the device. Polling and
+          interrupts are useful only for input and for I/O completion detection,
+          neither of which is needed for a memory-mapped device.
+        </p>
+      </li>
+    </ol>
+    <p>
+      &nbsp;
+    </p>
+  </li>
+  <li>
+    <i>(Exercise 13.6):</i><br>
+    <b>Describe three circumstances underwhich blocking I/O should be used.<br>
+    Describe three circumstances under which nonblocking I/O should be used. Why
+    not just implement nonblocking I/O and have processes busy-wait until their
+    device is ready?<br>
+    </b><br>
+    <b><i>Answer:</i></b>
+    <p>
+      Generally, blocking I/O is appropriate when the process will be waiting
+      only for one specific event. Examples include a disk, tape, or keyboard
+      read by an application program. Non-blocking I/O is useful when I/O may
+      come from more than one source and the order of the I/O arrival is not
+      predetermined. Examples include network daemons listening to more than one
+      network socket, window managers that accept mousemovement aswell as
+      keyboard input, and I/O-management programs, such as a copy command that
+      copies data between I/O devices. In the last case, the program could
+      optimize its performance by buffering the input and output and using
+      non-blocking I/O to keep both devices fully occupied.<br>
+      Non-blocking I/O is more complicated for programmers, because of the
+      asynchronous rendezvous that is neededwhen an I/O occurs. Also, busy
+      waiting is less efficient than interrupt-driven I/O so the overall system
+      performance would decrease.
+    </p>
+    <p>
+      &nbsp;
+    </p>
+  </li>
+</ol>
+<h3>
+  Programming Problems:
+</h3>
+<p>
+  Programming problems are to be done in your assigned groups using the VM that
+  has been assigned to your group. For all programming problems you will be
+  required to submit source code, a README file documenting your files and code,
+  and a test run of your programs. In addition, you should submit a cover sheet
+  using either
+  <a href=http://www.cs.columbia.edu/%7Enieh/teaching/w4118/homeworks/homework_work.txt>homework_work.txt</a>
+  or
+  <a href=http://www.cs.columbia.edu/%7Enieh/teaching/w4118/homeworks/homework_nonwork.txt>homework_nonwork.txt</a>,
+  depending on whether or not the programming assignment is completely working
+  or not. For source code submissions, you only need to submit new source code
+  files that you created and kernel source code files that you changed. You
+  should clearly indicate your names, email addresses, and assigned group number
+  on your submission. Each group is required to submit one writeup for the
+  programming assignment.
+</p>
+<p>
+  The image of the kernel you build for this assignment should be vmlinuz.hmwk6.
+  Grading for this assignment will be done based on vmlinuz.hmwk6. The kernel
+  you use for this assignment should be the Linux 2.6.8.18 kernel you built and
+  installed as part of
+  <a href=http://www.cs.columbia.edu/%7Enieh/teaching/w4118/homeworks/hmwk2.html>Homework
+  #2</a>.
+</p>
+<p>
+</p>
+<h4>
+  Pseudo File Systems
+</h4>
+<p>
+  On Unix systems, a <b>pseudo file system</b> is a virtual files system that is
+  used to access information from the kernel. It is so termed because it does
+  not represent a real, physical storage facility. Instead, it resides entirely
+  in main memory and provides a place to store files and directory entries that
+  represent kernel, or other (static or dynamic) information. Because pseudo
+  file systems are not real file systems, they consume no storage space and only
+  a limited amount of memory.
+</p>
+<p>
+  The most well-known example of a pseudo file system is <i>procfs</i>, short
+  for <i>process file system</i>. It was originally intended to provide
+  information about processes, but nowadays is used as a wider interface to many
+  kernel data structures. It is traditionally mounted at <code>/proc</code>. Most of it is
+  read-only, but some files allow kernel variables and behavior to be modified.
+  See the <i>proc(1)</i> manpage for further details. Other pseudo file systems
+  in Linux, for instance, are <i>sysfs, ramfs, devpts, debugfs, tmpfs</i> and
+  <i>sockfs</i>, to name a few.
+</p>
+<h4>
+  UserFS: User File System
+</h4>
+<p>
+  For this assignment, you are to implement a pseudo file system called
+  <b>UserFS</b>, which will export kernel information about the <i>UIDs</i> of
+  currently running processes, and provide an API for sending a signal to all
+  the processes owned by a specific user in an atomic manner. You may find
+  helpful Chapter 11 in <i>Linux Kernel Development</i>. This assignment will
+  demonstrate Linux's file systems behavior and teach you how to construct a
+  file system (without the need for the complete logic to handle real storage).
+</p>
+<p>
+  When <i>UserFS</i> is mounted at a point (assume <code>/userfs</code>) it provides the
+  following tree structure. The contents of the root of the file system
+  dynamically reflects the <i>UIDs</i> of users that own running processes in
+  the system. Specifically, this directory contains one subdirectory for each
+  unique <i>UID</i> that is being tracked by the kernel. Each subdirectory is
+  named after its respective UIDs, and contains two special files: <code>procs</code> and
+  <code>signal</code>.
+</p>
+<pre>        /userfs<br>	/userfs/UID_1<br>	/userfs/UID_1/procs<br>	/userfs/UID_1/signal<br>	/userfs/UID_2<br>	/userfs/UID_2/procs<br>	/userfs/UID_2/signal<br>	/userfs/.....<br></pre>
+<p>
+  The <i>UserFS</i> file system will have the following properties:
+</p>
+<ul>
+  <li>
+    The <i>UIDs</i> directories shall have their owner set to the <i>UID</i>,
+    and their group set to <i>root</i> (GID=0). They should be readable and
+    executable for the user, the group and the rest of the world.
+  </li>
+  <li>
+    <code>/userfs/UID/procs</code> is a read only file that contains the list of processes whose real-,
+    effective- or save-UID matches the directory. The contents are to be
+    formatted as: <code>printf("%d %s %d %d %d\n",pid,comm,ruid,euid,suid)</code>
+    <pre>$ cat /userfs/1000/procs<br>2433 ./test 1000 1000 1000<br>2012 /bin/sh 1000 1000 1000<br>...<br></pre>
+  </li>
+  <li>
+    <code>/userfs/UID/signal</code> is a write-only file. If a valid signal number is written to this
+    file, that signal will be sent to all the processes whose effective-UID
+    matches that of the parent directory (see the example below). Your
+    implementation must respect the existing permissions requirements for
+    sending signals.
+    <pre>$ ls /userfs<br>.<br>..<br>1000<br>1001<br>$ echo "9" &gt; /userfs/1001/signal<br># (will send a signal to all processes with EUID==1001)<br></pre>
+  </li>
+</ul>
+<p>
+  You may find existing code of pseudo file systems extremely useful as it
+  provides countless examples. Specifically, you are encouraged to study the
+  code in <code>fs/debugfs</code> (a simple file system for debugging purposes) and <code>fs/devpts</code> (which
+  creates files in response to adding/removing certain kernel objects). Both of
+  them make use of the API provided by the generic file system library in <code>fs/libfs.c</code>.
+  <i>These examples contain nearly everything that you need to complete this
+  assignment.</i> For simplicity, you are provided with a
+  <a href=http://www.cs.columbia.edu/%7Enieh/teaching/w4118/homeworks/hmwk6.code>skeleton</a>
+  of the <i>UserFS</i> implementation.
+</p>
+<p>
+  Note: you may <i>not</i> build your solution on top of <i>debugfs</i>, i.e. by
+  leveraging its API. Instead, you must implement your own methods to manage the
+  file systems inodes, dentries, files and directories. However, you may borrow
+  ideas as to how to leverage the generic file system library (<i>libfs</i>).
+</p>
+<ol>
+  <li>
+    (40 pts) Implement the <i>UserFS</i> file system by extending the pseudo
+    file system skeleton. Your implementation should take care of setting the
+    ownership and the premissions for all files and directories, implementing
+    the relevant file system operations as well as appropriate acquiring locks
+    and/or mutexes.
+    <p>
+      <br>
+      <b><i>Answer:</i></b> There is a sample solution for this problem in the
+      form of a
+      <a href=http://www.cs.columbia.edu/%7Enieh/teaching/w4118/homeworks/solutions/hmwk6/code/hw6.patch><i>patch</i></a>
+      against Linux 2.6.18.8.
+    </p>
+    <p>
+      <br>
+      ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    </p>
+    <pre>linux-2.6.18.8.base/fs/userfs/inode.c	1969-12-31 19:00:00.000000000 -0500<br>+++ linux-2.6.18.8.hw6/fs/userfs/inode.c	2007-12-10 11:20:51.000000000 -0500<br>@@ -0,0 +1,327 @@<br>+/*<br>+ *  inode.c - part of userfs, a file system to track users<br>+ */<br>+<br>+#if 0<br>+#define USERFS(str, args...) \<br>+        printk(KERN_ERR "[USERFS][%d][%s]: " str,current-&gt;pid,__func__,##args)<br>+#else<br>+#define USERFS(str, args...) \<br>+        do { } while (0)<br>+#endif <br>+<br>+/* #define DEBUG */<br>+<br>+#include &lt;linux/module.h&gt;<br>+#include &lt;linux/fs.h&gt;<br>+#include &lt;linux/mount.h&gt;<br>+#include &lt;linux/pagemap.h&gt;<br>+#include &lt;linux/init.h&gt;<br>+#include &lt;linux/namei.h&gt;<br>+<br>+#define USERFS_MAGIC	0xbeefcafe<br>+<br>+static struct super_block *userfs_super;<br>+static struct vfsmount *userfs_mnt;<br>+static struct dentry *userfs_dentry;<br>+static struct inode *userfs_inode;<br>+<br>+extern struct file_operations userfs_procs_fops;<br>+extern struct file_operations userfs_signal_fops;<br>+<br>+struct {<br>+	char *fname;<br>+	int mode;<br>+	struct file_operations *fops;<br>+} userfs_files[] = {<br>+	{ "procs", (S_IRUGO|S_IFREG), &amp;userfs_procs_fops },<br>+	{ "signal", (S_IWUSR|S_IWGRP|S_IFREG), &amp;userfs_signal_fops },<br>+	{ NULL, 0, NULL }<br>+};<br>+<br>+/*<br>+ * To solve a potential race netween alloc_uid() and free_uid() we keep<br>+ * a "reference count" on the private field of the UID directory inode.<br>+ * (Access to this inode is already protected by the mutex.)<br>+ */<br>+/* use the private field to settle a race between alloc_uid/free_uid */<br>+static void userfs_init_priv(struct inode *inode)<br>+{<br>+	long *lp = (long *) &amp;inode-&gt;u.generic_ip;<br>+	*lp = 1L;<br>+}<br>+<br>+static void userfs_inc_priv(struct inode *inode)<br>+{<br>+	long *lp = (long *) &amp;inode-&gt;u.generic_ip;<br>+	USERFS("ref %ld-&gt;%ld for uid %d\n", *lp, *lp+1, inode-&gt;i_uid);<br>+	*lp = *lp + 1;<br>+}<br>+<br>+static int userfs_dec_priv(struct inode *inode)<br>+{<br>+	long *lp = (long *) &amp;inode-&gt;u.generic_ip;<br>+	USERFS("ref %ld-&gt;%ld for uid %d\n", *lp, *lp-1, inode-&gt;i_uid);<br>+	*lp = *lp - 1;<br>+	return (*lp);<br>+}<br>+<br>+/* <br>+ * get a/the dentry of /UID<br>+ * (if successful, return with the root's mutex held)<br>+ */<br>+static int get_uid_dentry(int uid, struct dentry **dent)<br>+{<br>+	char name[8];<br>+<br>+	USERFS("looking for %d\n", uid);<br>+	mutex_lock(&amp;userfs_inode-&gt;i_mutex);<br>+	*dent = lookup_one_len(name, userfs_dentry, sprintf(name, "%d", uid));<br>+	USERFS("got dentry %p\n", *dent);<br>+	if (IS_ERR(*dent)) {<br>+		mutex_unlock(&amp;userfs_inode-&gt;i_mutex);<br>+		return PTR_ERR(*dent);<br>+	}<br>+	return 0;<br>+}<br>+<br>+/*<br>+ * delete 'fname' from directory 'parent'<br>+ * (assume parent mutex is held)<br>+ */<br>+static void del_user_file(struct dentry *parent, char *fname)<br>+{<br>+	struct dentry *dentry = lookup_one_len(fname, parent, strlen(fname));<br>+	USERFS("%s pp %p del %p\n",fname,parent,dentry);<br>+	if (IS_ERR(dentry))<br>+		return;<br>+	USERFS("%s pp %p del %p/%p\n",fname,parent,dentry,dentry-&gt;d_inode);<br>+	if (dentry-&gt;d_inode &amp;&amp; !d_unhashed(dentry)) {<br>+		simple_unlink(parent-&gt;d_inode, dentry);<br>+		d_delete(dentry);<br>+	}<br>+	dput(dentry);<br>+}<br>+<br>+/*<br>+ * We can't sleep in userfs_user_del() because the caller, free_uid(), may<br>+ * already be called with a spinlock held; Instead, userfs_user_del() will<br>+ * schedule the actual work to be performed later (using a work-queue). It<br>+ * is __userfs_user_del() that actually does the deletion. <br>+ */<br>+<br>+/* delete a UID subtree */<br>+static void __userfs_user_del(struct user_struct *user)<br>+{<br>+	struct dentry *uid_dentry;<br>+	int n, ret;<br>+<br>+	if (!userfs_super)<br>+		return;<br>+	USERFS("del user %d\n", user-&gt;uid);<br>+<br>+	/* XXX: get_uid_dentry() takes root's mutex, and does dget() */<br>+	if ((ret = get_uid_dentry(user-&gt;uid, &amp;uid_dentry)) &lt; 0)<br>+		return;<br>+	if (uid_dentry-&gt;d_inode &amp;&amp; !userfs_dec_priv(uid_dentry-&gt;d_inode)) {<br>+		BUG_ON(d_unhashed(uid_dentry));<br>+<br>+		/* delete UID/... subdirectories */<br>+		mutex_lock(&amp;uid_dentry-&gt;d_inode-&gt;i_mutex);<br>+		for (n = 0; userfs_files[n].fname; n++)<br>+			del_user_file(uid_dentry, userfs_files[n].fname);<br>+		mutex_unlock(&amp;uid_dentry-&gt;d_inode-&gt;i_mutex);<br>+<br>+		/* delete UID subdirectory */<br>+		simple_rmdir(userfs_inode, uid_dentry);<br>+		d_delete(uid_dentry);<br>+	}<br>+	/* release extra reference taken by get_uid_dentry() */<br>+	dput(uid_dentry);<br>+	mutex_unlock(&amp;userfs_inode-&gt;i_mutex);<br>+}<br>+<br>+/*<br>+ * Following two function are a (really ugly) hack: userfs_user_del() gets<br>+ * a user_struct, atomically links it into in a list (userfs_wqhead), and<br>+ * schedules work to be done by userfs_wqhandler(). The latter empties the<br>+ * linked list and then scans through it, calling __userfs_user_del() for<br>+ * each member and freeing that member.<br>+ */<br>+<br>+extern kmem_cache_t *uid_cachep;   /* from kernel/user.c */<br>+static struct user_struct *userfs_wqhead;<br>+static spinlock_t userfs_wqlock = SPIN_LOCK_UNLOCKED;<br>+<br>+static void userfs_wqhandler(void *dummy)<br>+{<br>+	struct user_struct *user, *next;<br>+<br>+	spin_lock(&amp;userfs_wqlock);<br>+	user = userfs_wqhead;<br>+	userfs_wqhead = NULL;<br>+	spin_unlock(&amp;userfs_wqlock);<br>+<br>+	while (user) {<br>+		__userfs_user_del(user);<br>+		next = (struct user_struct *) user-&gt;uidhash_list.next;<br>+		kmem_cache_free(uid_cachep, user);<br>+		user = next;<br>+	}<br>+}<br>+<br>+static DECLARE_WORK(userfs_work, userfs_wqhandler, NULL);<br>+<br>+/* called from kernel/user.c:free_uid() to delete UID subtree */<br>+void userfs_user_del(struct user_struct *user)<br>+{<br>+	spin_lock(&amp;userfs_wqlock);<br>+	user-&gt;uidhash_list.next = (struct list_head *) userfs_wqhead;<br>+	userfs_wqhead = user;<br>+	spin_unlock(&amp;userfs_wqlock);<br>+	schedule_work(&amp;userfs_work);<br>+}<br>+<br>+/* From this point down, no more (ugly) hacks, I promise ! */<br>+<br>+/* generate a new inode: set credentials and private data */<br>+static struct inode *get_new_inode(int mode, uid_t uid)<br>+{<br>+	struct inode *new = new_inode(userfs_super);<br>+<br>+	if (new) {<br>+		USERFS("new inode %p\n", new);<br>+		new-&gt;i_mode = mode;<br>+		new-&gt;i_uid = uid;<br>+		new-&gt;i_gid = 0;<br>+		new-&gt;i_blksize = PAGE_CACHE_SIZE;<br>+		new-&gt;i_blocks = 0;<br>+		new-&gt;i_atime = new-&gt;i_mtime = new-&gt;i_ctime = CURRENT_TIME;<br>+		/* dir inodes start off with i_nlink == 2 (for "." entry) */<br>+		if ((mode &amp; S_IFMT) == S_IFDIR) {<br>+			/* count of users */<br>+			userfs_init_priv(new);<br>+			new-&gt;i_nlink++;<br>+		}<br>+	}<br>+	return new; <br>+}<br>+<br>+/*<br>+ * add 'fname' to directory 'parent'<br>+ * (assume parent mutex is held)<br>+ */<br>+static int add_user_file(struct user_struct *user, struct dentry *parent,<br>+			 char *fname, int mode, struct file_operations *fops)<br>+{<br>+	struct inode *inode;<br>+	struct dentry *dentry;<br>+<br>+	BUG_ON(!user);<br>+	if (!(inode = get_new_inode(mode, user-&gt;uid)))<br>+		return -ENOMEM;<br>+	inode-&gt;i_fop = fops;<br>+	dentry = lookup_one_len(fname, parent, strlen(fname));<br>+	USERFS("%s pp %p new %p/%p\n",fname,parent,dentry,inode);<br>+	if (!IS_ERR(dentry) &amp;&amp; (!dentry-&gt;d_inode)) {<br>+		d_instantiate(dentry, inode);<br>+		dget(dentry);<br>+	} else<br>+		iput(inode);<br>+	dput(dentry);<br>+	return IS_ERR(dentry) ? PTR_ERR(dentry) : 0;<br>+}<br>+<br>+/* called from kernel/user.c:alloc_uid() to create UID subtree */<br>+int userfs_user_add(struct user_struct *user)<br>+{<br>+	struct dentry *uid_dentry;<br>+	struct inode *inode;<br>+	int n, ret = 0;<br>+<br>+	if (!userfs_super)<br>+		return 0;<br>+	USERFS("add user %d\n", user-&gt;uid);<br>+<br>+	/* create UID subdirectory */<br>+	if (!(inode = get_new_inode(S_IRUGO|S_IXUGO|S_IFDIR, user-&gt;uid)))<br>+		return -ENOMEM;<br>+	inode-&gt;i_op = &amp;simple_dir_inode_operations;<br>+	inode-&gt;i_fop = &amp;simple_dir_operations;<br>+<br>+	/* XXX: get_uid_dentry() takes root's mutex, and does dget() */<br>+	if ((ret = get_uid_dentry(user-&gt;uid, &amp;uid_dentry)) &lt; 0)<br>+		return ret;<br>+	else if (uid_dentry-&gt;d_inode) {<br>+		/* get_uid_dentry() took an extra reference of dentry */<br>+		USERFS("exists subdir (%p, %p)\n", uid_dentry, inode);<br>+		userfs_inc_priv(uid_dentry-&gt;d_inode);<br>+		iput(inode);<br>+	} else {<br>+		USERFS("add subdir (%p, %p)\n", uid_dentry, inode);<br>+		d_instantiate(uid_dentry, inode);<br>+		dget(uid_dentry);<br>+		userfs_inode-&gt;i_nlink++;<br>+		/* create UID/... subdirectories */<br>+		mutex_lock(&amp;uid_dentry-&gt;d_inode-&gt;i_mutex);<br>+		for (n = 0; userfs_files[n].fname; n++) {<br>+			ret = add_user_file(user, uid_dentry,<br>+					    userfs_files[n].fname,<br>+					    userfs_files[n].mode,<br>+					    userfs_files[n].fops);<br>+			if (ret &lt; 0) {<br>+				USERFS("error %d while adding file %s\n",<br>+				       ret, userfs_files[n].fname);<br>+				__userfs_user_del(user);<br>+				break;<br>+			}<br>+		}<br>+		mutex_unlock(&amp;uid_dentry-&gt;d_inode-&gt;i_mutex);<br>+	}<br>+	dput(uid_dentry);<br>+	mutex_unlock(&amp;userfs_inode-&gt;i_mutex);<br>+	USERFS("return %d\n", ret);<br>+	return ret;<br>+}<br>+<br>+/* super-block allocation and management */<br>+static int user_fill_super(struct super_block *sb, void *data, int silent)<br>+{<br>+	static struct tree_descr user_files[] = {{""}};<br>+<br>+	return simple_fill_super(sb, USERFS_MAGIC, user_files);<br>+}<br>+<br>+static int user_get_sb(struct file_system_type *fs_type,<br>+		       int flags, const char *dev_name,<br>+		       void *data, struct vfsmount *mnt)<br>+{<br>+	return get_sb_single(fs_type, flags, data, user_fill_super, mnt);<br>+}<br>+<br>+static struct file_system_type user_fs_type = {<br>+	.owner =	THIS_MODULE,<br>+	.name =		"userfs",<br>+	.get_sb =	user_get_sb,<br>+	.kill_sb =	kill_anon_super,<br>+};<br>+<br>+<br>+/* initialization: called from init/main.c */<br>+int __init userfs_root_init(void)<br>+{<br>+	int ret;<br>+	<br>+	if (!(ret = register_filesystem(&amp;user_fs_type))) {<br>+		if (IS_ERR(userfs_mnt = kern_mount(&amp;user_fs_type))) {<br>+			unregister_filesystem(&amp;user_fs_type);<br>+			ret = PTR_ERR(userfs_mnt);<br>+		} else {<br>+			userfs_super = userfs_mnt-&gt;mnt_sb;<br>+			userfs_dentry = userfs_super-&gt;s_root;<br>+			userfs_inode = userfs_dentry-&gt;d_inode;<br>+		}<br>+	}<br>+	USERFS("userfs: initialized (%d)\n", ret);<br>+	return ret;<br>+}<br>--- linux-2.6.18.8.base/fs/userfs/file.c	1969-12-31 19:00:00.000000000 -0500<br>+++ linux-2.6.18.8.hw6/fs/userfs/file.c	2007-12-10 11:30:17.000000000 -0500<br>@@ -0,0 +1,156 @@<br>+/*<br>+ *  file.c - part of userfs, a file system to track users<br>+ */<br>+<br>+#include &lt;linux/module.h&gt;<br>+#include &lt;linux/fs.h&gt;<br>+#include &lt;linux/pagemap.h&gt;<br>+<br>+#if 0<br>+#define USERFS(str, args...) \<br>+        printk(KERN_ERR "[USERFS][%d][%s]: " str,current-&gt;pid,__func__,##args)<br>+#else<br>+#define USERFS(str, args...) \<br>+        do { } while (0)<br>+#endif <br>+<br>+static ssize_t default_read_file(struct file *file, char __user *buf,<br>+				 size_t count, loff_t *ppos)<br>+{<br>+	return 0;<br>+}<br>+<br>+static ssize_t default_write_file(struct file *file, const char __user *buf,<br>+				   size_t count, loff_t *ppos)<br>+{<br>+	return count;<br>+}<br>+<br>+static int default_open(struct inode *inode, struct file *file)<br>+{<br>+	USERFS("open with uid %d\n", inode ? inode-&gt;i_uid : -1);<br>+	file-&gt;private_data = (void *) inode-&gt;i_uid;<br>+	return 0;<br>+}<br>+<br>+/*<br>+ * helper function to filter procs based on their -&gt;user<br>+ */<br>+static ssize_t userfs_fill_procs(char **buf, uid_t uid)<br>+{<br>+	struct task_struct *p;<br>+	char *str = NULL;     /* hold generated file contents */<br>+	ssize_t n, pos, len;<br>+<br>+	len = PAGE_SIZE;   /* a rough over-estiamte */<br>+	pos = -ENOMEM;<br>+	while (1) {<br>+		USERFS("alloc len %d\n", len);<br>+		if (!(str = kmalloc(len, GFP_KERNEL)))<br>+			break;<br>+		pos = 0;<br>+		read_lock(&amp;tasklist_lock);<br>+		for_each_process(p) {<br>+			if (p-&gt;uid != uid &amp;&amp; p-&gt;euid != uid &amp;&amp; p-&gt;suid != uid)<br>+				continue;<br>+			USERFS("new pid %d\n", p-&gt;tgid);<br>+			n = snprintf(&amp;str[pos], len - pos, "%d %s %d %d %d\n",<br>+				     p-&gt;tgid,p-&gt;comm,p-&gt;uid,p-&gt;euid,p-&gt;suid);<br>+			USERFS("new line (new pos %d): %s", pos+n, &amp;str[pos]);<br>+			if (n &gt;= len - pos) {<br>+				pos = -ENOMEM;<br>+				break;<br>+			} else<br>+				pos += n;<br>+		}<br>+		read_unlock(&amp;tasklist_lock);<br>+		if (pos &gt;= 0)<br>+			break;<br>+		kfree(str);<br>+		len *= 2;<br>+		if (len &lt; 0)<br>+			return -ENOMEM;<br>+	}<br>+	*buf = str;<br>+	USERFS("return %d", pos);<br>+	return pos;<br>+}<br>+<br>+/*<br>+ * /userfs/UID/procs<br>+ */<br>+<br>+static ssize_t userfs_procs_read(struct file *file, char __user *ubuf,<br>+				size_t count, loff_t *ppos)<br>+{<br>+	char *buf = NULL;<br>+	uid_t uid;<br>+	ssize_t cnt;<br>+<br>+	uid = (uid_t) file-&gt;private_data;<br>+	cnt = userfs_fill_procs(&amp;buf, uid);<br>+	if (cnt &lt; 0)<br>+		return cnt;<br>+	cnt = simple_read_from_buffer(ubuf, count, ppos, buf, cnt);<br>+	kfree(buf);<br>+	return cnt;<br>+}<br>+<br>+const struct file_operations userfs_procs_fops = {<br>+        .read =         userfs_procs_read,<br>+        .write =        default_write_file,<br>+        .open =         default_open,<br>+};<br>+<br>+/*<br>+ * /userfs/UID/signal<br>+ */<br>+<br>+static void signal_user_procs(int sig, uid_t uid)<br>+{<br>+	struct task_struct *p;<br>+        struct siginfo info;<br>+<br>+        info.si_signo = sig;<br>+        info.si_errno = 0;<br>+        info.si_code = SI_USER;<br>+        info.si_pid = current-&gt;tgid;<br>+        info.si_uid = current-&gt;uid;<br>+ <br>+	read_lock(&amp;tasklist_lock);<br>+	for_each_process(p) {<br>+		if (p-&gt;euid == uid) {<br>+			USERFS("send_sig to %d\n", p-&gt;pid);<br>+			(void) group_send_sig_info(sig, &amp;info, p);<br>+		}<br>+	}<br>+	read_unlock(&amp;tasklist_lock);<br>+}<br>+<br>+static ssize_t userfs_signal_write(struct file *file, const char __user *ubuf,<br>+				   size_t count, loff_t *ppos)<br>+{<br>+	char buf[5];<br>+	uid_t uid;<br>+	int sig;<br>+<br>+	uid = (uid_t) file-&gt;private_data;<br>+	USERFS("dentry %p/%p count %d\n",<br>+	       file-&gt;f_dentry, file-&gt;f_dentry-&gt;d_inode, count);<br>+	if (count &lt;= 4) {<br>+		if (copy_from_user(buf, ubuf, count))<br>+			return -EFAULT;<br>+		buf[count] = '\0';<br>+		sig = simple_strtoul(buf, NULL, 0);<br>+		USERFS("sig (%s) %d\n", buf, sig);<br>+		if (sig &gt;= 0)<br>+			signal_user_procs(sig, uid);<br>+	}<br>+	return count;<br>+}<br>+<br>+const struct file_operations userfs_signal_fops = {<br>+        .read =         default_read_file,<br>+        .write =        userfs_signal_write,<br>+        .open =         default_open,<br>+};<br>--- linux-2.6.18.8.base/fs/userfs/Makefile	1969-12-31 19:00:00.000000000 -0500<br>+++ linux-2.6.18.8.hw6/fs/userfs/Makefile	2007-11-17 17:10:46.000000000 -0500<br>@@ -0,0 +1,4 @@<br>+userfs-objs	:= inode.o file.o<br>+<br>+obj-y		+= userfs.o<br>+<br>--- linux-2.6.18.8.base/fs/Makefile	2007-02-23 18:52:30.000000000 -0500<br>+++ linux-2.6.18.8.hw6/fs/Makefile	2007-11-17 17:10:19.000000000 -0500<br>@@ -102,3 +102,5 @@<br> obj-$(CONFIG_HPPFS)		+= hppfs/<br> obj-$(CONFIG_DEBUG_FS)		+= debugfs/<br> obj-$(CONFIG_OCFS2_FS)		+= ocfs2/<br>+<br>+obj-y				+= userfs/<br>--- linux-2.6.18.8.base/kernel/user.c	2007-02-23 18:52:30.000000000 -0500<br>+++ linux-2.6.18.8.hw6/kernel/user.c	2007-12-10 07:26:51.000000000 -0500<br>@@ -26,7 +26,7 @@<br> #define __uidhashfn(uid)	(((uid &gt;&gt; UIDHASH_BITS) + uid) &amp; UIDHASH_MASK)<br> #define uidhashentry(uid)	(uidhash_table + __uidhashfn((uid)))<br> <br>-static kmem_cache_t *uid_cachep;<br>+kmem_cache_t *uid_cachep;<br> static struct list_head uidhash_table[UIDHASH_SZ];<br> <br> /*<br>@@ -101,6 +101,9 @@<br> 	return ret;<br> }<br> <br>+extern int userfs_user_add(struct user_struct *user);<br>+extern void userfs_user_del(struct user_struct *user);<br>+<br> void free_uid(struct user_struct *up)<br> {<br> 	unsigned long flags;<br>@@ -114,7 +117,8 @@<br> 		spin_unlock_irqrestore(&amp;uidhash_lock, flags);<br> 		key_put(up-&gt;uid_keyring);<br> 		key_put(up-&gt;session_keyring);<br>-		kmem_cache_free(uid_cachep, up);<br>+		/* will eventually free the user_struct */<br>+		userfs_user_del(up);<br> 	} else {<br> 		local_irq_restore(flags);<br> 	}<br>@@ -153,6 +157,13 @@<br> 			return NULL;<br> 		}<br> <br>+		if (userfs_user_add(new) &lt; 0) {<br>+			key_put(new-&gt;uid_keyring);<br>+			key_put(new-&gt;session_keyring);<br>+			kmem_cache_free(uid_cachep, new);<br>+			return NULL;<br>+		}<br>+<br> 		/*<br> 		 * Before adding this, check whether we raced<br> 		 * on adding the same user already..<br>@@ -162,7 +173,8 @@<br> 		if (up) {<br> 			key_put(new-&gt;uid_keyring);<br> 			key_put(new-&gt;session_keyring);<br>-			kmem_cache_free(uid_cachep, new);<br>+			/* will eventually free the user_struct */<br>+			userfs_user_del(new);<br> 		} else {<br> 			uid_hash_insert(new, hashent);<br> 			up = new;<br>--- linux-2.6.18.8.base/init/main.c	2007-02-23 18:52:30.000000000 -0500<br>+++ linux-2.6.18.8.hw6/init/main.c	2007-11-23 05:37:15.000000000 -0500<br>@@ -104,6 +104,9 @@<br> extern void tc_init(void);<br> #endif<br> <br>+extern void userfs_root_init(void);<br>+extern int userfs_user_add(struct user_struct *user);<br>+<br> enum system_states system_state;<br> EXPORT_SYMBOL(system_state);<br> <br>@@ -575,6 +578,7 @@<br> #ifdef CONFIG_PROC_FS<br> 	proc_root_init();<br> #endif<br>+	userfs_root_init();<br> 	cpuset_init();<br> 	taskstats_init_early();<br> 	delayacct_init();<br>@@ -746,6 +750,9 @@<br> 	(void) sys_dup(0);<br> 	(void) sys_dup(0);<br> <br>+	if (userfs_user_add(current-&gt;user) &lt; 0)<br>+		printk(KERN_WARNING "Failed to add root UID to userfs\n");<br>+<br> 	if (ramdisk_execute_command) {<br> 		run_init_process(ramdisk_execute_command);<br> 		printk(KERN_WARNING "Failed to execute %s\n",<br>@@ -763,6 +770,7 @@<br> 		printk(KERN_WARNING "Failed to execute %s.  Attempting "<br> 					"defaults...\n", execute_command);<br> 	}<br>+<br> 	run_init_process("/sbin/init");<br> 	run_init_process("/etc/init");<br> 	run_init_process("/bin/init");<br></pre>
+    <p>
+    </p>
+  </li>
+  <li>
+    (10 pts) To test your file system, create a simple program called <code>userps</code> that
+    will display the list of users (or groups) in the systems, and optionally
+    the processes owned by each:
+    <pre>$ userps -h<br>Usage: userps [-u UID]<br>Without the argument, the program lists all the UIDs that are currently<br>being tracked in the kernel. If the switch "-u" is used, the program<br>lists all the process (in the same format as above) whose EUID matches<br>the UID argument. <br><br><p><br><b><i>Answer:</i></b><br>There is a sample <a href=http://www.cs.columbia.edu/%7Enieh/teaching/w4118/homeworks/solutions/hmwk6/code/userps><i>test program</i></a>
+</p><br><pre>#!/bin/bash<br><br>usage()<br>{<br>    cat &lt;&lt; USAGE_END<br>Usage: userps [-u UID]<br>Without the argument, the program lists all the UIDs that are currently<br>being tracked in the kernel. If the switch "-u" is used, the program<br>lists all the process (in the same format as above) whose EUID matches<br>the UID argument. <br>USAGE_END<br>    exit $1<br>}<br><br>uid=<br><br>while [ true ]; do<br>    case "x$1" in<br>	x-h)<br>	usage 0 ;;<br>	x-u)<br>	[ $# -ne 2 ] &amp;&amp; usage 1<br>	    uid="$2"<br>	    shift ;;<br>	x) break ;;<br>	*) usage ;;<br>    esac<br>    shift<br>done<br><br>if [ "x$uid" == x ]; then<br>    err="Failed to access /userfs. Is it mounted ?"<br>    out=`/bin/ls /userfs 2&gt; /dev/null`<br>    ret=$?<br>else<br>    err="UID '$uid' doesn't exist, or failed to access /userfs"<br>    cmd="/bin/cat \"/userfs/${uid}/procs\" | awk '{ if (\$4 == $uid) print; }'"<br>    out=`eval $cmd 2&gt; /dev/null`<br>fi<br><br>if [ $? -eq 0 ]; then<br>    echo "$out"<br>else<br>    echo "$err"<br>fi<br><br></pre><p><br>	<br></p></pre>
+  </li>
+</ol>
+<br></body>
+</html>

@@ -1,0 +1,1472 @@
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type="text/css">
+
+  
+
+  
+  table {
+    font-size: 1em;
+  }
+
+  
+  div, address, ol, ul, li, option, select { 
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+
+  p {
+    margin: 0px;
+  }
+
+  body {
+    padding: 0px;
+    
+    
+      margin: 0px;
+    
+  }
+
+  h6 { font-size: 10pt }
+  h5 { font-size: 11pt }
+  h4 { font-size: 12pt }
+  h3 { font-size: 13pt }
+  h2 { font-size: 14pt }
+  h1 { font-size: 16pt }
+
+  blockquote {padding: 10px; border: 1px #DDDDDD dashed }
+
+  a img {border: 0}
+
+  
+  
+
+  
+  body {
+    font-family: Verdana;
+    
+    font-size: 10.0pt;
+    line-height: normal;
+    background-color: #ffffff;
+  }
+
+
+
+
+</style>
+
+
+</head>
+
+
+<body revision="dcgckwk6_13hg9g89:4">
+
+<CENTER>
+<H2>
+  Homework 1 Solutions<BR>
+  <FONT size=-1>W4118 Fall 2010</FONT><BR>
+</H2>
+</CENTER>
+<P>
+  &nbsp;
+  <H3>
+    Non-Programming Problems:
+  </H3>
+  Exercise numbers refer to the course textbook, <I>Operating System Concepts
+  with Java</I>. Each problem is worth 5 points.
+  <P>
+    &nbsp;
+    <OL>
+      <P>
+        &nbsp;
+        <LI>
+          Exercise 1.3
+          <P>
+            Answer: When there are few other users, the task is large, and the
+            hardware is fast, time-sharing makes sense. The full power of the
+            system can be brought to bear on the user's problem. The problem can
+            be solved faster than on a personal computer. Another case occurs
+            when lots of other users need resources at the same time. A personal
+            computer is best when the job is small enough to be exe- cuted
+            reasonably on it and when performance is sufficient to execute the
+            program to the user's satisfaction.
+            <P>
+              &nbsp;
+            </P>
+            <LI>
+              Exercise 1.10
+              <P>
+                Answer: An interrupt is a hardware-generated change of flow
+                within the system. An interrupt handler is summoned to deal with
+                the cause of the interrupt; control is then returned to the
+                interrupted context and instruction. A trap is a
+                software-generated interrupt. An interrupt can be used to signal
+                the completion of an I/O to obviate the need for device polling.
+                A trap can be used to call operating system routines or to catch
+                arithmetic errors.
+                <P>
+                  &nbsp;
+                </P>
+                <LI>
+                  Exercise 1.12
+                  <P>
+                    Answer: An operating system for a machine of this type would
+                    need to remain in control (or monitor mode) at all times.
+                    One way to accomplish this is by software interpretation of
+                    all user programs (like some BASIC, Java, and LISP systems,
+                    for example). The software interpreter would provide, in
+                    software, what the hardware does not provide. Another way is
+                    to require that all programs be written in high-level
+                    languages so that all object code is compiler-produced. The
+                    compiler would generate (either in-line or by function
+                    calls) the protection checks that the hardware is missing.
+                    <P>
+                      &nbsp;
+                    </P>
+                    <LI>
+                      Exercise 1.17
+                      <P>
+                        a. Batch. Jobs with similar needs are batched together
+                        and run through the computer as a group by an operator
+                        or automatic job sequencer. Performance is increased by
+                        attempting to keep CPU and I/O devices busy at all times
+                        through buffering, off-line operation, spooling, and
+                        multiprogramming. Batch is good for executing large jobs
+                        that need little interaction; they can be sub- mitted
+                        and picked up later.<BR>
+                        b. Interactive. This system is composed of many short
+                        transactions where the results of the next transaction
+                        may be unpredictable. Response time needs to be short
+                        (seconds) since the user submits and waits for the
+                        result.<BR>
+                        c. Time sharing. This system uses CPU scheduling and
+                        multipro- gramming to provide economical interactive use
+                        of a system. The CPU switches rapidly from one user to
+                        another. Instead of having a job defined by spooled card
+                        images, each program reads its next control card from
+                        the terminal, and output is normally printed immediately
+                        to the screen.<BR>
+                        d. Real time. Often used in a dedicated application,
+                        this system reads information from sensors and must
+                        respond within a fixed amount of time to ensure correct
+                        performance.<BR>
+                        e. Network. Provides operating system features across a
+                        network such as file sharing.<BR>
+                        f. SMP. Used in systems where there are multiple CPUs
+                        each running the same copy of the operating system.
+                        Communication takes place across the system bus.<BR>
+                        g. Distributed.This system distributes computation among
+                        several physical processors. The processors do not share
+                        memory or a clock. Instead, each processor has its own
+                        local memory. They communicate with each other through
+                        various communication lines, such as a high-speed bus or
+                        local area network.<BR>
+                        h. Clustered. A clustered system combines multiple
+                        computers into a single system to perform computational
+                        tasks distributed across the cluster.<BR>
+                        i. Handheld. A small computer system that performs
+                        simple tasks such as calendars, email, and web browsing.
+                        Handheld systems differ from traditional desktop systems
+                        with smaller memory and display screens and slower
+                        processors.
+                        <P>
+                          &nbsp;
+                        </P>
+                        <LI>
+                          Exercise 2.2
+                          <P>
+                            a. Program execution. The operating system loads the
+                            contents (or sections) of a file into memory and
+                            begins its execution. A user- level program could
+                            not be trusted to properly allocate CPU time.<BR>
+                            b. I/O operations. Devices must be communicated with
+                            at a very low level. The user need only specify the
+                            device and the operation to perform on it, while the
+                            system converts that request into device- or
+                            controller-specific commands. User-level programs
+                            cannot be trusted to access only devices they should
+                            have access to and to access them only when they are
+                            otherwise unused.<BR>
+                            c. File-system manipulation. There are many details
+                            in file creation, deletion, allocation, and naming
+                            that users should not have to per- form. Blocks of
+                            disk space are used by files and must be tracked.
+                            Deleting a file requires removing the name file
+                            information and freeing the allocated blocks.
+                            Protections must also be checked to assure proper
+                            file access. User programs could neither ensure ad-
+                            herence to protection methods nor be trusted to
+                            allocate only free blocks and deallocate blocks on
+                            file deletion.<BR>
+                            d. Communications. Message passing between systems
+                            requires that messages be turned into packets of
+                            information, sent to the network controller,
+                            transmitted across a communications medium, and
+                            reassembled by the destination system. Packet
+                            ordering and data correction must take place. Again,
+                            user programs might not coordinate access to the
+                            network device, or they might receive packets
+                            destined for other processes.<BR>
+                            e. Error detection. Error detection occurs at both
+                            the hardware level (e.g. inspect data transfers
+                            against corruption) and the software level (e.g.
+                            check media for data consistency). Errors are
+                            frequently process-independent (e.g. the corruption
+                            of data on a disk), so there must be a global
+                            service (the operating system) that handles all
+                            types of errors. In addition, processes need not
+                            contain code to catch and correct all the errors
+                            possible on a system.
+                            <P>
+                              &nbsp;
+                            </P>
+                            <LI>
+                              Exercise 2.9
+                              <P>
+                                Answer: Mechanism and policy must be separate to
+                                ensure that systems are easy to modify. No two
+                                system installations are the same, so each
+                                installation may want to tune the operating
+                                system to suit its needs. With mechanism and
+                                policy separate, the policy may be changed at
+                                will while the mechanism stays unchanged. This
+                                arrangement provides a more flexible system.
+                                <P>
+                                  &nbsp;
+                                </P>
+                                <LI>
+                                  Exercise 2.16
+                                  <P>
+                                    Answer: A guest operating system provides
+                                    its services by mapping them onto the
+                                    functionality provided by the host operating
+                                    system. A key issue that needs to be
+                                    considered in choosing the host operating
+                                    system is whether it is sufficiently general
+                                    in terms of its system-call interface in
+                                    order to be able to support the
+                                    functionality associated with the guest
+                                    operating system.
+                                    <P>
+                                      &nbsp;
+                                    </P>
+                                    <LI>
+                                      Exercise 2.17
+                                      <P>
+                                        Answer: Synthesis is impressive due to
+                                        the performance it achieves through
+                                        on-the-fly compilation. Unfortunately,
+                                        it is difficult to debug problems within
+                                        the kernel due to the fluidity of the
+                                        code. Also, such compilation is system
+                                        specific, making Synthesis very
+                                        difficult to port (a new compiler must
+                                        be written for each architecture).
+                                      </P>
+                                    </LI>
+    </OL>
+    <P>
+      &nbsp;
+      <H3>
+        Programming Problems:
+      </H3>
+      For all programming problems you will be required to submit source code, a
+      README file documenting your files and code, and a test run of your
+      programs. The README should explain any way in which your solution differs
+      from what was assigned, and any assumptions you made. Refer to the
+      homework submission page on the class web site for additional submission
+      instructions.
+      <DIV>
+        Keep in mind that we requested that your code's compilation be
+        controlled by a makefile. Our sample makefile can be found at
+        <A href=http://www.cs.columbia.edu/~nieh/teaching/w4118/homeworks/solutions/hmwk1/code/Makefile><FONT color=#0000cc>Makefile</FONT></A>.
+      </DIV>
+      <DIV>
+        --------------------------------------------------------------------------------------------------------------------------------------------
+      </DIV>
+      <DIV>
+        <PRE>all: cat sh time
+
+time : time.c
+	gcc -Wall -o time time.c -lm
+cat : cat.c
+	gcc -Wall -o cat cat.c
+sh : sh.c
+	gcc -Wall -o sh sh.c
+clean :
+	rm -f cat sh time *~
+</PRE>
+        &nbsp;-------------------------------------------------------------------------------------------------------------------------------------------
+      </DIV>
+      <P>
+        &nbsp;
+        <OL>
+          <P>
+            &nbsp;
+            <LI>
+              Shell Utility <KBD>cat</KBD> (20 Pts.) Most of the commands you
+              type into a UNIX shell are separate executable programs that are
+              invoked by the shell with the arguments you specify. For example,
+              the files <KBD>/bin/rm</KBD>, <KBD>/bin/cp</KBD>, and
+              <KBD>/bin/cat</KBD> are programs executed by your shell when you
+              remove, copy, or concatenate files.
+              <P>
+                &nbsp;
+              </P>
+              <P>
+                Write <KBD>cat</KBD> in C. Your <KBD>cat</KBD> should assume
+                each of its command line arguments is a filename, open that
+                file, and write its contents to standard output, in order.
+                <P>
+                  &nbsp;
+                  <UL>
+                    <LI>
+                      <P>
+                        You don't need to handle command line options like GNU
+                        cat does. Assume all command arguments are filenames.
+                      </P>
+                      <LI>
+                        <P>
+                          You <i>do</i> need to handle the case where no files
+                          are given on the command line. In this case
+                          <KBD>cat</KBD> should read from standard input.
+                        </P>
+                        <LI>
+                          <P>
+                            Notice that you don't have to handle redirection
+                            operators like <KBD>&lt;</KBD>, <KBD>&gt;</KBD>, and
+                            <KBD>&gt;&gt;</KBD>, or globbing operators like
+                            <KBD>*</KBD>, <KBD>?</KBD>, and <KBD>[]</KBD>.
+                            Redirection and globbing are done by the shell on
+                            behalf of every program run by that shell.
+                          </P>
+                        </LI>
+                  </UL>
+                  <P>
+                    <B><I>Answer:</I></B>
+                    <P>
+                      Our solution is the file
+                      <A href=http://www.cs.columbia.edu/~nieh/teaching/w4118/homeworks/solutions/hmwk1/code/cat.c><FONT color=#0000cc>cat.c</FONT></A>.&nbsp;&nbsp;<BR>
+                      --------------------------------------------------------------------------------------------------------------------------------------
+                      /* W4118 Homework 1, problem 1 (cat)<BR>
+                      * Solution<BR>
+                      */<BR>
+                      <BR>
+                      <BR>
+                      #include &lt;stdio.h&gt;<BR>
+                      #include &lt;unistd.h&gt;<BR>
+                      #include &lt;string.h&gt;<BR>
+                      #include &lt;errno.h&gt;<BR>
+                      <BR>
+                      static void cat(FILE *in, char *fname)<BR>
+                      {<BR>
+                      &nbsp; int c;<BR>
+                      <BR>
+                      &nbsp; while((c = fgetc(in)) != EOF)<BR>
+                      &nbsp;&nbsp;&nbsp; putchar(c);<BR>
+                      &nbsp; if (ferror(in)) {<BR>
+                      &nbsp;&nbsp;&nbsp; fprintf(stderr, "cat: error while
+                      reading from %s: %s\n",<BR>
+                      &nbsp;&nbsp;&nbsp; fname, strerror(errno));<BR>
+                      &nbsp; }<BR>
+                      }<BR>
+                      <BR>
+                      int main(int argc, char *argv[])<BR>
+                      {<BR>
+                      &nbsp; FILE *in;<BR>
+                      &nbsp; int i;<BR>
+                      <BR>
+                      &nbsp; if (argc &lt; 2) {<BR>
+                      &nbsp;&nbsp;&nbsp; in = fdopen(STDIN_FILENO, "rb");<BR>
+                      &nbsp;&nbsp;&nbsp; if (in == NULL)<BR>
+                      fprintf(stderr, "cat: error opening STDIN: %s\n",
+                      strerror(errno));<BR>
+                      &nbsp;&nbsp;&nbsp; else {<BR>
+                      cat(in, "STDIN");<BR>
+                      fclose(in);<BR>
+                      &nbsp;&nbsp;&nbsp; }<BR>
+                      &nbsp; } else {<BR>
+                      &nbsp;&nbsp;&nbsp; for (i = 1; i &lt; argc; i++) {<BR>
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; in = fopen(argv[i], "rb");<BR>
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (in == NULL) {<BR>
+                      fprintf(stderr, "cat: %s: %s\n", argv[i],
+                      strerror(errno));<BR>
+                      continue;<BR>
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<BR>
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cat(in, argv[i]);<BR>
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fclose(in);<BR>
+                      &nbsp;&nbsp;&nbsp; }<BR>
+                      &nbsp; }<BR>
+                      &nbsp; return 0;<BR>
+                      }<BR>
+                      --------------------------------------------------------------------------------------------------------------------------------------
+                    </P>
+            </LI>
+            <P>
+              &nbsp;
+            </P>
+            <LI>
+              Simple Shell (25 Pts.) Even the shell itself is just another user
+              program. The files <KBD>/bin/sh</KBD>, <KBD>/bin/bash</KBD>, and
+              <KBD>/bin/tcsh</KBD> are all executable files for shells. The only
+              thing special about your login shell is that it is listed in your
+              login record so that <KBD>/bin/login</KBD> (the program that
+              prompts you for your password) knows what program to start when
+              you log in. If you run ``<KBD>ypmatch <VAR>id</VAR>
+              passwd</KBD>'', replacing <VAR>id</VAR> with your user ID, you'll
+              see your login record, with your login shell program listed as the
+              last field.
+              <P>
+                &nbsp;
+                <OL>
+                  <LI>
+                    <P>
+                      Write a simple shell in C. Your shell should read a line
+                      from standard input, parse the line to get the command and
+                      its arguments, <CODE>fork</CODE>, and <CODE>exec</CODE> the command. Your shell
+                      should wait for commands to finish, and should exit when
+                      it receives the command <KBD>exit</KBD>. When executing a
+                      command, the shell should first look for the command in
+                      the current directory, and, if not found, search the
+                      directories defined in a special variable, <VAR>path<VAR>.
+                    </P>
+                    <UL>
+                      <LI>
+                        <P>
+                          Using the <CODE>system</CODE> function is not allowed, as it just
+                          invokes the system's <KBD>/bin/sh</KBD> shell to do
+                          all the work.
+                        </P>
+                        <LI>
+                          <P>
+                            You may assume command line arguments are separated
+                            by whitespace. Don't do anything special for
+                            backslashes, quotes, ampersands or other characters
+                            that are ``special'' in other shells. Note that this
+                            means commands in your shell will not be able to
+                            operate on filenames with spaces in them!
+                          </P>
+                          <LI>
+                            <P>
+                              You may set a reasonable maximum on the number of
+                              command line arguments, but your shell should
+                              handle input lines of any length.
+                            </P>
+                            <LI>
+                              <P>
+                                The executable file for your shell should be
+                                named <KBD>sh</KBD>. When testing, make sure you
+                                execute your <KBD>sh</KBD> and not
+                                <KBD>/bin/sh</KBD>.
+                              </P>
+                            </LI>
+                    </UL>
+                    <LI>
+                      <P>
+                        A few shell commands are not separate programs at all,
+                        but are handled directly by the shell program. You have
+                        already implemented <KBD>exit</KBD>, which is an example
+                        of this. Now implement <KBD>cd</KBD>, the change
+                        directory command. You will need to invoke the <CODE>chdir</CODE>
+                        system call to do this. Note that if the call to <CODE>chdir</CODE>
+                        fails, you probably don't want to exit the shell but
+                        instead should handle the error appropriately.
+                      </P>
+                      <LI>
+                        <P>
+                          Some convenient builtins present in many shells are
+                          <KBD>pushd</KBD>, <KBD>popd</KBD>, and
+                          <KBD>dirs</KBD>. Implement these in your shell.
+                        </P>
+                        <UL>
+                          <LI>
+                            <P>
+                              <KBD>pushd</KBD> works like <KBD>cd</KBD>, but
+                              pushes the directory you switched from onto a
+                              stack.
+                            </P>
+                            <LI>
+                              <P>
+                                <KBD>popd</KBD> pops the top directory off the
+                                stack, and <KBD>cd</KBD>'s to it. In other
+                                words, a <KBD>pushd</KBD> followed by a
+                                <KBD>popd</KBD> should bring you back to the
+                                directory you were in before the
+                                <KBD>pushd</KBD>.
+                              </P>
+                              <LI>
+                                <P>
+                                  <KBD>dirs</KBD> prints the contents of the
+                                  stack.
+                                </P>
+                              </LI>
+                        </UL>
+                        <LI>
+                          <P>
+                            The <VAR>path</VAR> variable holds a list of
+                            possible paths in which to search for executables.
+                            The list of paths is empty by default. You should
+                            implement a builtin command to control this
+                            variable: <KBD>path [+|- /some/dir]</KBD>
+                          </P>
+                          <UL>
+                            <LI>
+                              <P>
+                                <KBD>path</KBD> (without arguments) displays all
+                                the entries in the list separated by colons,
+                                e.g. <VAR>"/bin:/usr/bin"</VAR>.
+                              </P>
+                              <LI>
+                                <P>
+                                  <KBD>path + /some/dir</KBD> appends the given
+                                  pathname to the path list.
+                                </P>
+                                <LI>
+                                  <P>
+                                    <KBD>path - /some/dir</KBD> removes the
+                                    given pathname from the path list.
+                                  </P>
+                                </LI>
+                          </UL>
+                        </LI>
+                </OL>
+                <P>
+                  <B>Answer:</B><BR>
+                  Our sample version of the simple shell is at
+                  <A href=http://www.cs.columbia.edu/~nieh/teaching/w4118/homeworks/solutions/hmwk1/code/sh.c><FONT color=#0000cc>sh.c</FONT></A>.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  ------------------------------------------------------------------------------------------------------------------------------------------------
+                  <PRE>/*
+ * W4118 Homework 1, problem 2 (simple shell)
+ * Solution
+ */
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;ctype.h&gt;
+#include &lt;string.h&gt;
+#include &lt;errno.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/wait.h&gt;
+
+#define DEFAULT_BUFSZ 128
+#define MAX_ARGS 512
+
+/* struct to keep a stack of strings, used by pushd, popd, dirs */
+struct sstack {
+  char *s;
+  struct sstack *next;
+};
+
+/* struct to keep a list of strings, used by path [+|- /some/dir] */
+struct llist {
+  char *s;
+  struct llist *next;
+};
+
+/* function prototypes */
+static int split_line(char *buf, char *argv[]);
+
+static void do_cd(int argc, char *argv[], struct sstack **pdirstack);
+static void do_pushd(int argc, char *argv[], struct sstack **pdirstack);
+static void do_popd(int argc, char *argv[], struct sstack **pdirstack);
+static void do_dirs(int argc, char *argv[], struct sstack **pdirstack);
+static void do_path(int argc, char *argv[], struct llist **pathlist);
+
+static void sstack_init(struct sstack **st);
+static void sstack_push(struct sstack **st, const char *s);
+static void sstack_pop(struct sstack **st);
+static char *sstack_top(struct sstack **st);
+static void sstack_print(struct sstack **st, FILE *out);
+
+static void llist_init(struct llist **list);
+static void llist_append(struct llist **list, const char *s);
+static void llist_remove(struct llist **list, const char *s);
+static void llist_print(struct llist **list, FILE *out);
+
+static char *xstrdup(const char *s);
+static char *xgetcwd(void);
+static void *xmalloc(size_t size);
+static void *xrealloc(void *ptr, size_t size);
+
+char *progname;
+
+int main(int argc, char *argv[])
+{
+  int pid, status, len, in_from_tty = 0;
+  char *buf, *cwd, *cmd;
+  int bufsz = DEFAULT_BUFSZ;
+  int cmdsz = DEFAULT_BUFSZ;
+  int cmd_argc;
+  char *cmd_argv[MAX_ARGS + 1]; /* need +1 because last must be NULL */
+  struct sstack *dirstack;
+  struct llist *pathlist;
+
+  /* get program name */
+  if ((progname = strrchr(argv[0], '/')) == NULL)
+    progname = argv[0];
+  else
+    progname++;
+
+  /* a little magic to see if we should print prompts */
+  in_from_tty = isatty(0);
+
+  /*
+   * Initialize our pushd/popd stack.  We do this bash-style, where
+   * the top of the stack always contains the current working
+   * directory.
+   */
+  sstack_init(&amp;dirstack);
+  cwd = xgetcwd();
+  if (cwd == NULL) {
+    fprintf(stderr, "%s: can't getcwd: %s\n", progname, strerror(errno));
+    sstack_push(&amp;dirstack, "/");
+  } else {
+    sstack_push(&amp;dirstack, cwd);
+    free(cwd);
+  }
+
+  /*
+   * Initialize the path list (empty)
+   */
+  llist_init(&amp;pathlist);
+
+  /* alloc the line buffer */
+  buf = (char *)xmalloc(bufsz);
+
+  /* alloc the exec buffer */
+  cmd = (char *)xmalloc(cmdsz);
+
+  for (;;) {
+
+    /*
+     * Read a line into the buffer from stdin
+     */
+
+    if (in_from_tty)
+      fprintf(stderr, "&gt; ");
+    len = 0;
+    do {
+
+      /* expand the buffer if we need room */
+      if (len) {
+	bufsz *= 2;
+	buf = xrealloc(buf, bufsz);
+      }
+
+      /* read into the line buffer */
+      if (fgets(buf + len, bufsz - len, stdin) == NULL) {
+	/* if fgets() returns NULL, it means either error or EOF */
+	if (ferror(stdin)) {
+	  /* Uh oh, it was an error */
+	  fprintf(stderr, "%s: %s\n", progname, strerror(errno));
+	  exit(1);
+	}
+	/* No error, just EOF.  If the buffer is empty, just exit
+	   successfully. */
+	if (len == 0) {
+	  printf("\n");
+	  exit(0);
+	}
+      }
+
+      /* If the buffer doesn't end with a newline, there's more of the
+	 line to read, so we mark where the buffer ends and start
+	 over. */
+      len = strlen(buf);
+
+    } while (buf[len - 1] != '\n');
+
+
+    /* split the line into words */
+    cmd_argc = split_line(buf, cmd_argv);
+
+    /* check if too many arguments */
+    if (cmd_argc &gt; MAX_ARGS) {
+      fprintf(stderr, "%s: command line too long\n", progname);
+      continue;
+    }
+
+    /* ignore empty lines */
+    if (cmd_argc == 0)
+      continue;
+
+
+    /*
+     * Run the command
+     */
+
+    if (strcmp(cmd_argv[0], "exit") == 0) {
+
+      exit(0);
+
+    } else if (strcmp(cmd_argv[0], "cd") == 0) {
+
+      do_cd(cmd_argc, cmd_argv, &amp;dirstack);
+
+    } else if (strcmp(cmd_argv[0], "pushd") == 0) {
+
+      do_pushd(cmd_argc, cmd_argv, &amp;dirstack);
+
+    } else if (strcmp(cmd_argv[0], "popd") == 0) {
+
+      do_popd(cmd_argc, cmd_argv, &amp;dirstack);
+
+    } else if (strcmp(cmd_argv[0], "dirs") == 0) {
+
+      do_dirs(cmd_argc, cmd_argv, &amp;dirstack);
+
+    } else if (strcmp(cmd_argv[0], "path") == 0) {
+
+      do_path(cmd_argc, cmd_argv, &amp;pathlist);
+
+    } else {
+
+      /*
+       * The command is not a shell builtin, so fork and exec
+       */
+      pid = fork();
+      if (pid == -1) {
+	fprintf(stderr, "%s: can't fork: %s\n", progname, strerror(errno));
+      } else if (pid) {
+
+	/* parent */
+
+	if (wait(&amp;status) == -1)
+	  fprintf(stderr, "%s: wait failed: %s\n", progname, strerror(errno));
+
+	/* report on the exit of our children */
+	if (WIFEXITED(status)) {
+	  /* print a message if the program ended with a non-zero status */
+	  if (WEXITSTATUS(status))
+	    printf("Process %d finished with status %d\n",
+		   pid, WEXITSTATUS(status));
+	} else {
+	  /* print a message if the program was killed */
+	  if (WIFSIGNALED(status))
+	      printf("Process %d killed by signal %d\n",
+		     pid, WTERMSIG(status));
+	}
+
+      } else {
+
+	struct llist *ll;
+
+	/* child */
+
+	/* try the current directory */
+	if (execv(cmd_argv[0], cmd_argv) == 0)
+	  exit(0);
+	/* else try all paths in list */
+	for (ll = pathlist; ll != NULL; ll = ll-&gt;next) {
+	  while (cmdsz &lt; strlen(ll-&gt;s) + strlen(cmd_argv[0]) + 2) {
+	    cmdsz *= 2;
+	    cmd = xrealloc(cmd, cmdsz);
+	  }
+	  sprintf(cmd, "%s/%s", ll-&gt;s, cmd_argv[0]);
+	  if (execv(cmd, cmd_argv) == 0)
+	    exit(0);
+	}
+	fprintf(stderr, "%s: exec failed: %s\n",progname, strerror(errno));
+	/* exit status 0 so parent doesn't complain (we already did) */
+	exit(0);
+      }
+    }
+  }
+
+  return 0; /* never gets here; just to keep the compiler happy */
+}
+
+/*
+ * Splits a NUL-terminated string, buf, into words.  The words must be
+ * separated by whitespace.  At most MAX_ARGS pointers to words will
+ * be stored in argv.  On return, argv is guaranteed to be
+ * NULL-terminated, so argv must have room for (MAX_ARGS + 1)
+ * elements.
+ *
+ * The number of words scanned is returned.  If there are more than
+ * MAX_ARGS words in the buffer, MAX_ARGS + 1 will be returned.
+ */
+static int split_line(char *buf, char *argv[])
+{
+  int argc;
+  char *p;
+
+#if 0
+  /* using strtok(): */
+  argv[0] = strtok(buf, " \f\n\r\t\v"); /* this assumes POSIX locale */
+  argc = 1;
+  while (argc &lt;= MAX_ARGS
+	 &amp;&amp; (argv[argc] = strtok(NULL, " \f\n\r\t\v")) != NULL)
+    argc++;
+#else
+  /* by hand: */
+  argc = 0;
+  p = buf;
+  while (argc &lt;= MAX_ARGS) {
+    /* skip whitespace, replacing it with NUL characters */
+    while(*p != '\0' &amp;&amp; isspace(*p))
+      *p++ = '\0';
+
+    /* have we reached the end of the line? */
+    if (*p == '\0')
+      break;
+
+    /* we have found the beginning of a word */
+    argv[argc++] = p;
+
+    /* find end of word */
+    while(*p != '\0' &amp;&amp; !isspace(*p))
+      p++;
+  }
+#endif
+
+  /* make sure argv is NULL-terminated */
+  if (argc &lt;= MAX_ARGS)
+    argv[argc] = NULL;
+
+  return argc;
+}
+
+
+/********************************
+ *
+ * Implementing the cd command
+ *
+ ********************************/
+
+static void do_cd(int argc, char *argv[], struct sstack **pdirstack)
+{
+  if (argc &gt; 2) {
+    /* cd with too many arguments: abort */
+    fprintf(stderr, "%s: cd: syntax error\n", progname);
+  } else if (argc &lt; 2) {
+    /* cd with no args; go to home dir */
+    argv[1] = getenv("HOME");
+    if (argv[1] == NULL)
+      fprintf(stderr, "%s: cd: HOME not set\n", progname);
+  } else {
+    if (chdir(argv[1]) == -1) {
+      fprintf(stderr, "%s: cd: %s\n", progname, strerror(errno));
+    } else {
+      /* we track the CWD on the top of the dirstack */
+      sstack_pop(pdirstack);
+      sstack_push(pdirstack, argv[1]);
+    }
+  }
+}
+
+
+/***********************************
+ *
+ * Implementing the stack builtins
+ *
+ ***********************************/
+
+static void do_pushd(int argc, char *argv[], struct sstack **pdirstack)
+{
+  if (argc &gt; 2) {
+    /* pushd with too many arguments: abort */
+    fprintf(stderr, "%s: pushd: syntax error\n", progname);
+  } else if (argc &lt; 2) {
+    fprintf(stderr, "%s: pushd: no other directory\n", progname);
+  } else {
+    sstack_push(pdirstack, argv[1]);
+    if (chdir(argv[1]) == -1) {
+      fprintf(stderr, "%s: pushd: %s\n", progname, strerror(errno));
+      /* oops, back out */
+      sstack_pop(pdirstack);
+    } else {
+      sstack_print(pdirstack, stdout);
+    }
+  }
+}
+
+static void do_popd(int argc, char *argv[], struct sstack **pdirstack)
+{
+  char *newdir;
+
+  if (argc &gt; 1) {
+    /* popd with arguments: abort */
+    fprintf(stderr, "%s: popd: syntax error\n", progname);
+  } else if (*pdirstack == NULL || (*pdirstack)-&gt;next == NULL) {
+    /* always maintain one element (the CWD) on the stack */
+    fprintf(stderr, "%s: popd: directory stack empty\n", progname);
+  } else {
+    /* pop! */
+    sstack_pop(pdirstack);
+    newdir = sstack_top(pdirstack);
+    /* cd to the new top directory */
+    if (chdir(newdir) == -1)
+      fprintf(stderr, "%s: popd: %s\n", progname, strerror(errno));
+    else
+      sstack_print(pdirstack, stdout);
+  }
+}
+
+static void do_dirs(int argc, char *argv[], struct sstack **pdirstack)
+{
+  if (argc &gt; 1) {
+    /* dirs with arguments: abort */
+    fprintf(stderr, "%s: dirs: syntax error\n", progname);
+  } else if (*pdirstack == NULL) {
+    /* shouldn't ever happen (we keep the CWD on top of the stack) */
+    fprintf(stderr, "%s: dirs: stack contains no elements!\n", progname);
+  } else {
+    sstack_print(pdirstack, stdout);
+  }
+}
+
+static void do_path(int argc, char *argv[], struct llist **ppathlist)
+{
+  if (argc == 1) {
+    llist_print(ppathlist, stdout);
+  } else if (argc != 3) {
+    fprintf(stderr, "%s: path: syntax error\n", progname);
+  } else if (strcmp(argv[1], "-") == 0) {
+    llist_remove(ppathlist, argv[2]);
+  } else if (strcmp(argv[1], "+") == 0) {
+    llist_append(ppathlist, argv[2]);
+  } else {
+    fprintf(stderr, "%s: path: syntax error\n", progname);
+  }
+}
+
+
+/***********************************************
+ *
+ * Functions for manipulating stacks of strings
+ *
+ ***********************************************/
+
+/*
+ * Initializes a struct sstack.
+ */
+static void sstack_init(struct sstack **st)
+{
+  *st = NULL;
+}
+
+/*
+ * Makes a duplicate of NUL-terminated string s and pushes it onto the
+ * stack.
+ */
+static void sstack_push(struct sstack **st, const char *s)
+{
+  struct sstack *newelt;
+
+  /* alloc new element */
+  newelt = (struct sstack *)xmalloc(sizeof(struct sstack));
+
+  /* could also use strdup(), although it's not POSIX... */
+  newelt-&gt;s = xstrdup(s);
+
+  /* push it */
+  newelt-&gt;next = *st;
+  *st = newelt;
+}
+
+/*
+ * Pops the top string off the stack.
+ */
+static void sstack_pop(struct sstack **st)
+{
+  struct sstack *tmp;
+  if (*st != NULL) {
+    free((*st)-&gt;s);
+    tmp = *st;
+    *st = (*st)-&gt;next;
+    free(tmp);
+  }
+}
+
+/*
+ * Returns the string on the top of the stack, without popping it.
+ */
+static char *sstack_top(struct sstack **st)
+{
+  if (*st != NULL)
+    return (*st)-&gt;s;
+  return NULL;
+}
+
+/*
+ * Prints the stack to stream out, with spaces between elements.
+ */
+static void sstack_print(struct sstack **st, FILE *out)
+{
+  struct sstack *p = *st;
+
+  if (p == NULL)
+    return;
+
+  fputs(p-&gt;s, out);
+  p = p-&gt;next;
+  while (p) {
+    fprintf(out, " %s", p-&gt;s);
+    p = p-&gt;next;
+  }
+  putc('\n', out);
+}
+
+
+/***********************************************
+ *
+ * Functions for manipulating list of strings
+ *
+ ***********************************************/
+
+/*
+ * Initializes a struct sstack.
+ */
+static void llist_init(struct llist **list)
+{
+  *list = NULL;
+}
+
+/*
+ * Makes a duplicate of NUL-terminated string s and appends it onto the
+ * list.
+ */
+static void llist_append(struct llist **list, const char *s)
+{
+  struct llist *newelt;
+
+  /* alloc new element */
+  newelt = (struct llist *)xmalloc(sizeof(struct llist));
+
+  /* could also use strdup(), although it's not POSIX... */
+  newelt-&gt;s = strdup(s);
+
+  /* append it */
+  if (*list == NULL)
+    *list = newelt;
+  else {
+    struct llist *ll = *list;
+    while (ll-&gt;next)
+      ll = ll-&gt;next;
+    ll-&gt;next = newelt;
+  }
+
+  newelt-&gt;next = NULL;
+}
+
+/*
+ * Remove the string s from the list
+ */
+static void llist_remove(struct llist **list, const char *s)
+{
+  struct llist *ll = *list;
+
+  if (ll == NULL) {
+    /* nothing to do ? */
+    return;
+  } else if (strcmp(ll-&gt;s, s) == 0) {
+    /* first match ?  need to modify head */
+    *list = ll-&gt;next;
+    free(ll-&gt;s);
+    free(ll);
+  } else {
+    /* otherwise, find all matches */
+    while (ll-&gt;next) {
+      if (!strcmp(ll-&gt;next-&gt;s, s)) {
+	struct llist *tmp = ll-&gt;next;
+	ll-&gt;next = tmp-&gt;next;
+	free(tmp-&gt;s);
+	free(tmp);
+      }
+      ll = ll-&gt;next;
+    }
+  }
+}
+
+/*
+ * Prints the stack to stream out, with spaces between elements.
+ */
+static void llist_print(struct llist **list, FILE *out)
+{
+  struct llist *tmp = *list;
+
+  if (!tmp)
+    return;
+
+  fputs(tmp-&gt;s, out);
+  for (tmp = tmp-&gt;next; tmp!= NULL; tmp = tmp-&gt;next)
+    fprintf(out, ":%s", tmp-&gt;s);
+  putc('\n', out);
+}
+
+
+/***********************************************
+ *
+ *             Utility functions
+ *
+ ***********************************************/
+
+/*
+ * Make a duplicate of NUL-terminated string s
+ */
+static char *xstrdup(const char *s)
+{
+  char *new;
+
+  /* could also use strdup(), although it's not POSIX... */
+  new = (char *)xmalloc((strlen(s) + 1) * sizeof(char));
+  strcpy(new, s);
+  return new;
+}
+
+/*
+ * Allocates a buffer and gets the cwd, using getcwd().  Equivalent to
+ * calling getcwd(NULL, -1) on GNU libc.
+ */
+static char *xgetcwd(void)
+{
+  int bufsz = 32;
+  char *buf, *ret;
+  buf = (char *)xmalloc(bufsz);
+  for (;;) {
+
+    /* make the getcwd() call */
+    ret = getcwd(buf, bufsz);
+    if (ret == NULL) {
+      if (errno != ERANGE) {
+	/* a real error occurred, so pass it back */
+	free(buf);
+	return NULL;
+      }
+    } else {
+      break;
+    }
+
+    /* realloc */
+    bufsz *= 2;
+    buf = xrealloc(buf, bufsz);
+  }
+  return buf;
+}
+
+/* Calls malloc and dies on error. */
+static void *xmalloc(size_t size)
+{
+  void *ptr = malloc(size);
+  if (ptr == NULL) {
+    /* malloc() can only fail for one reason, so strerror() is not
+       strictly necessary here */
+    fprintf(stderr, "%s: malloc failed: %s\n", progname, strerror(errno));
+    exit(1);
+  }
+  return ptr;
+}
+
+/* Calls realloc and dies on error. */
+static void *xrealloc(void *ptr, size_t size)
+{
+  void *newptr = realloc(ptr, size);
+  if (newptr == NULL) {
+    fprintf(stderr, "%s: realloc failed: %s\n", progname, strerror(errno));
+    exit(1);
+  }
+  return newptr;
+}
+</PRE>
+                  <P>
+                    </VAR></VAR><VAR><VAR>-------------------------------------------------------------------------------------------------------------------------------------------------------------</VAR></VAR><VAR><VAR>
+                  </P>
+            </LI>
+            <P>
+              &nbsp;
+            </P>
+            <LI>
+              Timing Methodologies (15 Pts.) Modern x86 PCs such as those in the
+              CLIC lab have a tsc hardware register that counts processor
+              cycles. The register can be read using the rdtsc instruction,
+              which can be used to provide very accurate timing measurements.
+              There are several macros used to read this register, as described
+              in the include file
+              <A href=http://www.cs.columbia.edu/~nieh/teaching/w4118/homeworks/solutions/hmwk1/code/msr.h><TT>asm/msr.h</TT></A>.
+              These macros can be wrapped through a function like <TT>getcpucycles</TT> below,
+              which takes a pointer to a long long and packs it with the number
+              of cpu cycles used since the system was last booted. inline void
+              getcpucycles (long long int * cycles){ unsigned long low; long
+              high; rdtsc(low,high); *cycles = high; *cycles &lt;&lt;= 32;
+              *cycles |= low; }
+              <OL>
+                <LI>
+                  Write a function in C called <TT>getmyhosttime</TT> that takes a long long cycles
+                  value as an argument and returns the equivalent long long in
+                  nanoseconds. Your function should be portable across machines,
+                  so it will need to determine the CPU speed of the machine on
+                  which it is being called. One way to do this in Linux is to
+                  parse the data contained in the file /proc/cpuinfo. The /proc
+                  filesystem (where /proc/cpuinfo resides), is a virtual
+                  filesystem that presents a way for userspace to communicate
+                  with the kernel and vice-versa. Various statistics can be read
+                  from the files in the /proc filesystem and /proc/cpuinfo, as
+                  its name suggests, contains information regarding the CPU.
+                  <LI>
+                    Using <TT>getmyhosttime</TT>, figure out how long it takes to execute the <TT>getcpucycles</TT>
+                    function. In addition, time the <TT>gettimeofday</TT> system call. You should
+                    be careful to do the measurement in such a way that
+                    minimizes the overhead of doing the measurement.
+                    <LI>
+                      Use both <TT>getmyhosttime</TT> and the <TT>gettimeofday</TT> system call to time the inner
+                      for-loop of the following bit of code: for (x=0;
+                      x&lt;1000; x++) { for (y=0; y&lt;100; y++) { /* inner loop
+                      starts here */ z = x + y; } /* inner loop ends here */ }
+                      Your writeup should include the mean and standard
+                      deviation of loop iterations, and provide an explanation
+                      for any large variations in your results. Based on your
+                      measurements, indicate which timing method is more
+                      accurate and explain why.
+                    </LI>
+              </OL>
+              <P>
+                <B>Answer:</B>
+                <P>
+                  The code for this function is in our file
+                  <A href=http://www.cs.columbia.edu/~nieh/teaching/w4118/homeworks/solutions/hmwk1/code/time.c><FONT color=#0000cc>time.c</FONT></A>
+                </P>
+                <P>
+                  <VAR><VAR>-------------------------------------------------------------------------------------------------------------------------------------------------------------
+                </P>
+                <PRE>/*
+ * W4118 Homework 1, problem 3
+ * Solution
+ */
+
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;errno.h&gt;
+#include &lt;sys/time.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;math.h&gt;
+#include "msr.h"
+
+#define PROG_NAME "Q3_1"
+
+/* parse /proc/cpuinfo to get processor speed */
+float find_cpu_speed(void)
+{
+  FILE *fp;
+  char *c;
+  char buf[128];
+  static float cpu_speed = 0.0;
+
+  /* only initialize once */
+  if (cpu_speed != 0.0)
+    return cpu_speed;
+
+  fp = fopen("/proc/cpuinfo","r");
+  if (!fp) {
+    perror("Unable to open /proc/cpuinfo. defaulting to 200MHz");
+    return cpu_speed;;
+  }
+
+  while(fgets(buf,128,fp) != NULL) {
+    /* read line by line and look for the string starting with cpu MHz */
+    if(strstr(buf,"cpu MHz")) {
+      c = strchr(buf,':');
+      cpu_speed = (float)atoi(c+2);
+      c = strchr(c,'.');
+      if (c)
+	cpu_speed += ((float)atoi(c+1)/1000.0);
+      fclose(fp);
+      return cpu_speed;;
+    }
+  }
+
+  printf("Error reading /proc/cpuinfo. defaulting to 200MHz");
+  fclose(fp);
+  return cpu_speed;
+
+}
+
+/* Q3.1 */
+inline void getcycles (long long int * cycles)
+{
+  unsigned long low;
+  long high;
+  rdtsc(low,high);
+  *cycles = high; 
+  *cycles &lt;&lt;= 32; 
+  *cycles |= low; 
+}
+
+long long int gethosttime (long long int cycles) {
+  
+  float cpu_speed_fl=0.0;
+  float time_ns_fl=0.0;
+  long long int time_ns_ll=0;
+  
+  cpu_speed_fl = find_cpu_speed();
+  time_ns_fl = (((float) (cycles * 1000)) / (cpu_speed_fl));
+  time_ns_ll = (long long) time_ns_fl;
+  return (time_ns_ll);
+}
+
+#define LOOP 100000
+
+long long int time_getcycles(void)
+{
+  long long int start, end, tmp;
+  long long int start2, end2;
+  long i;
+  
+  /* time getcycles */
+  getcycles(&amp;start);
+  for (i = 0; i &lt; LOOP; i++) 
+    getcycles(&amp;tmp);
+  getcycles(&amp;end);
+  
+  /* time the for-loop -- COMPILER OPTIMIZATIONS SHOULD BE OFF */
+  getcycles(&amp;start2);
+  for (i = 0; i &lt; LOOP; i++) {}
+  getcycles(&amp;end2);
+  
+  return (((end-start)-(end2-start2)) / LOOP);
+}
+
+long long int time_gettimeofday(void)
+{
+  long long int start, end;
+  long long int start2, end2;
+  struct timeval tv;
+  long i;
+  
+  /* time gettimeofday */
+  getcycles(&amp;start);
+  for (i = 0; i &lt; LOOP; i++)  
+    gettimeofday(&amp;tv, NULL);
+  getcycles(&amp;end);
+  
+  /* time the for-loop -- COMPILER OPTIMIZATIONS SHOULD BE OFF */
+  getcycles(&amp;start2);
+  for (i = 0; i &lt; LOOP; i++) {}
+  getcycles(&amp;end2);
+  
+  return (((end-start)-(end2-start2)) / LOOP);
+}
+
+static void statistics(long long *arr1, long long *arr2, int n,
+		       long long *mean, long long *std)
+{
+  long long m, v;
+  int i;
+
+  m = v = 0;
+
+  for (i = 0; i &lt; n; i++) {
+    arr1[i] -= arr2[i];
+    m += arr1[i];
+  }
+
+  m /= n;
+
+  for (i = 0; i &lt; n; i++)
+    v += (arr1[i] - m) * (arr1[i] - m);
+
+  v = sqrt(v / n);
+
+  *mean = m;
+  *std = v;
+}
+
+#define COUNT  500
+
+void time_loop_getcycles(long long overhead)
+{
+  long long int a[COUNT], b[COUNT];
+  long long int mean, std;
+  long i, j, k;
+
+  /* avoid cold cache effects */
+  for(i = 0; i &lt; COUNT; i++)
+    a[i] = b[i] = i;
+
+  /* do actual measurement */
+  for(i = 0; i &lt; COUNT; i++) {
+    getcycles(&amp;a[i]);
+    for (j = 0; j &lt; 100; j++)
+      k = i + j;
+    getcycles(&amp;b[i]);
+  }
+
+  statistics(b, a, COUNT, &amp;mean, &amp;std);
+
+  printf("inner loop with getcycles: mean %lli[ns] stddev %lli [ns]\n",
+	 gethosttime(mean)-overhead, gethosttime(std));
+}
+
+void time_loop_gettimeofday(long long overhead)
+{
+  long i, j, k;
+  struct timeval tv1[COUNT], tv2[COUNT];
+  long long int a[COUNT], b[COUNT];
+  long long int mean, std;
+
+  /* avoid cold cache effects */
+  for(i = 0; i &lt; COUNT; i++)
+    tv1[i].tv_sec = tv1[i].tv_usec = tv2[i].tv_sec = tv2[i].tv_usec = i;
+
+  /* do actual measurement */
+  for(i = 0; i &lt; COUNT; i++) {
+    gettimeofday(&amp;tv1[i], NULL);
+    for (j = 0; j &lt; 100; j++)
+      k = i + j;
+    gettimeofday(&amp;tv2[i], NULL);
+  }
+
+  for (i = 0; i &lt; COUNT; i++) {
+    a[i] = (tv1[i].tv_sec * 1000000000LL) + (tv1[i].tv_usec * 1000LL);
+    b[i] = (tv2[i].tv_sec * 1000000000LL) + (tv2[i].tv_usec * 1000LL);
+  }
+
+  statistics(b, a, COUNT, &amp;mean, &amp;std);
+
+  printf("inner loop with getcycles: mean %lli[ns] stddev %lli [ns]\n",
+	 mean-overhead, std);
+}
+
+int main(int argc, char * argv [])
+{
+    long long int cycles, gettime, tmp;
+
+    printf("cpu speed is %.4f\n", find_cpu_speed());
+
+    /* avoid overhead of instruction cache */
+    tmp = gethosttime(time_getcycles());
+    /* measure getcycles() */
+    cycles = gethosttime(time_getcycles());
+
+    /* avoid overhead of instruction cache */
+    tmp = gethosttime(time_gettimeofday());
+    /* measure gettimeofday() */
+    gettime = gethosttime(time_gettimeofday());
+
+    printf("time to get cycles is %lld\ntime to get time is %lld\n",
+	   cycles, gettime);
+
+    /* measure inner loop with getcycles */
+    time_loop_getcycles(cycles);
+
+    /* measure inner loop with gettimeofday */
+    time_loop_gettimeofday(gettime);
+
+    exit(0);
+}
+</PRE>
+                <P>
+                  <VAR><VAR>-------------------------------------------------------------------------------------------------------------------------------------------------------------</VAR></VAR><VAR><VAR>
+                </P>
+                <P>
+                  </VAR></VAR></VAR></VAR><VAR><VAR>
+                </P>
+                </VAR></VAR>
+            </LI>
+        </OL>
+        </VAR></VAR></body>
+</html>

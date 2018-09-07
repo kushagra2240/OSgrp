@@ -1,0 +1,982 @@
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type="text/css">
+
+  
+
+  
+  table {
+    font-size: 1em;
+  }
+
+  
+  div, address, ol, ul, li, option, select { 
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+
+  p {
+    margin: 0px;
+  }
+
+  body {
+    padding: 0px;
+    
+    
+      margin: 0px;
+    
+  }
+
+  h6 { font-size: 10pt }
+  h5 { font-size: 11pt }
+  h4 { font-size: 12pt }
+  h3 { font-size: 13pt }
+  h2 { font-size: 14pt }
+  h1 { font-size: 16pt }
+
+  blockquote {padding: 10px; border: 1px #DDDDDD dashed }
+
+  a img {border: 0}
+
+  
+  
+
+  
+  body {
+    font-family: Verdana;
+    
+    font-size: 10.0pt;
+    line-height: normal;
+    background-color: #ffffff;
+  }
+
+
+
+
+</style>
+
+
+</head>
+
+
+<body revision="dcgckwk6_14g2v4g9:12">
+
+<CENTER>
+<H2>
+  Homework 2<BR>
+  <FONT size=-1>W4118 Fall 2010</FONT>
+</H2>
+</CENTER><B>Kernel version:</B> this solution is based on the 2.6 Linux kernel,
+specifically it is up to date with kernel version 2.6.18.8.<BR>
+<BR>
+<H3>
+  Non-programming Problems:
+</H3>
+<OL>
+  <P>
+    &nbsp;
+    <LI>
+      (<I>Exercise 2.6</I>): <B>What are the advantages and disadvantages of
+      using the same system-call interface for manipulating both files and
+      devices? </B>
+      <P>
+        &nbsp;
+      </P>
+      <BR>
+      <B><I>Answer:</I></B> Each device can be accessed as though it was a file
+      in the file system. Since most of the kernel deals with devices through
+      this file interface, it is relatively easy to add a new device driver by
+      implement- ing the hardware-specific code to support this abstract file
+      interface. Therefore, this benefits the development of both user program
+      code, which can be written to access devices and files in the same manner,
+      and device-driver code, which can be written to support a well-defined
+      API. The disadvantage with using the same interface is that it might be
+      difficult to capture the functionality of certain devices within the
+      context of the file access API, thereby resulting in either a loss of
+      functionality or a loss of performance. Some of this could be overcome by
+      the use of the ioctl operation that provides a general-purpose interface
+      for processes to invoke operations on devices.
+      <P>
+        &nbsp;
+      </P>
+      <P>
+        &nbsp;
+      </P>
+      <LI>
+        (<I>Exercise 2.14</I>): <B>What is the main advantage for an
+        operating-system designer of using a virtual-machine architecture? What
+        is the main advantage for a user? </B>
+        <P>
+          &nbsp;
+        </P>
+        <BR>
+        <B><I>Answer:</I></B> The system is easy to debug, and security problems
+        are easy to solve. Virtual machines also provide a good platform for
+        operating system research since many different operating systems can run
+        on one physical system.
+        <P>
+          &nbsp;
+        </P>
+        <P>
+          &nbsp;
+        </P>
+        <LI>
+          (<I>Exercise 3.2</I>): <B>Describe the actions taken by a kernel to
+          context-switch between processes.</B>
+          <P>
+            &nbsp;
+          </P>
+          <BR>
+          <B><I>Answer:</I></B> The operating system must save the state of the
+          currently running process and restore the state of the process sched-
+          uled to be run next. Saving the state of a process typically includes
+          the values of all the CPU registers in addition to memory allocation.
+          Con- text switches must also perform many architecture-specific
+          operations, including flushing data and instruction caches.
+          <P>
+            &nbsp;
+          </P>
+          <P>
+            &nbsp;
+          </P>
+          <LI>
+            (<I>Exercise 3.4</I>): <B>Using the program shown in Figure 3.24,
+            explain what will be output at Line A. </B>
+            <P>
+              &nbsp;
+            </P>
+            <BR>
+            <B><I>Answer:</I></B> When control returns to the parent, its value
+            remains at 5 as the child updates its copy of the value.
+            <P>
+              &nbsp;
+            </P>
+            <P>
+              &nbsp;
+            </P>
+            <LI>
+              (<I>Exercise 3.5</I>): <B>What are the benefits and detriments of
+              each of the following? Consider both the systems and the
+              programmers' levels.
+              <OL>
+                <LI>
+                  <P>
+                    Symmetric and asymmetric communication.
+                  </P>
+                  <LI>
+                    <P>
+                      Automatic and explicit buffering.
+                    </P>
+                    <LI>
+                      <P>
+                        Send by copy and send by reference.
+                      </P>
+                      <LI>
+                        <P>
+                          Fixed-sized and variable-sized messages.
+                        </P>
+                      </LI>
+              </OL>
+              </B>
+              <P>
+                <BR>
+                <B><I>Answer:</I></B>
+                <OL>
+                  <LI>
+                    <P>
+                      <B>Symmetric and asymmetric communication:</B> A benefit
+                      of symmetric communication is that it allows a rendezvous
+                      between the sender and receiver. A disadvantage of a
+                      blocking send is that a rendezvous may not be required and
+                      the message could be delivered asynchronously. As a
+                      result, message-passing systems often provide both forms
+                      of synchronization.
+                    </P>
+                    <LI>
+                      <P>
+                        <B>Automatic and explicit buffering:</B> Automatic
+                        buffering provides a queue with indefinite length, thus
+                        ensuring the sender will never have to block while
+                        waiting to copy a message. There are no specifications
+                        onhowautomatic buffering will be provided; one scheme
+                        may reserve sufficiently large memory where much of the
+                        memory is wasted. Explicit buffering specifies how large
+                        the buffer is. In this situation, the sender may be
+                        blocked while waiting for available space in the queue.
+                        However, it is less likely that memory will be wasted
+                        with explicit buffering.
+                      </P>
+                      <LI>
+                        <P>
+                          <B>Send by copy and send by reference:</B> Send by
+                          copy does not allow the receiver to alter the state of
+                          the parameter; send by reference does allow
+                          it.Abenefit of send by reference is that it allows the
+                          programmer towrite a distributed version of a
+                          centralized application. Java's RMI provides both;
+                          however, passing a parameter by reference requires
+                          declaring the parameter as a remote object as well,
+                          and requires more care in programming.
+                        </P>
+                        <LI>
+                          <P>
+                            <B>Fixed-sized and variable-sized messages:</B> The
+                            implications of this are mostly related to buffering
+                            issues; with fixed-size messages, a buffer with a
+                            specific size can hold a known number of messages.
+                            The number of variable-sized messages that can be
+                            held by such a buffer is unknown. In addition,
+                            handling of variables sized is more involved as the
+                            system has to keep track (and optimize for) the size
+                            of each message.
+                          </P>
+                        </LI>
+                </OL>
+                <P>
+                  &nbsp;
+                </P>
+                <P>
+                  &nbsp;
+                </P>
+                <P>
+                  &nbsp;
+                </P>
+                <LI>
+                  <B>On all current computers, at least part of the interrupt
+                  handlers are written in assembly language. Why?</B>
+                  <P>
+                    &nbsp;
+                  </P>
+                  <BR>
+                  <B><I>Answer:</I></B>
+                  <OL>
+                    <LI>
+                      <P>
+                        Assembly language allows for faster execution.
+                      </P>
+                      <LI>
+                        <P>
+                          Assembly gives more direct access to the CPU than
+                          other high level programming languages. Actions such
+                          as disabling interrupts, or manipulating a process'
+                          stack cannot be done in high level languages.
+                        </P>
+                      </LI>
+                  </OL>
+                  <P>
+                    &nbsp;
+                  </P>
+                  <P>
+                    &nbsp;
+                  </P>
+                  <LI>
+                    <B>Read the Linux source code and construct a state diagram
+                    to represent the relevant states that a process may be in at
+                    any given time. For each state, give the exact name used for
+                    the state in the source code. </B>
+                    <P>
+                      &nbsp;
+                    </P>
+                    <BR>
+                    <B><I>Answer:</I></B>
+                    <P>
+                      &nbsp;
+                      <CENTER><IMG src=Homework_2_images/EXTERN_0000.gif></CENTER>
+                      <P>
+                        &nbsp;
+                      </P>
+                      <P>
+                        &nbsp;
+                      </P>
+                      <P>
+                        &nbsp;
+                      </P>
+                      <LI>
+                        <B>What is the difference between a top half and a
+                        bottom half? Give an example of how interrupt
+                        functionality is divided into these two parts.</B>
+                        <P>
+                          &nbsp;
+                        </P>
+                        <BR>
+                        <B><I>Answer:</I></B> A top half is executed immediately
+                        when an interrupted is handled, while a bottom half is
+                        deferred for later. For example, the Linux timer
+                        interrupt updates the time elapsed since system startup
+                        in its top half. The timer interrupt bottom half is then
+                        responsible for updates the system date, invokes the
+                        scheduler, updates usage statistics, etc.<BR>
+                        <BR>
+                        Note that while the concept of top and bottom halves is
+                        useful to understand, the original bottom half (BH)
+                        mechanism from the early days of Linux has been retired
+                        as of Linux 2.5. In Linux 2.6 there are three methods to
+                        defer work:
+                        <OL>
+                          <LI>
+                            <CODE>Softirqs</CODE>: a fixed set of statically defined bottom
+                            halves that can run simultaneously on any processor.
+                            <LI>
+                              <CODE>Tasklets</CODE>: dynamically created bottom halves built on
+                              top of <CODE>softirqs</CODE>, but two <CODE>tasklets</CODE> of the same type
+                              cannot run simultaneously.
+                              <LI>
+                                <CODE>Work queues</CODE>: a method of queueing work to later be
+                                performed in process context.
+                              </LI>
+                        </OL>
+                        <P>
+                          &nbsp;
+                        </P>
+                        <P>
+                          &nbsp;
+                        </P>
+                        <LI>
+                          <B>Describe what happens in the Linux kernel when a
+                          timer interrupt occurs. Be sure to list the procedures
+                          that are called and explain the functions of each.</B>
+                          <P>
+                            &nbsp;
+                          </P>
+                          <BR>
+                          <B><I>Answer:</I></B>
+                          <OL>
+                            <LI>
+                              Timer interrupt handling is mostly done by <CODE>arch/i386/kernel/time.c</CODE>.
+                              First, on boot, the function <CODE>timer_interrupt()</CODE> is registered
+                              to handle the timer interrupt <CODE>(IRQ0)</CODE>.
+                              <LI>
+                                The register state is saved (using macros from
+                                <CODE>arch/i386/kernel/i8259.c</CODE>).
+                                <LI>
+                                  <CODE>do_IRQ()</CODE> is called, which looks up and executes
+                                  an appropriate interrupt handler (using the
+                                  <CODE>irq_desc</CODE> table).
+                                  <LI>
+                                    TSC register is used to adjust elapsed time,
+                                    and <CODE>do_timer_interrupt()</CODE> is called.
+                                    <LI>
+                                      <CODE>do_timer_interrupt()</CODE>:
+                                      <UL>
+                                        <LI>
+                                          acknowledges and resets interrupt
+                                          <LI>
+                                            calls <CODE>do_timer()</CODE>
+                                          </LI>
+                                      </UL>
+                                      <UL>
+                                        <LI>
+                                          <CODE>do_timer()</CODE>:
+                                          <LI>
+                                            increments <CODE>jiffies</CODE> time elapsed since
+                                            boot
+                                            <LI>
+                                              activates the timer bottom half if
+                                              not already activated (<CODE>timer_bh(void)</CODE>).
+                                              <LI>
+                                                calls other functions that
+                                                update the time elapsed in the
+                                                system and execute timers that
+                                                have been scheduled.
+                                              </LI>
+                                      </UL>
+                                    </LI>
+                          </OL>
+                          <P>
+                            &nbsp;
+                          </P>
+                          <P>
+                            &nbsp;
+                          </P>
+                          <LI>
+                            <B>Describe what happens in the Linux kernel when a
+                            fork system call occurs. Be sure to list the
+                            procedures that are called and explain the function
+                            of each.</B>
+                            <P>
+                              &nbsp;
+                            </P>
+                            <BR>
+                            <B><I>Answer:</I></B>
+                            <OL>
+                              <LI>
+                                When the system call is invoked, either via
+                                software interrupt 128 (INT 0x80) (<CODE>system_call</CODE>) or
+                                <CODE>sysenter</CODE>, the code:
+                                <UL>
+                                  <LI>
+                                    saves most of the registers and system call
+                                    number
+                                    <LI>
+                                      calls the <CODE>sys_fork</CODE> routine registered in
+                                      <CODE>sys_call_table</CODE>
+                                      <LI>
+                                        in turn, <CODE>sys_fork</CODE> invokes the generic <CODE>do_fork()</CODE>
+                                      </LI>
+                                </UL>
+                                <LI>
+                                  <CODE>do_fork()</CODE> allocates a new PID (<CODE>alloc_pid()</CODE>) and creates
+                                  an identical copy of the process that invoked
+                                  the system call by calling <CODE>copy_process()</CODE>
+                                  <LI>
+                                    <CODE>copy_process()</CODE> duplicates the process state:
+                                    <UL>
+                                      <LI>
+                                        allocates a new process descriptor
+                                        (<CODE>struct task_struct</CODE>)
+                                        <LI>
+                                          initialize fields that are not to be
+                                          copied (e.g. <CODE>children</CODE>)
+                                          <LI>
+                                            copies the table of open files
+                                            (<CODE>copy_files()</CODE>)
+                                            <LI>
+                                              copies the file system information
+                                              (<CODE>copy_fs()</CODE>)
+                                              <LI>
+                                                copies the signal handling and
+                                                signal information (<CODE>copy_sighand()</CODE> and
+                                                <CODE>copy_signal()</CODE>)
+                                                <LI>
+                                                  copies the memory address
+                                                  space (<CODE>copy_mm()</CODE>)
+                                                  <LI>
+                                                    copies the thread specific
+                                                    information, modifies the
+                                                    kernel stack and adjusts the
+                                                    process registers so that
+                                                    the new process will return
+                                                    directly to user space
+                                                    (<CODE>copy_thread()</CODE>)
+                                                    <LI>
+                                                      atomically links the
+                                                      process into the global
+                                                      task list, and to the
+                                                      children list of the
+                                                      parent process
+                                                    </LI>
+                                    </UL>
+                                    <LI>
+                                      2 identical processes now exist (perfect
+                                      mitosis). The parent and the child, one of
+                                      which gets a returned value of the child's
+                                      PID (the parent) and the other of which
+                                      gets zero as the returned value for the
+                                      call.
+                                    </LI>
+                            </OL>
+                            <P>
+                              &nbsp;
+                            </P>
+                          </LI>
+</OL>
+<P>
+  &nbsp;
+  <H3>
+    Programming Problems:
+  </H3>
+  <OL>
+    <P>
+      <B>
+      <LI>
+        Compile and install your own Linux kernel on your VM. </B>
+        <P>
+          If you were unable to complete this question, please ask one of the
+          TA's for help.
+          <P>
+            <B>
+          </P>
+          <LI>
+            Patch a kernel to install SGI's the KDB kernel debugger. </B>
+            <P>
+              If you were unable to complete this question, please ask one of
+              the TA's for help.
+              <P>
+                <B>
+              </P>
+              <LI>
+                Write a new system call in Linux. The system call you write
+                should take two arguments and return the process tree
+                information in a depth-first-search (DFS) order. Note that you
+                will be adding this system call to the kernel based on the
+                2.6.18.8 kernel you previously built with kernel debugging
+                installed.
+                <P>
+                  The prototype for your system call will be:
+                  <PRE>nt ptree(struct prinfo *buf, int *nr);
+</PRE>
+                  You should define <CODE>struct prinfo</CODE> as
+                  <PRE>struct prinfo {
+	long state;			/* current state of process */
+	pid_t pid;			/* process id */
+	pid_t parent_pid;		/* process id of parent */
+	pid_t first_child_pid;		/* pid of youngest child */
+	pid_t next_sibling_pid;		/* pid of next sibling */
+	long uid;			/* user id of process owner */
+	char comm[16];			/* name of program executed */
+};
+</PRE>
+                  in <CODE>include/linux/prinfo.h</CODE> as part of your solution.<BR>
+                  The argument buf points to a buffer for the process data, and
+                  nr points to the size of this buffer (number of entries). The
+                  system call copies at most that many entries of the process
+                  tree data to the buffer and stores the number of entries
+                  actually copied in nr.<BR>
+                  If a value to be set in prinfo is accessible through a pointer
+                  which is null, set the value in prinfo to 0. For example, the
+                  first_child_pid should be set to 0 if the process does not
+                  have a child.<BR>
+                  Your system call should return the total number of entries on
+                  success (this may be bigger than the actual number of entries
+                  copied). Your code should handle errors that can occur but not
+                  handle any errors that cannot occur. At a minimum, your system
+                  call should detect and report the following error conditions:
+                  <UL>
+                    <LI>
+                      -EINVAL: if buf or nr are null, or if the number of
+                      entries is less than 1
+                      <LI>
+                        -EFAULT: if buf or nr are outside the accessible address
+                        space.
+                      </LI>
+                  </UL>
+                  The referenced error code is defined as EINVAL in
+                  /usr/src/linux/asm/errno.h. </B>
+                  <P>
+                    See <CODE><A href=http://www.cs.columbia.edu/~nieh/teaching/w4118/homeworks/solutions/hmwk2/code/prinfo.h>prinfo.h, <A href=http://www.cs.columbia.edu/~nieh/teaching/w4118/homeworks/solutions/hmwk2/code/ptree.c>ptree.c</A></CODE> and the
+                    <A href=http://www.cs.columbia.edu/~nieh/teaching/w4118/homeworks/solutions/hmwk2/code/patch>patch</A>
+                    to modify <CODE>entry.S, unistd.h</CODE> and <CODE>Makefile</CODE>
+                    <P>
+                      The <CODE>ptree.c</CODE> source should be placed into the <CODE>kernel/</CODE>
+                      directory. The <CODE>kernel/Makefile</CODE> gets updates by applying the
+                      patch.&nbsp;<B>---------------------------------------------------------------</B>/*&nbsp;
+                      -*- linux-c -*-
+                      */----------------------------------------------------------------<BR>
+                      <b><U>/*prinfo.h*/</U></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>
+                      #ifndef _LINUX_PRINFO_H<BR>
+                      #define _LINUX_PRINFO_H<BR>
+                      <BR>
+                      #include &lt;linux/sched.h&gt;<BR>
+                      <BR>
+                      struct prinfo {<BR>
+                      long
+                      state;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      /* current state of process */<BR>
+                      pid_t
+                      pid;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      /* process id */<BR>
+                      pid_t
+                      parent_pid;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      /* process id of parent */<BR>
+                      pid_t first_child_pid;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /*
+                      pid of youngest child */<BR>
+                      pid_t next_sibling_pid;&nbsp;&nbsp;&nbsp;&nbsp; /* pid of
+                      older sibling */<BR>
+                      long
+                      uid;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      /* user id of process owner */<BR>
+                      char
+                      comm[16];&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      /* name of program executed */<BR>
+                      };<BR>
+                      <BR>
+                      #endif<BR>
+                      <b>--------------------------------------------------------------------------------------------------------------------------------------<U>/*ptree.c*/</U></b>
+                      <PRE>/*  -*- linux-c -*- */
+
+#include &lt;linux/sched.h&gt;
+#include &lt;linux/slab.h&gt;
+#include &lt;linux/errno.h&gt;
+#include &lt;linux/uaccess.h&gt;
+#include &lt;linux/unistd.h&gt;
+#include &lt;linux/prinfo.h&gt;
+
+/*
+ * implement a basic stack functionality: can init, free, push and pop
+ * elements (of type "void *"), except a NULL pointer (which marks that
+ * the stack is empty).
+ */
+
+struct stk {
+	int loc;        /* current position */
+	int max;        /* maximum position */
+	void **buf;     /* buffer holding entries */
+};
+
+/* initialize a stack for 'size' elements */
+static int stk_init(struct stk *stk, int size)
+{
+	stk-&gt;buf = kmalloc(size * sizeof(void *), GFP_KERNEL);
+	if (stk-&gt;buf) {
+		stk-&gt;loc = 0;
+		stk-&gt;max = size;
+		return 0;
+	} else
+		return -ENOMEM;
+}
+
+/* double the size of a given stack */
+static int stk_reinit(struct stk *stk)
+{
+	void **buf;
+
+	buf = kmalloc(stk-&gt;max * 2 * sizeof(void *), GFP_KERNEL);
+	if (buf) {
+		memcpy(buf, stk-&gt;buf, stk-&gt;max * sizeof(void *));
+		kfree(stk-&gt;buf);
+		stk-&gt;buf = buf;
+		stk-&gt;max *= 2;
+		return 0;
+	} else
+		return -ENOMEM;
+}
+
+/* free memory used by a stack */
+static void stk_free(struct stk *stk)
+{
+	kfree(stk-&gt;buf);
+}
+
+/* push an entry (of type 'void *') into a stack */
+static int stk_push(struct stk *stk, void *item)
+{
+	/* need a larger stack ?  (can't realloc, caller may hold a lock) */
+	if (stk-&gt;loc == stk-&gt;max)
+		return -ENOMEM;
+	stk-&gt;buf[stk-&gt;loc++] = item;
+	return 0;
+}
+
+/* pop an entry (of type 'void *') from a stack */
+static void *stk_pop(struct stk *stk)
+{
+	if (stk-&gt;loc &gt; 0)
+		return stk-&gt;buf[--stk-&gt;loc];
+	else
+		return NULL;
+}
+
+/*
+ * helpers to extract prinfo data
+ * - first_child_pid(): returns the pid of first child (if exists)
+ * - next_sibling_pid(): returns the pid of next sibling child (if exists)
+ * - copy_entry(): fills the buffer with data of a single entry
+ */
+
+static pid_t first_child_pid(struct task_struct *c)
+{
+	if (list_empty(&amp;c-&gt;children))
+		return 0;
+	c = list_entry(c-&gt;children.next, struct task_struct, sibling);
+	return c-&gt;pid;
+}
+
+static pid_t next_sibling_pid(struct task_struct *c, struct task_struct *p)
+{
+	if (c-&gt;sibling.next == &amp;p-&gt;children)
+		return 0;
+	c = list_entry(c-&gt;sibling.next, struct task_struct, sibling);
+	return c-&gt;pid;
+}
+
+static void copy_entry(struct prinfo *ent,
+		       struct task_struct *c, struct task_struct *p)
+{
+	/* collect data into the given entry */
+	ent-&gt;state = c-&gt;state;
+	ent-&gt;pid = c-&gt;pid;
+	ent-&gt;parent_pid = c-&gt;real_parent-&gt;pid;
+	ent-&gt;first_child_pid = first_child_pid(c);
+	ent-&gt;next_sibling_pid = next_sibling_pid(c, p);
+	ent-&gt;uid = c-&gt;uid;
+	memcpy(ent-&gt;comm, c-&gt;comm, 16);
+}
+
+/*
+ * fill_ptree(): perform a DFS pass over the process tree (start from
+ * the child_reaper, ie init(1), and skip the swapper, ie pid 0)
+ */
+extern struct task_struct *child_reaper;      /* the init(1) task */
+
+static int fill_ptree(struct prinfo *buf, struct stk *stk, int *nent)
+{
+	struct task_struct *p, *c;
+	int nr = *nent;
+	int tot = 0;
+
+	read_lock(&amp;tasklist_lock);
+
+	/*
+	 * at any time, 'c' is the current process, and 'p' is its parent
+	 * (note that we ignore ptrace effect, we only look at real_parent)
+	 */
+	c = child_reaper;
+	p = c-&gt;real_parent;
+
+	do {
+
+		/* only copy entries while buffer has room (ie. nr &gt; 0) */
+		if (nr &gt; 0) {
+			copy_entry(buf++, c, p);
+			nr--;
+		}
+ 
+		tot++;
+
+		/*
+		 * (1) if we have a child - go recursively to that child
+		 * (2) else if we have a sibling - proceed to process her
+		 * (3) else return from recursion and goto step #2
+		 */
+
+		if (!list_empty(&amp;c-&gt;children)) {
+			/* case (1): push ourself and proceed to the child */
+			if (stk_push(stk, (void *) c)) {
+				/* push may fails if we run out of stack */
+				tot = -ENOMEM;
+				break;
+			}
+			p = c;
+			c = list_entry(p-&gt;children.next, 
+				       struct task_struct, sibling);
+			continue;
+		}
+
+		while (c-&gt;sibling.next == &amp;p-&gt;children) {
+			/* case (3): no sibling, return from recursion */
+			c = (struct task_struct *) stk_pop(stk);
+			if (!c)
+				break;
+			p = c-&gt;real_parent;
+		}
+
+		/* finished recursion ? */
+		if (!c)
+			break;
+
+		/* case (2): proceed to next sibling */
+		c = list_entry(c-&gt;sibling.next, struct task_struct, sibling);
+
+	} while (1);
+
+	read_unlock(&amp;tasklist_lock);
+
+	if (tot &gt; 0)
+		*nent -= nr;
+
+	return tot;
+}
+
+/*
+ * syscall ptree(struct prinfo *buf, int *nr)
+ */
+asmlinkage long sys_ptree(struct prinfo __user *buf, int __user *nr)
+{
+	struct prinfo *ptree;
+	struct stk stk;
+	int nent, cnt;
+
+	/* check arguments */
+	if (!buf)
+		return -EINVAL;
+	if (get_user(nent, nr))
+		return -EFAULT;
+	if (nent &lt;= 0)
+		return -EINVAL;
+
+	/* allocate kernel buffer and stack */
+	if (!(ptree = kmalloc(nent * sizeof(struct prinfo), GFP_KERNEL)))
+		return -ENOMEM;
+	if (stk_init(&amp;stk, nent) &lt; 0) {
+		kfree(ptree);
+		return -ENOMEM;
+	}
+    
+	/* do real work */
+	cnt = fill_ptree(ptree, &amp;stk, &amp;nent);
+
+	/* ENOMEM means stack was too small -- reallocate larger and retry */
+	while (cnt == -ENOMEM) {
+		/* if stk_reinit() fails as well, abort and report to user */
+		if (stk_reinit(&amp;stk) &lt; 0)
+			break;
+		cnt = fill_ptree(ptree, &amp;stk, &amp;nent);
+	}
+
+	/* if all well, update user's 'nr' */
+	if (cnt &gt; 0 &amp;&amp; copy_to_user(buf, ptree, nent * sizeof(struct prinfo)))
+		cnt = -EFAULT;
+	else if (cnt &gt; 0 &amp;&amp; put_user(nent, nr))
+		cnt = -EFAULT;
+
+	/* free stack and local buffer */
+	stk_free(&amp;stk);
+	kfree(ptree);
+
+	return cnt;
+}
+</PRE>
+                      <P>
+                        <b>--------------------------------------------------------------------------------------------------------------------------------------</b>
+                        <P>
+                          <b>-----------------------------------------------------------<U>/*patch*/</U>---------------------------------------------------------------</b>
+                        </P>
+                        <PRE>diff -Naur linux-2.6.18.8.base/arch/i386/kernel/syscall_table.S linux-2.6.18.8.hw2/arch/i386/kernel/syscall_table.S
+--- linux-2.6.18.8.base/arch/i386/kernel/syscall_table.S	2007-02-23 18:52:30.000000000 -0500
++++ linux-2.6.18.8.hw2/arch/i386/kernel/syscall_table.S	2007-09-25 18:37:51.000000000 -0400
+@@ -222,7 +222,7 @@
+ 	.long sys_getdents64	/* 220 */
+ 	.long sys_fcntl64
+ 	.long sys_ni_syscall	/* reserved for TUX */
+-	.long sys_ni_syscall
++	.long sys_ptree
+ 	.long sys_gettid
+ 	.long sys_readahead	/* 225 */
+ 	.long sys_setxattr
+diff -Naur linux-2.6.18.8.base/kernel/Makefile linux-2.6.18.8.hw2/kernel/Makefile
+--- linux-2.6.18.8.base/kernel/Makefile	2007-02-23 18:52:30.000000000 -0500
++++ linux-2.6.18.8.hw2/kernel/Makefile	2007-09-25 16:32:13.000000000 -0400
+@@ -8,7 +8,7 @@
+ 	    signal.o sys.o kmod.o workqueue.o pid.o \
+ 	    rcupdate.o extable.o params.o posix-timers.o \
+ 	    kthread.o wait.o kfifo.o sys_ni.o posix-cpu-timers.o mutex.o \
+-	    hrtimer.o rwsem.o
++	    hrtimer.o rwsem.o ptree.o
+ 
+ obj-$(CONFIG_STACKTRACE) += stacktrace.o
+ obj-y += time/
+diff -Naur linux-2.6.18.8.base/include/asm-i386/unistd.h linux-2.6.18.8.hw2/include/asm-i386/unistd.h
+--- linux-2.6.18.8.base/include/asm-i386/unistd.h       2007-10-05 23:46:29.000000000 -0400
++++ linux-2.6.18.8.hw2/include/asm-i386/unistd.h        2007-10-05 23:48:36.000000000 -0400
+@@ -228,7 +228,7 @@
+ 	#define __NR_madvise1          219     /* delete when C lib stub is removed */
+ 	#define __NR_getdents64                220
+ 	#define __NR_fcntl64           221
+-	/* 223 is unused */
++	#define __NR_ptree              223
+ 	#define __NR_gettid            224
+ 	#define __NR_readahead         225
+ 	#define __NR_setxattr          226
+</PRE>
+                        <P>
+                          <b>--------------------------------------------------------------------------------------------------------------------------------------</b>
+                        </P>
+                        <LI>
+                          <b>To test your system call, write a simple program
+                          that calls <TT>ptree()</TT>. Your program should print the entire
+                          process tree (in DFS order), using tabs to indent
+                          children with respect to their parents. For each
+                          process, it should print the process name (comm field)
+                          followed by its pid in square brackets, and the
+                          remaining fields of <TT>struct prinfo</TT> (except pid values) </b>
+                          <P>
+                            See
+                            <A href=http://www.cs.columbia.edu/~nieh/teaching/w4118/homeworks/solutions/hmwk2/code/test.c><CODE>test.c</CODE></A>.
+                            <P>
+                              Once you have recompiled the kernel with the
+                              changes above, install the new kernel image on
+                              your VM and boot into it. Now you can copy <CODE>test.c</CODE>
+                              to the VM, compile and
+                              run&nbsp;it.&nbsp;----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                            </P>
+                            <PRE>/*  -*- linux-c -*- */
+
+#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;sys/syscall.h&gt;
+
+#include "linux/prinfo.h"
+
+static void err_exit(char *s)
+{
+	perror(s);
+	exit(1);
+}
+
+/* emit 'n' tabs */
+static void print_tabs(int n)
+{
+	while (n--)
+		putchar('\t');
+}
+
+/*
+ * recursively (ahh... user space...) print the tree that we
+ * received from the system call
+ * @ptree - points to the current position in the tree
+ * @nr    - indicates how many entries remain in the tree
+ * @tab   - indicates the current level of indentation
+ */
+static int print_tree(struct prinfo *ptree, int nr, int tab)
+{
+	/*
+	 * iterate through the sibling list while counting how many
+	 * processes are printed: that is ourselves (1) plus what we
+	 * recursively print (m); accumulate the total (cnt).
+	 */
+	int cnt = 0, m = 0;
+
+	do {
+
+		ptree += m;
+		cnt += m;
+		nr -= m;
+
+		if (!nr)
+			break;
+
+		print_tabs(tab);
+		printf("%s [%d] %ld,%ld\n",
+		       ptree-&gt;comm, ptree-&gt;pid, ptree-&gt;state, ptree-&gt;uid);
+
+		/* count ourselves */
+		m = 1;
+
+		/* if we have children - recursively print/count then */
+		if (ptree-&gt;first_child_pid)
+			m += print_tree(ptree + 1, nr - 1, tab + 1);
+
+	} while (ptree-&gt;next_sibling_pid);
+
+	return (cnt + m);
+}
+
+int main()
+{
+	struct prinfo *ptree;
+	int max, cnt;
+
+	max = 512;    /* my (humble) initial guess */
+
+	do {
+
+		ptree = malloc(max * sizeof(struct prinfo));
+		if (!ptree)
+			err_exit("failed memory allocation");
+    
+		cnt = syscall(__NR_ptree, ptree, &amp;max);
+    
+		if (cnt &lt;= max)
+			break;
+    
+		free(ptree);
+
+		/* provision for new tasks that may be created meanwhile */
+		max = (cnt * 4) / 3;
+
+	} while (1);
+
+	if (cnt &lt; 0)
+		err_exit("system call ptree() failed");
+
+	print_tree(ptree, cnt, 0);
+	free(ptree);
+
+	exit(0);
+}
+---------------------------------------------------------------------------------------------------------------------</PRE>
+                        </LI>
+  </OL></body>
+</html>

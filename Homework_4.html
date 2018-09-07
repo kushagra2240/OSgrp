@@ -1,0 +1,1784 @@
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type="text/css">
+
+  
+
+  
+  table {
+    font-size: 1em;
+  }
+
+  
+  div, address, ol, ul, li, option, select { 
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+
+  p {
+    margin: 0px;
+  }
+
+  body {
+    padding: 0px;
+    
+    
+      margin: 0px;
+    
+  }
+
+  h6 { font-size: 10pt }
+  h5 { font-size: 11pt }
+  h4 { font-size: 12pt }
+  h3 { font-size: 13pt }
+  h2 { font-size: 14pt }
+  h1 { font-size: 16pt }
+
+  blockquote {padding: 10px; border: 1px #DDDDDD dashed }
+
+  a img {border: 0}
+
+  
+  
+
+  
+  body {
+    font-family: Verdana;
+    
+    font-size: 10.0pt;
+    line-height: normal;
+    background-color: #ffffff;
+  }
+
+
+
+
+</style>
+
+
+</head>
+
+
+<body revision="dcgckwk6_17fdwg3p:5">
+
+<CENTER>
+<H2>
+  Homework 4<BR>
+  <FONT size=-1>W4118 Fall 2010<BR>
+  </FONT>
+</H2>
+</CENTER>
+<P>
+  &nbsp;
+  <H3>
+    Individual Written Problems:
+  </H3>
+  <P>
+    &nbsp;
+    <OL>
+      <P>
+        &nbsp;
+        <LI>
+          <I>(Exercise 5.2):</I><BR>
+          <B>Discuss how the following pairs of scheduling criteria conflict in
+          certain settings.
+          <P>
+            &nbsp;
+          </P>
+          <OL type=a>
+            <LI>
+              <P>
+                CPU utilization and response time
+              </P>
+              <LI>
+                <P>
+                  Average turnaround time and maximum waiting time
+                </P>
+                <LI>
+                  <P>
+                    I/O device utilization and CPU utilization
+                  </P>
+                </LI>
+          </OL>
+          </B>
+          <P>
+            &nbsp;
+          </P>
+          <BR>
+          <B><I>Answer:</I></B>
+          <OL type=a>
+            <LI>
+              <P>
+                <B>CPU utilization and response time:</B><BR>
+                CPU utilization is increased if the overheads associated with
+                context switching is minimized. The context switching overheads
+                could be lowered by performing context switches infrequently.
+                This could, however, result in increasing the response time for
+                processes.
+              </P>
+              <LI>
+                <P>
+                  <B>Average turnaround time and maximum waiting time:</B><BR>
+                  Average turnaround time is minimized by executing the shortest
+                  tasks first. Such a scheduling policy could, however, starve
+                  long-running tasks and thereby increase their waiting time.
+                </P>
+                <LI>
+                  <P>
+                    <B>I/O device utilization and CPU utilization:</B><BR>
+                    CPU utilization is maximized by running long-running
+                    CPU-bound tasks without performing context switches. I/O
+                    device utilization is maximized by scheduling I/O-bound jobs
+                    as soon as they become ready to run, thereby incurring the
+                    overheads of context switches.
+                  </P>
+                </LI>
+          </OL>
+          <P>
+            &nbsp;
+          </P>
+          <P>
+            &nbsp;
+          </P>
+          <LI>
+            <I>(Exercise 5.3):</I><BR>
+            <B>Consider the exponential average formula used to predict the
+            length of the next CPU burst. What are the implications of assigning
+            the following values to the parameters used by the algorithm?<BR>
+            <P>
+              &nbsp;
+            </P>
+            <OL type=a>
+              <LI>
+                <P>
+                  a = 0 and T0 = 100 milliseconds
+                </P>
+                <LI>
+                  <P>
+                    a = 0.99 and T0 = 10 milliseconds
+                  </P>
+                </LI>
+            </OL>
+            </B>
+            <P>
+              &nbsp;
+            </P>
+            <BR>
+            <P>
+              <B><I>Answer:</I></B><BR>
+              When a = 0 and T0 = 100 milliseconds, the formula always makes a
+              prediction of 100 milliseconds for the next CPU burst. When a =
+              0.99 and T0 = 10 milliseconds, the most recent behavior of the
+              process is given much higher weight than the past history
+              associated with the process. Consequently, the scheduling
+              algorithm is almost memoryless, and simply predicts the length of
+              the previous burst for the next quantum of CPU execution.
+            </P>
+            <P>
+              &nbsp;
+            </P>
+            <P>
+              &nbsp;
+            </P>
+            <LI>
+              <I>(Exercise 5.4):</I><BR>
+              <B>Consider the following set of processes, with the length of the
+              CPU-burst time given in milliseconds: The processes are assumed to
+              have arrived in the order P1, P2, P3, P4, P5, all at time 0.<BR>
+              <IMG src=Homework_4_images/EXTERN_0000.jpg><BR>
+              <OL type=a>
+                <LI>
+                  <P>
+                    Draw four Gantt charts illustrating the execution of these
+                    processes using FCFS, SJF,<BR>
+                    a nonpreemptive priority (a smaller priority number implies
+                    a higher priority), and RR<BR>
+                    (quantum = 1) scheduling.
+                  </P>
+                  <LI>
+                    <P>
+                      What is the turnaround time of each process for each of
+                      the scheduling algorithms in part a?
+                    </P>
+                    <LI>
+                      <P>
+                        What is thewaiting time of each process for each of the
+                        scheduling algorithms in part a?
+                      </P>
+                      <LI>
+                        <P>
+                          Which of the schedules in part a results in the
+                          minimal average waiting time (over all processes)?
+                        </P>
+                      </LI>
+              </OL>
+              </B><BR>
+              <P>
+                &nbsp;
+              </P>
+              <BR>
+              <B><I>Answer:</I></B><BR>
+              <IMG src=Homework_4_images/EXTERN_0001.jpg>
+              <P>
+                &nbsp;
+              </P>
+              <P>
+                &nbsp;
+              </P>
+              <LI>
+                <I>(Exercise 5.5):</I><BR>
+                <B>Which of the following scheduling algorithms could result in
+                starvation?
+                <P>
+                  &nbsp;
+                </P>
+                <OL type=a>
+                  <LI>
+                    <P>
+                      First-come, first-served
+                    </P>
+                    <LI>
+                      <P>
+                        Shortest job first
+                      </P>
+                      <LI>
+                        <P>
+                          Round robin
+                        </P>
+                        <LI>
+                          <P>
+                            Priority
+                          </P>
+                        </LI>
+                </OL>
+                </B>
+                <P>
+                  &nbsp;
+                </P>
+                <BR>
+                <B><I>Answer:</I></B><BR>
+                Shortest job first and priority-based scheduling algorithms
+                could result in starvation.
+                <P>
+                  &nbsp;
+                </P>
+                <P>
+                  &nbsp;
+                </P>
+                <LI>
+                  <I>(Exercise 5.10):</I><BR>
+                  <B>Explain the differences in the degree to which the
+                  following scheduling algorithms discriminate in favor of short
+                  processes:<BR>
+                  <P>
+                    &nbsp;
+                  </P>
+                  <OL type=a>
+                    <LI>
+                      <P>
+                        FCFS
+                      </P>
+                      <LI>
+                        <P>
+                          RR
+                        </P>
+                        <LI>
+                          <P>
+                            Multilevel feedback queues
+                          </P>
+                        </LI>
+                  </OL>
+                  </B>
+                  <P>
+                    &nbsp;
+                  </P>
+                  <BR>
+                  <B><I>Answer:</I></B><BR>
+                  <OL type=a>
+                    <LI>
+                      <P>
+                        FCFS¡ªdiscriminates against short jobs since any short
+                        jobs arriving after long jobs will have a longer waiting
+                        time.
+                      </P>
+                      <LI>
+                        <P>
+                          RR¡ªtreats all jobs equally (giving them equal bursts
+                          of CPU time) so short jobs will be able to leave the
+                          system faster since they will finish first.
+                        </P>
+                        <LI>
+                          <P>
+                            Multilevel feedback queues work similar to the RR
+                            algorithm¡ª they discriminate favorably toward short
+                            jobs.
+                          </P>
+                        </LI>
+                  </OL>
+                  <P>
+                    &nbsp;
+                  </P>
+                  <P>
+                    &nbsp;
+                  </P>
+                  <LI>
+                    <I>(Exercise 5.11):</I><BR>
+                    <B>Using the Windows XP scheduling algorithm, what is the
+                    numeric priority of a thread for the following scenarios?<BR>
+                    <P>
+                      &nbsp;
+                    </P>
+                    <OL type=a>
+                      <LI>
+                        <P>
+                          A thread in the REALTIME_PRIORITY_CLASS with a
+                          relative priority of HIGHEST.
+                        </P>
+                        <LI>
+                          <P>
+                            A thread in the NORMAL_PRIORITY_CLASS with a
+                            relative priority of NORMAL.
+                          </P>
+                          <LI>
+                            <P>
+                              A thread in the HIGH_PRIORITY_CLASS with a
+                              relative priority of ABOVE_NORMAL.
+                            </P>
+                          </LI>
+                    </OL>
+                    </B>
+                    <P>
+                      &nbsp;
+                    </P>
+                    <BR>
+                    <B><I>Answer:</I></B><BR>
+                    <OL type=a>
+                      <LI>
+                        <P>
+                          26
+                        </P>
+                        <LI>
+                          <P>
+                            8
+                          </P>
+                          <LI>
+                            <P>
+                              14
+                            </P>
+                          </LI>
+                    </OL>
+                    <P>
+                      &nbsp;
+                    </P>
+                    <P>
+                      &nbsp;
+                    </P>
+                    <LI>
+                      <B>
+                      <P>
+                        Suppose a new process with the default scheduler and
+                        default nice value is created<BR>
+                        and run using the Linux 2.6.18.8 kernel. What is the
+                        default time quantum assigned to<BR>
+                        the process to run when using an x86 CPU?
+                      </P>
+                      </B><BR>
+                      <B><I>Answer:</I></B>
+                      <P>
+                        In Linux 2.6.18.8 kernel<BR>
+                        the default scheduler is SCHED_NORMAL.<BR>
+                        the default nice value is 0, and the static_prio is 120.
+                        so the time quantum should be<BR>
+                        SCALE_PRIO(DEF_TIMESLICE, static_prio) = 100ms.<BR>
+                        ( DEF_TIMESLICE = 100*HZ/1000 )
+                      </P>
+                      <P>
+                        &nbsp;
+                      </P>
+                      <P>
+                        &nbsp;
+                      </P>
+                      <LI>
+                        <B>Describe what happens in the Linux 2.6.18.8 kernel
+                        when a SCHED_NORMAL process runs out<BR>
+                        its time quantum and is preempted when a timer interrupt
+                        occurs. Be sure to list the procedures<BR>
+                        that are called and explain the function of each. </B>
+                        <P>
+                          &nbsp;
+                        </P>
+                        <BR>
+                        <B><I>Answer:</I></B><BR>
+                        the time quantum of a process will be checked and
+                        updated at scheduler_tick() function:<BR>
+                        <BR>
+                        when a process runs out of its time quantum:<BR>
+                        <OL type=1>
+                          <LI>
+                            <B><I>dequeue_task(p, p-&gt;active)</I></B> It will
+                            be removed from the active queue<BR>
+                            <LI>
+                              <B><I>set_tsk_need_resched(p)</I></B> marks the
+                              tasks so that later the kernel, just before
+                              resuming the user space, will re-calculate the
+                              priorities and (likely) select a new task to run
+                              (but it may choose the same task again)<BR>
+                              <LI>
+                                <B><I>effective_prio(p)</I></B>
+                                <B><I>task_timeslice(p)</I></B> set new values
+                                in p-&gt;prio and p-&gt;time_slice according to
+                                the scheduling policy<BR>
+                                <LI>
+                                  ==&gt;if the task is needed to move to expired
+                                  queue, then change rq-&gt;best_expired_prio
+                                  value and moved to expired queue by
+                                  <B><I>enqueue_task(p,
+                                  rq-&gt;expired)</I></B><BR>
+                                  ==&gt;else insert this task at the tail of
+                                  rq-&gt;active by <B><I>enqueue_task(p,
+                                  rq-&gt;active)</I></B><BR>
+                                  <P>
+                                    &nbsp;
+                                  </P>
+                                </LI>
+                        </OL>
+                        <P>
+                          &nbsp;
+                          <H3>
+                            Group Programming Problems:
+                          </H3>
+                          <P>
+                            Programming problems are to be done in your assigned
+                            groups using the VM that has been assigned to your
+                            group. For all programming problems you will be
+                            required to submit source code, a kernel patch, a
+                            README file documenting your files and code, and a
+                            test run of your programs. In addition, you should
+                            submit a cover sheet using either
+                            <A href=http://www.cs.columbia.edu/~nieh/teaching/w4118/homeworks/solutions/hmwk4/homework_work.txt>homework_work.txt</A>
+                            or
+                            <A href=http://www.cs.columbia.edu/~nieh/teaching/w4118/homeworks/solutions/hmwk4/homework_nonwork.txt>homework_nonwork.txt</A>,
+                            depending on whether or not the programming
+                            assignment is completely working or not. For source
+                            code submissions, you only need to submit new source
+                            code files that you created and kernel source code
+                            files that you changed. You should clearly indicate
+                            your names, email addresses, and assigned group
+                            number on your submission. Each group is required to
+                            submit one writeup for the programming assignment.
+                            <P>
+                              The image of the kernel you build for this
+                              assignment should be vmlinuz.hmwk4. Grading for
+                              this assignment will be done based on
+                              vmlinuz.hmwk4. The kernel you use for this
+                              assignment should be the Linux 2.6.18.8 kernel you
+                              built and installed as part of
+                              <A href=http://www.cs.columbia.edu/~nieh/teaching/w4118/homeworks/solutions/hmwk4/hmwk2.html>Homework
+                              #2</A>.
+                              <P>
+                                &nbsp;
+                                <P>
+                                  <b>GWRR Scheduling</b>
+                                </P>
+                                <P>
+                                  The Linux scheduler repeatedly switches
+                                  between all the running tasks on the system,
+                                  attempting to give a fair amount of CPU time
+                                  to each task. Fair-share scheduling is a
+                                  strategy that shares the CPU among sets of
+                                  processes according to the groups that own
+                                  those processes. For example, suppose that
+                                  Mary, Jane, and Sam belong to different groups
+                                  and are logged in to a machine that uses
+                                  fair-share scheduling. Suppose Mary has one
+                                  runnable process, Jane has three, and Sam has
+                                  six. Fair-share scheduling views the ten
+                                  runnable processes in three groups, and each
+                                  group receives one-third of the CPU cycles to
+                                  allocate to the processes that it owns. So
+                                  Mary's single process would get about 33
+                                  percent of the available CPU cycles, each of
+                                  Jane's three processes would get roughly 11
+                                  percent of the available CPU cycles, and each
+                                  of Sam's six processes would get about 5.5
+                                  percent of the CPU cycles. Suppose Jim
+                                  belonged to Jane's group and he logs in to the
+                                  machine and created two more processes. Then
+                                  Mary's single process would still get its 33
+                                  percent of the CPU and each of Sam's six
+                                  processes would still get about 5.5 percent of
+                                  the CPU. But Jim and Jane together would have
+                                  five processes that in total receive one-third
+                                  of the CPU, so that each process would get
+                                  about 6.7% of the CPU.
+                                </P>
+                                <P>
+                                  Add a new scheduling policy to support
+                                  fair-share scheduling. Call this policy GWRR,
+                                  for group weighted round-robin scheduling.
+                                  GWRR should use fair-share scheduling based on
+                                  each process's UNIX group identification. At
+                                  each invocation of the scheduler, we will use
+                                  a <i>hierachical</i> scheme to choose which
+                                  task to run: first, a group is chosen, then, a
+                                  task within that group's set is chosen. If we
+                                  allow each group's chosen task the same amount
+                                  of time on the CPU, each group should be
+                                  represented equally.
+                                </P>
+                                <P>
+                                  Since we are making two choices in each
+                                  scheduling decision, we need two algorithms:
+                                  one to choose the group, and one to choose one
+                                  of that group's tasks. Let's start by assuming
+                                  we will use a Round-Robin scheme to decide
+                                  which group to choose. We keep a queue of
+                                  groups, and whichever group was chosen last
+                                  time we scheduled, we choose the next group in
+                                  the queue for this schedule. We then choose a
+                                  task within this group's set of tasks (more on
+                                  this later), and let it run for a fixed amount
+                                  of time (the <i>time quantum</i>). Now every
+                                  group gets an equal amount of CPU time.
+                                </P>
+                                <P>
+                                  Now let's say that some groups are more equal
+                                  than others. Imagine that we associate an
+                                  integer, which we'll call a <i>weight</i>,
+                                  with each group, and when a user is chosen, we
+                                  let the group's chosen tasks run for <I>W</I>
+                                  time quanta (instead of a single time
+                                  quantum), where <I>W</I> is the group's
+                                  weight. In this way we can specify that some
+                                  groups get more CPU time than others, and also
+                                  how much more. A group with a weight of 3 will
+                                  get 50% more CPU time than a group with weight
+                                  2. This is called <i>proportional sharing</i>.
+                                  More specifically, this implementation of
+                                  proportional sharing is called <i>Weighted
+                                  Round-Robin</i>.
+                                </P>
+                                <P>
+                                  We still haven't specified how a task is to be
+                                  chosen once we choose a group. For simplicity,
+                                  use a simple round-robin (RR) scheduling
+                                  algorithm to do that. The intragroup RR
+                                  scheduler should use the same default
+                                  timeslice as the Linux scheduler uses for a
+                                  task with the default nice value. Otherwise,
+                                  the RR scheduler should work the same as GWRR
+                                  except that it schedules tasks, not groups,
+                                  and there are no different task weights.
+                                </P>
+                                <OL>
+                                  <LI>
+                                    <P>
+                                      (5 pts) We would like to gain a better
+                                      understanding of the amount of work
+                                      involved with this assignment in planning
+                                      for this course. To do this, we need your
+                                      help to provide us with some additional
+                                      information on your group's progress on
+                                      this assignment. For this purpose, please
+                                      submit a time log of your group's work on
+                                      this assignment. The log should simply be
+                                      an ASCII text file submitted with your
+                                      assignment entitled LOG.txt. Each entry in
+                                      the file should contain a date, a start
+                                      time, an end time, and a brief one line
+                                      summary of what your group did during that
+                                      time, e.g. 10/29/07 5-7pm 1st group
+                                      meeting to discuss assignment. This part
+                                      of the assignment is graded only based on
+                                      whether your group submits a time log, not
+                                      the number of hours you put in, etc.
+                                      Please submit one time log per group.
+                                      Thanks in advance for your help.
+                                    </P>
+                                    <LI>
+                                      <P>
+                                        (45 pts) Implement a new task scheduler,
+                                        which we will call Group-based Weighted
+                                        Round-Robin, or GWRR:
+                                      </P>
+                                      <UL>
+                                        <LI>
+                                          <P>
+                                            Most of the code of interest for
+                                            this assignment is in <CODE>kernel/sched.c</CODE> and
+                                            <CODE>include/linux/sched.h</CODE>. These are probably not the
+                                            only files you will need to look at,
+                                            but they're a good start. While
+                                            there is a fair amount of code in
+                                            these files, a key goal of this
+                                            assignment is for you to understand
+                                            how to abstract the scheduler code
+                                            so that you learn in detail the
+                                            parts of the scheduler that are
+                                            crucial for this assignment and
+                                            ignore the parts that are not.
+                                          </P>
+                                          <LI>
+                                            <P>
+                                              Implement group weights. Add two
+                                              system calls, <CODE>getgroupweight()</CODE> and <CODE>setgroupweight()</CODE>,
+                                              with the following prototypes:
+                                            </P>
+                                            <P>
+                                              <CODE>int getgroupweight(gid_t gid);</CODE>
+                                            </P>
+                                            <P>
+                                              <CODE>int setgroupweight(gid_t gid, int weight);</CODE>
+                                            </P>
+                                            <P>
+                                              Give <CODE>getgroupweight()</CODE> syscall number 318, and
+                                              <CODE>setgroupweight()</CODE> number 319. <CODE>getgroupweight()</CODE> should
+                                              return the weight of the specified
+                                              group, or -1 on error. The default
+                                              group weight should be 10. <CODE>setgroupweight()</CODE>
+                                              should give the specified group
+                                              the specified weight, and return
+                                              0, or -1 on error.
+                                            </P>
+                                            <P>
+                                              For either call, a gid value of -1
+                                              indicates the current group (that
+                                              is, the owner of the task that is
+                                              making the system call).
+                                              Otherwise, the range of valid gids
+                                              is 0-65535. A bad gid should
+                                              result in a return value of -1 and
+                                              errno set to <CODE>EINVAL</CODE>. Only root is
+                                              allowed to call <CODE>setgroupweight()</CODE>; a call by
+                                              any other user should return -1
+                                              and set errno to <CODE>EACCES</CODE>. Also, a
+                                              group's weight must be greater
+                                              than zero. Any attempt to set a
+                                              bad weight is an error, and errno
+                                              should be set to <CODE>EINVAL</CODE>.
+                                            </P>
+                                            <P>
+                                              Put your code for these two system
+                                              calls at the bottom of <CODE>kernel/sched.c</CODE>.
+                                            </P>
+                                            <LI>
+                                              <P>
+                                                Your scheduler should operate
+                                                alongside the existing Linux
+                                                scheduler. Therefore, you should
+                                                add a new scheduling policy,
+                                                <CODE>SCHED_GWRR</CODE>. The value of SCHED_GWRR
+                                                should be 4. Only tasks whose
+                                                policy is set to <CODE>SCHED_GWRR</CODE> (normally
+                                                done via the system call <CODE>sched_setscheduler()</CODE>)
+                                                should be considered for
+                                                selection by your new scheduler.
+                                              </P>
+                                              <P>
+                                                Your scheduler and the existing
+                                                scheduler should interoperate as
+                                                follows:
+                                              </P>
+                                              <UL>
+                                                <LI>
+                                                  <P>
+                                                    If there are any running
+                                                    tasks whose policy is <CODE>SCHED_RR</CODE>
+                                                    or <CODE>SCHED_FIFO</CODE> (these are
+                                                    real-time tasks), one of
+                                                    them should be chosen before
+                                                    any other, according to the
+                                                    existing Linux scheduler
+                                                    rules.
+                                                  </P>
+                                                  <LI>
+                                                    <P>
+                                                      If there are any running
+                                                      tasks whose policy is
+                                                      <CODE>SCHED_GWRR</CODE> (your scheduler),
+                                                      one of them should be
+                                                      chosen before any <CODE>SCHED_NORMAL</CODE>
+                                                      (the default scheduler)
+                                                      tasks, according to the
+                                                      rules outlined.
+                                                    </P>
+                                                    <LI>
+                                                      <P>
+                                                        If all running tasks
+                                                        have a policy of <CODE>SCHED_NORMAL</CODE>
+                                                        (or <CODE>SCHED_BATCH</CODE>), the default
+                                                        scheduler should be used
+                                                        to choose a task,
+                                                        according to the default
+                                                        scheduler's rules.
+                                                      </P>
+                                                    </LI>
+                                              </UL>
+                                              <P>
+                                                In other words, there should be
+                                                a strict priority relationship
+                                                where <CODE>SCHED_RR</CODE> and <CODE>SCHED_FIFO</CODE> are first,
+                                                <CODE>SCHED_GWRR</CODE> is second, and <CODE>SCHED_NORMAL</CODE> and
+                                                <CODE>SCHED_BATCH</CODE> are last.
+                                              </P>
+                                              <P>
+                                                Making your scheduler operate
+                                                alongside the existing may seem
+                                                like an unnecessary difficulty,
+                                                but it spares you the
+                                                (significant) difficulty of
+                                                dealing with scheduling during
+                                                initialization, so you can get a
+                                                system up and running before any
+                                                of your own code goes into
+                                                action.
+                                              </P>
+                                              <LI>
+                                                <P>
+                                                  If a group who has no runnable
+                                                  <CODE>SCHED_GWRR</CODE> tasks has a <CODE>SCHED_GWRR</CODE> task
+                                                  become runnable, that group
+                                                  should go to the end of the
+                                                  round-robin queue (should be
+                                                  the last group to get a turn).
+                                                </P>
+                                                <LI>
+                                                  <P>
+                                                    The base time quantum should
+                                                    be 100 ms. This means that
+                                                    if a user's group has a
+                                                    weight of 5, she gets 500 ms
+                                                    at a time with which to run
+                                                    her <CODE>SCHED_GWRR</CODE> tasks. Note that
+                                                    this does not mean that
+                                                    every one of her <CODE>SCHED_GWRR</CODE> tasks
+                                                    runs for 500 ms. How long a
+                                                    task is allowed to run
+                                                    depends on the intragroup RR
+                                                    scheduler.
+                                                  </P>
+                                                  <P>
+                                                    Note that you will need to
+                                                    change the timer interrupt
+                                                    handler so that schedule
+                                                    gets called at the right
+                                                    time. See <CODE>scheduler_tick()</CODE> in <CODE>kernel/sched.c</CODE>.
+                                                  </P>
+                                                  <LI>
+                                                    <P>
+                                                      Linux uses an array data
+                                                      structure for keeping
+                                                      track of tasks for
+                                                      scheduling. Tasks in this
+                                                      array are indexed by
+                                                      priority. You may find
+                                                      this data structure useful
+                                                      for implementing GWRR.
+                                                      However, your scheduler
+                                                      should be designed to work
+                                                      with any number of groups
+                                                      and should not assume only
+                                                      a fixed number of groups.
+                                                    </P>
+                                                    <LI>
+                                                      <P>
+                                                        <I>Hint:</I> when you
+                                                        see the <CODE>need_resched</CODE> field of
+                                                        the currently running
+                                                        task get set to 1, this
+                                                        is a signal to some
+                                                        assembly code on the
+                                                        return path of the
+                                                        interrupt handler. It
+                                                        causes <CODE>schedule()</CODE> to get
+                                                        called just before
+                                                        returning from the
+                                                        current interrupt
+                                                        handler, and is the
+                                                        correct way to make a
+                                                        schedule happen from
+                                                        within an interrupt
+                                                        handler, where you can't
+                                                        call <CODE>schedule()</CODE> directly.
+                                                      </P>
+                                                      <LI>
+                                                        <P>
+                                                          <I>Hint:</I> the <CODE>user_struct</CODE>
+                                                          structure in <CODE>include/linux/sched.h</CODE> is
+                                                          used for tracking
+                                                          users. This structure
+                                                          may be helpful in
+                                                          creating a useful way
+                                                          to keep track of user
+                                                          groups.
+                                                        </P>
+                                                      </LI>
+                                      </UL>
+                                      <LI>
+                                        <P>
+                                          (10 pts) Create five users Mary, Jane,
+                                          Sam, Jim, and Pat. Assign Mary and
+                                          Jane to the same group, Sam and Jim to
+                                          the same group, and Pat to a separate
+                                          group. Assign weights of 30, 10, and
+                                          10 to the respective groups. Create a
+                                          simple test program that measures its
+                                          own CPU usage as it runs and and use
+                                          it to show that your GWRR scheduler
+                                          behaves properly. Submit your test
+                                          program source file and a writeup of
+                                          your results.
+                                        </P>
+                                      </LI>
+                                </OL>
+                                <UL>
+                                  <B>DIRECTIONS:</B>
+                                  <P>
+                                    Groups can be added using the command:
+                                  </P>
+                                  <B>groupadd <I>group_name</I> </B>.
+                                  <P>
+                                    Example: groupadd <I>w4118</I>
+                                  </P>
+                                  <P>
+                                    creates a group by name w4118 in the system.
+                                  </P>
+                                  <P>
+                                    &nbsp;
+                                  </P>
+                                  <P>
+                                    Users can be added to the system and to the
+                                    group using the command
+                                  </P>
+                                  <P>
+                                    <B>useradd <I>user_name</I> -g
+                                    <I>group_name</I></B>
+                                  </P>
+                                  <P>
+                                    Example: useradd <I>sam</I> -g <I>w4118</I>
+                                  </P>
+                                  <P>
+                                    &nbsp;
+                                  </P>
+                                  <P>
+                                    <BR>
+                                  </P>
+                                  <B><I>Answer:</I></B>
+                                  <P>
+                                    There are many ways this problem can be
+                                    solved. Here is the
+                                    <A href=http://www.cs.columbia.edu/~nieh/teaching/w4118/homeworks/solutions/hmwk4/patch.hw4>patch</A>
+                                    file for one approach and a
+                                    <A href=http://www.cs.columbia.edu/~nieh/teaching/w4118/homeworks/solutions/hmwk4/test.c>test</A>
+                                    program file.
+                                  </P>
+                                </UL>
+                      </LI>
+    </OL>
+    <UL>
+      <P>
+        -----------------------------------------------------------------------------------------------------------------------------
+      </P>
+      <PRE><b>/*Patch File*/</b></PRE>
+      <PRE>--- linux-2.6.18.8.base/arch/i386/kernel/syscall_table.S	2007-02-23 18:52:30.000000000 -0500
++++ linux-2.6.18.8.hw4/arch/i386/kernel/syscall_table.S	2007-10-22 14:13:38.000000000 -0400
+@@ -317,3 +317,5 @@
+ 	.long sys_tee			/* 315 */
+ 	.long sys_vmsplice
+ 	.long sys_move_pages
++	.long sys_getgroupweight
++	.long sys_setgroupweight
+--- linux-2.6.18.8.base/include/asm-i386/unistd.h	2007-10-05 23:46:29.000000000 -0400
++++ linux-2.6.18.8.hw4/include/asm-i386/unistd.h	2007-10-22 14:13:07.000000000 -0400
+@@ -323,10 +323,11 @@
+ #define __NR_tee		315
+ #define __NR_vmsplice		316
+ #define __NR_move_pages		317
+-
++#define __NR_getgroupweight     318
++#define __NR_setgroupweight     319
+ #ifdef __KERNEL__
+ 
+-#define NR_syscalls 318
++#define NR_syscalls 320
+ 
+ /*
+  * user-visible error numbers are in the range -1 - -128: see
+--- linux-2.6.18.8.base/include/linux/sched.h	2007-02-23 18:52:30.000000000 -0500
++++ linux-2.6.18.8.hw4/include/linux/sched.h	2007-11-10 01:49:17.000000000 -0500
+@@ -32,6 +32,7 @@
+ #define SCHED_FIFO		1
+ #define SCHED_RR		2
+ #define SCHED_BATCH		3
++#define SCHED_GWRR		4
+ 
+ #ifdef __KERNEL__
+ 
+@@ -83,6 +84,11 @@
+ 
+ #include &lt;asm/processor.h&gt;
+ 
++/* GWRR scheduling */
++extern int gwrr_setgid_pre(struct task_struct *p, gid_t gid);
++extern void gwrr_setgid_post(struct task_struct *p);
++extern int gwrr_exec(struct task_struct *p, gid_t gid);
++
+ struct exec_domain;
+ struct futex_pi_state;
+ 
+@@ -501,11 +507,15 @@
+ 
+ #define MAX_PRIO		(MAX_RT_PRIO + 40)
+ 
++#define gwrr_task(p)		((p)-&gt;policy == SCHED_GWRR)
+ #define rt_prio(prio)		unlikely((prio) &lt; MAX_RT_PRIO)
+-#define rt_task(p)		rt_prio((p)-&gt;prio)
++#define rt_task(p)		(rt_prio((p)-&gt;prio) &amp;&amp; !gwrr_task(p))
++
+ #define batch_task(p)		(unlikely((p)-&gt;policy == SCHED_BATCH))
+-#define has_rt_policy(p) \
+-	unlikely((p)-&gt;policy != SCHED_NORMAL &amp;&amp; (p)-&gt;policy != SCHED_BATCH)
++#define has_rt_policy(p)			\
++	unlikely((p)-&gt;policy != SCHED_NORMAL &amp;&amp;	\
++		 (p)-&gt;policy != SCHED_BATCH &amp;&amp;	\
++		 (p)-&gt;policy != SCHED_GWRR)
+ 
+ /*
+  * Some day this will be a full-fledged user tracking system..
+@@ -783,6 +793,8 @@
+ 	struct list_head run_list;
+ 	struct prio_array *array;
+ 
++	struct gwrr_struct *gwrr;
++ 
+ 	unsigned short ioprio;
+ 	unsigned int btrace_seq;
+ 
+--- linux-2.6.18.8.base/kernel/sched.c	2007-02-23 18:52:30.000000000 -0500
++++ linux-2.6.18.8.hw4/kernel/sched.c	2007-11-10 03:01:47.000000000 -0500
+@@ -157,8 +157,20 @@
+ 	(JIFFIES_TO_NS(MAX_SLEEP_AVG * \
+ 		(MAX_BONUS / 2 + DELTA((p)) + 1) / MAX_BONUS - 1))
+ 
++/* SCHED_GWRR task should preempt SCHED_NORMAL tasks */
+ #define TASK_PREEMPTS_CURR(p, rq) \
+-	((p)-&gt;prio &lt; (rq)-&gt;curr-&gt;prio)
++	(((p)-&gt;prio &lt; (rq)-&gt;curr-&gt;prio) || \
++	 (gwrr_task(p) &amp;&amp; ((rq)-&gt;curr-&gt;policy == SCHED_NORMAL || \
++			   (rq)-&gt;curr-&gt;policy == SCHED_BATCH)))
++
++
++#define GWRR_DEFAULT_WEIGHT  10
++#define GWRR_DEFAULT_SLICE   (HZ / 10)
++
++inline static long gwrr_time_quantum(int weight)
++{
++	return (weight * GWRR_DEFAULT_SLICE);
++}
+ 
+ /*
+  * task_timeslice() scales user-nice values [ -20 ... 0 ... 19 ]
+@@ -182,7 +194,10 @@
+ 
+ static inline unsigned int task_timeslice(struct task_struct *p)
+ {
+-	return static_prio_timeslice(p-&gt;static_prio);
++	if (gwrr_task(p))
++		return GWRR_DEFAULT_SLICE; /* GWRR gets 100ms timeslice */
++	else
++		return static_prio_timeslice(p-&gt;static_prio);
+ }
+ 
+ /*
+@@ -196,6 +211,332 @@
+ };
+ 
+ /*
++ * GWRR scheduling
++ * - keep a list of gwrr_struct objects, one object per group
++ * - objects are created on demand when (a) scheduler is set to GWRR for
++ *   some process, or (b) when a GWRR policy process changes its group id
++ * - a GWRR policy process has its p-&gt;gwrr set to point to the gwrr_struct
++ * - the gwrr_struct tracks GWRR policy process in gwrr-&gt;rq list
++ * - there are no provision to reduce scheduling latency
++ * - selection of next group/process is *not* smp-safe
++ */
++
++/* change this if you want some debugging output */
++#if 1
++#define GWRR_DEBUG(str, args...) \
++	do { } while (0)
++#else
++#define GWRR_DEBUG(str, args...) \
++	printk(KERN_ERR "[GWRR][%d][%s]: " str, current-&gt;pid, __func__, ##args)
++#endif
++
++struct gwrr_struct {
++	gid_t gid;               /* group id to which this refers */
++	unsigned long vtime;     /* virtual time (ticks) left */
++	unsigned long weight;    /* relative weight (priority) */
++	struct list_head rq;     /* list of GWRR processes in group */
++	struct list_head list;   /* link to list of gwrr_structs */
++};
++
++static LIST_HEAD(gwrr_list);                       /* list of gwrr groups */
++static spinlock_t gwrr_lock = SPIN_LOCK_UNLOCKED;  /* lock to gwrr lists */
++static int gwrr_ntasks;                            /* count SCHED_GWRR tasks */
++
++/*
++ * gwrr_alloc_group(): allocate a gwrr for a new group gid; only called
++ * from setscheduler() and from setgroupweight()
++ */
++static struct gwrr_struct *gwrr_alloc_group(gid_t gid)
++{
++	struct gwrr_struct *gwrr;
++
++	gwrr = kmalloc(sizeof(struct gwrr_struct), GFP_KERNEL);
++	if (gwrr) {
++		gwrr-&gt;gid = gid;
++		gwrr-&gt;weight = GWRR_DEFAULT_WEIGHT;
++		gwrr-&gt;vtime = gwrr_time_quantum(GWRR_DEFAULT_WEIGHT);
++		INIT_LIST_HEAD(&amp;gwrr-&gt;rq);
++		INIT_LIST_HEAD(&amp;gwrr-&gt;list);
++	}
++	GWRR_DEBUG("alloc %d\n", gid);
++	return gwrr;
++}
++
++static void gwrr_free_group(struct gwrr_struct *gwrr)
++{
++	GWRR_DEBUG("free %d\n", gwrr-&gt;gid);
++	kfree(gwrr);
++}
++
++/* __gwrr_find_group(): find group with given gid (assume gwrr_lock held) */
++static struct gwrr_struct *__gwrr_find_group(gid_t gid)
++{
++	struct gwrr_struct *gwrr;
++
++	list_for_each_entry(gwrr, &amp;gwrr_list, list) {
++		if (gwrr-&gt;gid == gid) {
++			GWRR_DEBUG("found %d\n", gid);
++			return gwrr;
++		}
++	}
++	GWRR_DEBUG("not found %d\n", gid);
++	return NULL;
++}
++
++/*
++ * _gwrr_find_group(): find group with given gid, if not found - create one;
++ * assume gwrr_lock is held; may release-sleep-reacquire 
++ */
++static struct gwrr_struct *_gwrr_find_group(gid_t gid)
++{
++	struct gwrr_struct *gwrr, *tmp;
++
++	if (!(gwrr = __gwrr_find_group(gid))) {
++
++		/* if not found already - release lock, allocate, reaquire */
++		spin_unlock(&amp;gwrr_lock);
++		tmp = gwrr_alloc_group(gid);
++		spin_lock(&amp;gwrr_lock);
++
++		/* maybe while we allocated, the group was already created ? */
++		if (!tmp)
++			return NULL;
++		else if ((gwrr = __gwrr_find_group(gid)))
++			gwrr_free_group(tmp);
++		else {
++			gwrr = tmp;
++			list_add_tail(&amp;gwrr-&gt;list, &amp;gwrr_list);
++			GWRR_DEBUG("linked %d\n", gwrr-&gt;gid);
++		}
++	}
++
++	return gwrr;
++}
++
++/* gwrr_find_group(): calls _gwrr_find_group() with the lock */
++struct gwrr_struct *gwrr_find_group(gid_t gid)
++{
++	struct gwrr_struct *gwrr;
++
++	spin_lock(&amp;gwrr_lock);
++	gwrr = _gwrr_find_group(gid);
++	spin_unlock(&amp;gwrr_lock);
++
++	return gwrr;
++}
++
++/* 
++ * called from fs/exit.c before (possibly) changing the -&gt;egid of the
++ * target process. ensure that the group object is allocated
++ */
++int gwrr_exec(struct task_struct *p, gid_t gid)
++{
++	if (gwrr_task(p) &amp;&amp; gid != p-&gt;egid &amp;&amp; !gwrr_find_group(gid))
++		return -ENOMEM;
++	else
++		return 0;
++}
++
++/* 
++ * called from sys.c before updating p-&gt;egid: ensure consistency of p-&gt;gwrr;
++ * on success, return with gwrr_lock *held*, gwrr_setgid_post() will release 
++ */
++int gwrr_setgid_pre(struct task_struct *p, gid_t gid)
++{
++	struct gwrr_struct *gwrr;
++
++	spin_lock(&amp;gwrr_lock);
++	if (gwrr_task(p)) {
++		/* call to _gwrr_find_group() may release lock and sleep */
++		if (!(gwrr = _gwrr_find_group(gid))) {
++			spin_unlock(&amp;gwrr_lock);
++			return 1;
++		}
++		/* policy may have changed if _gwrr_find_group() slept */
++		if (gwrr_task(p)) {
++			GWRR_DEBUG("group %d for p %d\n", gwrr-&gt;gid, p-&gt;pid);
++			p-&gt;gwrr = gwrr;
++		}
++	}
++	/* if all went wall, we leave the lock aquired ... */
++	return 0;
++}
++
++/* called from sys.c after updating p-&gt;egid to release gwrr_lock */
++void gwrr_setgid_post(struct task_struct *p)
++{
++	spin_unlock(&amp;gwrr_lock);
++}
++
++asmlinkage long sys_getgroupweight(gid_t gid)
++{
++	struct gwrr_struct *gwrr;
++	int weight;
++
++	if (gid == -1)
++		gid = current-&gt;egid;
++	else if (gid &lt; 0 || gid &gt; 65535)
++		return -EINVAL;
++
++	/* if group not found, return the default weight */
++	spin_lock(&amp;gwrr_lock);
++	gwrr = __gwrr_find_group(gid);
++	weight = gwrr ? gwrr-&gt;weight : GWRR_DEFAULT_WEIGHT;
++	spin_unlock(&amp;gwrr_lock);
++
++	GWRR_DEBUG("gwrr %d get weight %d\n", gid, weight);
++	return weight;
++}
++
++asmlinkage long sys_setgroupweight(gid_t gid, int weight)
++{
++	struct gwrr_struct *gwrr;
++
++	if (!capable(CAP_SYS_NICE))
++		return -EACCES;
++
++	if (gid == -1)
++		gid = current-&gt;egid;
++	else if (gid &lt; 0 || gid &gt; 65535 || weight &lt;= 0)
++		return -EINVAL;
++
++	spin_lock(&amp;gwrr_lock);
++	if ((gwrr = _gwrr_find_group(gid))) {
++		/* if the time quantum (vtime) was full before, then
++		   update to reflect new weight; else leave as is */
++		if (gwrr-&gt;vtime == gwrr_time_quantum(gwrr-&gt;weight))
++			gwrr-&gt;vtime = gwrr_time_quantum(weight);
++		gwrr-&gt;weight = weight;
++		GWRR_DEBUG("gwrr %d set weight %d\n", gid, weight);
++	}
++	spin_unlock(&amp;gwrr_lock);
++
++	return (gwrr ? 0 : -ENOMEM);
++}
++
++/* 
++ * called from syscall sched_setscheduler() to atomically adjust the
++ * p-&gt;gwrr field for the scheduler to use; if the group isn't found
++ * it needs to be allocated, but we can't since we hold the lock; so
++ * instead return 1 to tell the caller to retry.
++ */
++static int gwrr_set_scheduler(struct task_struct *p, int policy)
++{
++	struct gwrr_struct *gwrr;
++	int ret = 0;
++
++	spin_lock(&amp;gwrr_lock);
++	if (policy != SCHED_GWRR)
++		p-&gt;gwrr = NULL;
++	else if (!(gwrr = __gwrr_find_group(p-&gt;egid)))
++		ret = 1;
++	else
++		p-&gt;gwrr = gwrr;
++	spin_unlock(&amp;gwrr_lock);
++
++	GWRR_DEBUG("set scheduler %d %s\n", p-&gt;pid, p-&gt;gwrr ? "on" : "off");
++	return ret;
++}
++
++/* return 1 if task is running already - called from try_wake_up() */
++inline static int task_is_running(struct task_struct *p)
++{
++	return (p-&gt;array || (gwrr_task(p) &amp;&amp; p-&gt;state == TASK_RUNNING));
++}
++
++static void enqueue_task(struct task_struct *p, struct prio_array *array);
++static void dequeue_task(struct task_struct *p, struct prio_array *array);
++static void requeue_task(struct task_struct *p, struct prio_array *array);
++
++/*
++ * called from schedule_tick() when the process is of policy SCHED_GWRR;
++ * - decrement process's time slice, if zero - move to end of group's runqueue
++ * - decrement groups virtual time, if zero - move to end of groups list
++ */
++static void gwrr_schedule_tick(struct task_struct *p)
++{
++	struct gwrr_struct *gwrr = p-&gt;gwrr;
++
++	if (!--p-&gt;time_slice) {
++		GWRR_DEBUG("task %d group %d tick\n", p-&gt;pid, gwrr-&gt;gid);
++		p-&gt;time_slice = task_timeslice(p);
++		p-&gt;first_time_slice = 0;
++		set_tsk_need_resched(p);
++		requeue_task(p, NULL);
++	}
++	if (!--gwrr-&gt;vtime) {
++		GWRR_DEBUG("group %d tick\n", gwrr-&gt;gid);
++		spin_lock(&amp;gwrr_lock);
++		list_move_tail(&amp;gwrr-&gt;list, &amp;gwrr_list);
++		spin_unlock(&amp;gwrr_lock);
++		set_tsk_need_resched(p);
++	}
++}
++
++/* recalculate the time quantum for all groups in the list (gwrr_lock held) */
++inline static void gwrr_recalc_vtime(void)
++{
++	struct gwrr_struct *gwrr;
++
++	list_for_each_entry(gwrr, &amp;gwrr_list, list) {
++		gwrr-&gt;vtime = gwrr_time_quantum(gwrr-&gt;weight);
++		GWRR_DEBUG("vtime %d quantum %lu\n", gwrr-&gt;gid, gwrr-&gt;vtime);
++	}
++}
++
++/*
++ * called from schedule() after it selected the next task to run but before
++ * adjusting the run queue arrays; used to select a GWRR task over NORMAL.
++ * (schedule() passed the next task by reference in the 'next' argument.)
++ * returns 1 if selected a new (GWRR) task instead, of 0 otherwise.
++ */
++static int gwrr_want_next(struct task_struct **next)
++{
++	/* real time tasks have priority over us */
++	if (rt_task(*next))
++		return 0;
++
++	/* task is normal/batch: look for GWRR tasks to run instead */
++	spin_lock(&amp;gwrr_lock);
++	while (gwrr_ntasks) {
++		struct gwrr_struct *gwrr;
++		int recalc = 0;
++
++		/* 
++		 * scan through groups, until we find one with tasks; skip
++		 * groups of zero quantum, but if all candidates are in such
++		 * groups, we will recalc quantum of all groups and retry
++		 */
++		list_for_each_entry(gwrr, &amp;gwrr_list, list) {
++			GWRR_DEBUG("%d (vtime %lu)\n",gwrr-&gt;gid,gwrr-&gt;vtime);
++			if (list_empty(&amp;gwrr-&gt;rq))
++				continue;
++			if (gwrr-&gt;vtime == 0)
++				recalc = 1;
++			else {
++				spin_unlock(&amp;gwrr_lock);
++				*next = list_entry(gwrr-&gt;rq.next,
++						   struct task_struct,
++						   run_list);
++				return 1;
++			}
++		}
++
++		/* didn't find candidates: give up (let NORMAL task run)
++		   unless we want to recalc groups quantums and retry */
++		if (!recalc)
++			break;
++
++		/* at least one group has zero vtime, and no task selected
++		   (maybe because of that): recalculate quantum all groups */
++		gwrr_recalc_vtime();
++	}
++	spin_unlock(&amp;gwrr_lock);
++
++	return 0;
++}
++
++/*
+  * This is the main, per-CPU runqueue data structure.
+  *
+  * Locking rule: those places that want to lock multiple runqueues
+@@ -672,19 +1013,35 @@
+  */
+ static void dequeue_task(struct task_struct *p, struct prio_array *array)
+ {
+-	array-&gt;nr_active--;
+-	list_del(&amp;p-&gt;run_list);
+-	if (list_empty(array-&gt;queue + p-&gt;prio))
+-		__clear_bit(p-&gt;prio, array-&gt;bitmap);
++	if (gwrr_task(p)) {
++		/* SCHED_GWRR tasks use the group's run queue */
++		BUG_ON(!p-&gt;gwrr);
++		GWRR_DEBUG("dequeue p %d gid %d\n", p-&gt;pid, p-&gt;egid);
++		list_del(&amp;p-&gt;run_list);
++		gwrr_ntasks--;
++	} else {
++		array-&gt;nr_active--;
++		list_del(&amp;p-&gt;run_list);
++		if (list_empty(array-&gt;queue + p-&gt;prio))
++			__clear_bit(p-&gt;prio, array-&gt;bitmap);
++	}
+ }
+ 
+ static void enqueue_task(struct task_struct *p, struct prio_array *array)
+ {
+ 	sched_info_queued(p);
+-	list_add_tail(&amp;p-&gt;run_list, array-&gt;queue + p-&gt;prio);
+-	__set_bit(p-&gt;prio, array-&gt;bitmap);
+-	array-&gt;nr_active++;
+-	p-&gt;array = array;
++	if (gwrr_task(p)) {
++		/* SCHED_GWRR tasks use the group's run queue */
++		BUG_ON(!p-&gt;gwrr);
++		GWRR_DEBUG("enqueue p %d gid %d\n", p-&gt;pid, p-&gt;egid);
++		list_add_tail(&amp;p-&gt;run_list, &amp;p-&gt;gwrr-&gt;rq);
++		gwrr_ntasks++;
++	} else {
++		list_add_tail(&amp;p-&gt;run_list, array-&gt;queue + p-&gt;prio);
++		__set_bit(p-&gt;prio, array-&gt;bitmap);
++		array-&gt;nr_active++;
++		p-&gt;array = array;
++	}
+ }
+ 
+ /*
+@@ -693,12 +1050,20 @@
+  */
+ static void requeue_task(struct task_struct *p, struct prio_array *array)
+ {
+-	list_move_tail(&amp;p-&gt;run_list, array-&gt;queue + p-&gt;prio);
++	if (gwrr_task(p)) {
++		/* SCHED_GWRR tasks use the group's run queue */
++		BUG_ON(!p-&gt;gwrr || array);
++		GWRR_DEBUG("requeue p %d gid %d\n", p-&gt;pid, p-&gt;egid);
++		list_move_tail(&amp;p-&gt;run_list, &amp;p-&gt;gwrr-&gt;rq);
++	} else {
++		list_move_tail(&amp;p-&gt;run_list, array-&gt;queue + p-&gt;prio);
++	}
+ }
+ 
+ static inline void
+ enqueue_task_head(struct task_struct *p, struct prio_array *array)
+ {
++	BUG_ON(gwrr_task(p));  /* should not happen ! */
+ 	list_add(&amp;p-&gt;run_list, array-&gt;queue + p-&gt;prio);
+ 	__set_bit(p-&gt;prio, array-&gt;bitmap);
+ 	array-&gt;nr_active++;
+@@ -1386,7 +1751,8 @@
+ 	if (!(old_state &amp; state))
+ 		goto out;
+ 
+-	if (p-&gt;array)
++	/* GWRR: test if task is already running */
++	if (task_is_running(p))
+ 		goto out_running;
+ 
+ 	cpu = task_cpu(p);
+@@ -1477,7 +1843,8 @@
+ 		old_state = p-&gt;state;
+ 		if (!(old_state &amp; state))
+ 			goto out;
+-		if (p-&gt;array)
++		/* GWRR: test if task is already running */
++		if (task_is_running(p))
+ 			goto out_running;
+ 
+ 		this_cpu = smp_processor_id();
+@@ -1565,6 +1932,9 @@
+ 	 */
+ 	p-&gt;prio = current-&gt;normal_prio;
+ 
++	/* inherit the -&gt;gwrr field */
++	p-&gt;gwrr = current-&gt;gwrr;
++
+ 	INIT_LIST_HEAD(&amp;p-&gt;run_list);
+ 	p-&gt;array = NULL;
+ #if defined(CONFIG_SCHEDSTATS) || defined(CONFIG_TASK_DELAY_ACCT)
+@@ -3041,7 +3411,7 @@
+ 	}
+ 
+ 	/* Task might have expired already, but not scheduled off yet */
+-	if (p-&gt;array != rq-&gt;active) {
++	if (p-&gt;array != rq-&gt;active &amp;&amp; !gwrr_task(p)) {
+ 		set_tsk_need_resched(p);
+ 		goto out;
+ 	}
+@@ -3067,8 +3437,9 @@
+ 			requeue_task(p, rq-&gt;active);
+ 		}
+ 		goto out_unlock;
+-	}
+-	if (!--p-&gt;time_slice) {
++	} else if (gwrr_task(p)) {
++		gwrr_schedule_tick(p);
++	} else if (!--p-&gt;time_slice) {
+ 		dequeue_task(p, rq-&gt;active);
+ 		set_tsk_need_resched(p);
+ 		p-&gt;prio = effective_prio(p);
+@@ -3392,6 +3763,12 @@
+ 	queue = array-&gt;queue + idx;
+ 	next = list_entry(queue-&gt;next, struct task_struct, run_list);
+ 
++	/* check for GWRR tasks that take priority over NORMAL */
++	if (gwrr_want_next(&amp;next)) {
++		GWRR_DEBUG("select next %d (%s)\n", next-&gt;pid, next-&gt;comm);
++		goto switch_tasks;
++	}
++		
+ 	if (!rt_task(next) &amp;&amp; interactive_sleep(next-&gt;sleep_type)) {
+ 		unsigned long long delta = now - next-&gt;timestamp;
+ 		if (unlikely((long long)(now - next-&gt;timestamp) &lt; 0))
+@@ -3908,6 +4285,11 @@
+ 
+ 	if (TASK_NICE(p) == nice || nice &lt; -20 || nice &gt; 19)
+ 		return;
++
++	/* don't care about user nice for SCHED_GWRR tasks */
++	if (gwrr_task(p))
++		return;
++
+ 	/*
+ 	 * We have to be careful, if called from sys_setpriority(),
+ 	 * the task might be in the middle of scheduling on another CPU.
+@@ -4096,7 +4478,9 @@
+ 	if (policy &lt; 0)
+ 		policy = oldpolicy = p-&gt;policy;
+ 	else if (policy != SCHED_FIFO &amp;&amp; policy != SCHED_RR &amp;&amp;
+-			policy != SCHED_NORMAL &amp;&amp; policy != SCHED_BATCH)
++			policy != SCHED_NORMAL &amp;&amp; policy != SCHED_BATCH &amp;&amp;
++			policy != SCHED_GWRR)
++
+ 		return -EINVAL;
+ 	/*
+ 	 * Valid priorities for SCHED_FIFO and SCHED_RR are
+@@ -4107,8 +4491,8 @@
+ 	    (p-&gt;mm &amp;&amp; param-&gt;sched_priority &gt; MAX_USER_RT_PRIO-1) ||
+ 	    (!p-&gt;mm &amp;&amp; param-&gt;sched_priority &gt; MAX_RT_PRIO-1))
+ 		return -EINVAL;
+-	if ((policy == SCHED_NORMAL || policy == SCHED_BATCH)
+-					!= (param-&gt;sched_priority == 0))
++	if ((policy == SCHED_NORMAL || policy == SCHED_BATCH ||
++	     policy == SCHED_GWRR) != (param-&gt;sched_priority == 0))
+ 		return -EINVAL;
+ 
+ 	/*
+@@ -4138,6 +4522,12 @@
+ 	retval = security_task_setscheduler(p, policy, param);
+ 	if (retval)
+ 		return retval;
++
++	/* (optimistically) create the group as it willbe needed below;
++	   note that our group may change before really setting policy */
++	if (policy == SCHED_GWRR &amp;&amp; !gwrr_find_group(p-&gt;egid))
++		return -ENOMEM;
++
+ 	/*
+ 	 * make sure no PI-waiters arrive (or leave) while we are
+ 	 * changing the priority of the task:
+@@ -4155,12 +4545,21 @@
+ 		spin_unlock_irqrestore(&amp;p-&gt;pi_lock, flags);
+ 		goto recheck;
+ 	}
++
++	/* adjust p-&gt;gwrr as necessary (with locks held); if group changed
++	   since optimistic creation and isn't found, abort and retry */
++	if (gwrr_set_scheduler(p, policy)) {
++		__task_rq_unlock(rq);
++		spin_unlock_irqrestore(&amp;p-&gt;pi_lock, flags);
++		goto recheck;
++	}
++
+ 	array = p-&gt;array;
+-	if (array)
++	if (array || gwrr_task(p))
+ 		deactivate_task(p, rq);
+ 	oldprio = p-&gt;prio;
+ 	__setscheduler(p, policy, param-&gt;sched_priority);
+-	if (array) {
++	if (array || gwrr_task(p)) {
+ 		__activate_task(p, rq);
+ 		/*
+ 		 * Reschedule if we are currently running on this runqueue and
+@@ -4461,7 +4860,10 @@
+ 	if (rt_task(current))
+ 		target = rq-&gt;active;
+ 
+-	if (array-&gt;nr_active == 1) {
++	if (gwrr_task(current)) {
++		/* do nothing; since array==NULL, it will de/enqueue below */
++		BUG_ON(array == target);
++	} else if (array-&gt;nr_active == 1) {
+ 		schedstat_inc(rq, yld_act_empty);
+ 		if (!rq-&gt;expired-&gt;nr_active)
+ 			schedstat_inc(rq, yld_both_empty);
+--- linux-2.6.18.8.base/kernel/sys.c	2007-02-23 18:52:30.000000000 -0500
++++ linux-2.6.18.8.hw4/kernel/sys.c	2007-11-10 02:51:02.000000000 -0500
+@@ -827,6 +827,8 @@
+ 			return -EPERM;
+ 		}
+ 	}
++	if (gwrr_setgid_pre(current, new_egid))
++		return -ENOMEM;
+ 	if (new_egid != old_egid)
+ 	{
+ 		current-&gt;mm-&gt;dumpable = suid_dumpable;
+@@ -838,6 +840,7 @@
+ 	current-&gt;fsgid = new_egid;
+ 	current-&gt;egid = new_egid;
+ 	current-&gt;gid = new_rgid;
++	gwrr_setgid_post(current);
+ 	key_fsgid_changed(current);
+ 	proc_id_connector(current, PROC_EVENT_GID);
+ 	return 0;
+@@ -859,12 +862,15 @@
+ 
+ 	if (capable(CAP_SETGID))
+ 	{
++		if (gwrr_setgid_pre(current, gid))
++			return -ENOMEM;
+ 		if(old_egid != gid)
+ 		{
+ 			current-&gt;mm-&gt;dumpable = suid_dumpable;
+ 			smp_wmb();
+ 		}
+ 		current-&gt;gid = current-&gt;egid = current-&gt;sgid = current-&gt;fsgid = gid;
++		gwrr_setgid_post(current);
+ 	}
+ 	else if ((gid == current-&gt;gid) || (gid == current-&gt;sgid))
+ 	{
+@@ -1105,12 +1111,15 @@
+ 			return -EPERM;
+ 	}
+ 	if (egid != (gid_t) -1) {
++		if (gwrr_setgid_pre(current, egid))
++			return -ENOMEM;
+ 		if (egid != current-&gt;egid)
+ 		{
+ 			current-&gt;mm-&gt;dumpable = suid_dumpable;
+ 			smp_wmb();
+ 		}
+ 		current-&gt;egid = egid;
++		gwrr_setgid_post(current);
+ 	}
+ 	current-&gt;fsgid = current-&gt;egid;
+ 	if (rgid != (gid_t) -1)
+--- linux-2.6.18.8.base/fs/exec.c	2007-02-23 18:52:30.000000000 -0500
++++ linux-2.6.18.8.hw4/fs/exec.c	2007-11-10 02:55:51.000000000 -0500
+@@ -950,6 +950,10 @@
+ 	if (retval)
+ 		return retval;
+ 
++	retval = gwrr_exec(current, bprm-&gt;e_gid);
++	if (retval)
++		return retval;
++
+ 	memset(bprm-&gt;buf,0,BINPRM_BUF_SIZE);
+ 	return kernel_read(bprm-&gt;file,0,bprm-&gt;buf,BINPRM_BUF_SIZE);
+ }
+@@ -986,6 +990,11 @@
+ 	security_bprm_apply_creds(bprm, unsafe);
+ 	task_unlock(current);
+ 	security_bprm_post_apply_creds(bprm);
++
++	/* new current-&gt;egid was set, now change current-&gt;gwrr;
++	   note: this never fails, so we don't check the retval */
++	gwrr_setgid_pre(current, bprm-&gt;e_gid);
++	gwrr_setgid_post(current);
+ }
+ 
+ EXPORT_SYMBOL(compute_creds);</PRE>
+      <PRE><P>-----------------------------------------------------------------------------------------------------------------------------</P>
+/*test.c*/</PRE>
+      <PRE><PRE><PRE>#include &lt;stdio.h&gt;
+#include &lt;grp.h&gt;
+#include &lt;sys/types.h&gt;
+#include "asm/unistd.h"
+#include &lt;unistd.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;errno.h&gt;
+#include "linux/sched.h"
+#include &lt;signal.h&gt;
+#include &lt;sched.h&gt;
+#include &lt;time.h&gt;
+
+#define PERIOD     10
+
+#define WEIGHT_A   30
+#define WEIGHT_B   10
+#define WEIGHT_C   10
+
+int setgroupweight(int gid, int weight)
+{
+	return syscall(__NR_setgroupweight, gid, weight);
+}
+
+int getgroupweight(int gid) 
+{                           
+	return syscall(__NR_getgroupweight, gid);
+}
+
+void exiterr(char *str)
+{
+	perror(str);
+	kill(-getpgrp(), SIGKILL);
+	exit(1);
+}
+
+int busyloop(time_t end)
+{
+	long long work = 0;
+	time_t now;
+
+	while (1) {
+		time(&amp;now);
+		if(now &amp;&amp; now &gt; end)
+			return work;
+		work++;
+	}
+}
+
+void sighand(int sig)
+{
+	return;
+}
+
+int main(int argc, char *argv[])
+{
+	struct sched_param sched;
+	struct group *g;
+	gid_t gid1, gid2, gid3;
+	long long work;
+	time_t start;
+	char *who;
+
+	if (argc != 4) {
+		printf("Usage: %s &lt;group1&gt; &lt;group2&gt; &lt;group3&gt;\n", argv[0]);
+		exit(1);
+	}
+
+	if (!(g = getgrnam(argv[1]))) {
+		printf("group (%s) not found\n", argv[1]);
+		exit(1);
+	} else
+		gid1 = g-&gt;gr_gid;
+
+	if (!(g = getgrnam(argv[2]))) {
+		printf("group (%s) not found\n", argv[2]);
+		exit(1);
+	} else
+		gid2 = g-&gt;gr_gid;
+
+	if (!(g = getgrnam(argv[3]))) {
+		printf("group (%s) not found\n", argv[3]);
+		exit(1);
+	} else
+		gid3 = g-&gt;gr_gid;
+
+	printf("group 1: %d, group 2: %d, group 3: %d\n", gid1, gid2, gid3);
+
+	if (setgroupweight(gid1, WEIGHT_A) &lt; 0)
+		exiterr("setgroupweight 1");
+	if (setgroupweight(gid2, WEIGHT_B) &lt; 0)
+		exiterr("setgroupweight 2");
+	if (setgroupweight(gid3, WEIGHT_C) &lt; 0)
+		exiterr("setgroupweight 3");
+
+	sched.sched_priority = 0;
+	if (sched_setscheduler(getpid(), SCHED_GWRR, &amp;sched) &lt; 0)
+		exiterr("sched_setscheduler");
+
+	if (setpgrp() &lt; 0)
+		exiterr("setpgrp");
+
+	if (signal(SIGUSR1, sighand) &lt; 0)
+		exiterr("signal");
+
+	time(&amp;start);
+
+	switch (fork()) {
+	case -1:
+		exiterr("fork 1");
+	case 0:
+		switch (fork()) {
+		case -1:
+			exiterr("fork 2");
+		case 0:
+			/* group 1: mary, jane */
+			if (setgid(gid1) &lt; 0)
+				exiterr("setgid (group 1)");
+			switch(fork()) {
+			case -1:
+				exiterr("fork 3");
+			case 0:
+				who = "mary";
+				break;
+			default:
+				who = "jane";
+				break;
+			}
+			break;
+		default:
+			/* group 2: sam, jim */
+			if (setgid(gid2) &lt; 0)
+				exiterr("setgid (group 2)");
+			switch(fork()) {
+			case -1:
+				exiterr("fork 4");
+			case 0:
+				who = "sam";
+				break;
+			default:
+				who = "jim";
+				break;
+			}
+			break;
+		}
+		pause();
+		break;
+	default:
+		/* group 3: pat */
+		if (setgid(gid3) &lt; 0)
+			exiterr("setgid (group 3)");
+		who = "pat";
+		/* wait for everyone then kick start */
+		sleep(1);
+		if (kill(-getpgrp(), SIGUSR1) &lt; 0)
+		exiterr("kill");
+		break;
+	}
+
+	work = busyloop(start + PERIOD);
+	printf("[%d] %s work for %d seconds: %lld\n",
+	       getpid(), who, PERIOD, work);
+
+	exit(0);
+}
+</PRE></PRE></PRE>
+    </UL></body>
+</html>
